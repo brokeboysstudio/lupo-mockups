@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F1.1 — Wat wil je bereiken | LUPO</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<a href="index.html" class="back-link">← Alle schermen</a>
+
+<div class="phone-wrapper">
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="phone-notch"></div>
+      <div class="status-bar">
+        <span>09:24</span>
+        <span>5G</span>
+      </div>
+      <div class="screen">
+        <div class="phase-indicator">
+          <div class="phase-bar partial"></div>
+          <div class="phase-bar"></div>
+          <div class="phase-bar"></div>
+        </div>
+        <div class="phase-label-screen"><span class="accent">Fase 1</span> — kennismaking</div>
+
+        <h1 class="step-h1">Wat wil je <span class="em">bereiken?</span></h1>
+        <p class="step-sub">Een doel. Een uitdaging. Een droom. We helpen je daar te komen.</p>
+
+        <div class="choice">
+          <div class="choice-content">
+            <div class="choice-title">Een specifieke race of tijd</div>
+            <div class="choice-desc">Marathon, Ironman, 10K PR — iets concreets in je hoofd</div>
+          </div>
+          <div class="choice-radio"></div>
+        </div>
+
+        <div class="choice selected">
+          <div class="choice-content">
+            <div class="choice-title">Sterker en fitter worden</div>
+            <div class="choice-desc">Iedere week beter, geen race specifiek</div>
+          </div>
+          <div class="choice-radio"></div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-content">
+            <div class="choice-title">Volgende level halen</div>
+            <div class="choice-desc">Vorig jaar deed je iets. Dit jaar wil je verder</div>
+          </div>
+          <div class="choice-radio"></div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-content">
+            <div class="choice-title">Ik zoek nog</div>
+            <div class="choice-desc">LUPO toont 3 opties op niveau zodra we klaar zijn</div>
+          </div>
+          <div class="choice-radio"></div>
+        </div>
+
+        <div class="spacer"></div>
+        <div class="bottom-actions">
+          <a href="f1-2.html" class="btn-primary">Volgende</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.choice').forEach(choice => {
+  choice.addEventListener('click', () => {
+    document.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+    choice.classList.add('selected');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F1.4 — Veelgestelde vragen | LUPO</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<a href="index.html" class="back-link">← Alle schermen</a>
+
+<div class="phone-wrapper">
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="phone-notch"></div>
+      <div class="status-bar">
+        <span>09:27</span>
+        <span>5G</span>
+      </div>
+      <div class="screen">
+        <div class="phase-indicator">
+          <div class="phase-bar active"></div>
+          <div class="phase-bar active"></div>
+          <div class="phase-bar"></div>
+        </div>
+        <div class="phase-label-screen"><span class="accent">Fase 1</span> — kennismaking</div>
+
+        <h1 class="step-h1">Vragen voor <span class="em">je beslist?</span></h1>
+        <p class="step-sub">Tik op een vraag. Geen vraag? Skip naar onder.</p>
+
+        <div class="faq-item open">
+          <div class="faq-q">
+            <div class="faq-q-text">Werkt LUPO zonder wearable?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">Ja. Manuele input werkt voor iedereen. Wel: HRV-coaching en Honest Check werken alleen met wearable. Strava werkt voor trainings registratie.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-text">Wat kost het?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">€19 per maand. 14 dagen gratis trial om uit te proberen. Geen credit card nodig voor trial. Stoppen wanneer je wil.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-text">Hoe lang duurt het tot resultaat?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">Eerste week: LUPO leert je baseline kennen. Week 2-4: schema past zich aan jouw realiteit. Week 4-12: meetbare progressie. Resultaat hangt af van consistentie.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-text">Wat als ik geblesseerd raak?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">Markeer in app. LUPO past schema aan, vermijdt belasting op getroffen lichaamsdeel. Voor medisch advies: raadpleeg een arts. LUPO is een coach, geen medische dienst.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-text">Kan ik mijn schema aanpassen?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">Ja. Workouts verschuiven, vervangen of skippen kan altijd. LUPO past de week automatisch aan op je keuzes.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <div class="faq-q-text">Hoe is mijn data beschermd?</div>
+            <div class="faq-arrow">↓</div>
+          </div>
+          <div class="faq-a">EU servers (Supabase Frankfurt). GDPR-compliant. Gezondheidsdata aparte toestemming. Nooit verkocht aan derden. Verwijderd binnen 30 dagen na account stopzetting.</div>
+        </div>
+
+        <div class="spacer"></div>
+        <div class="bottom-actions">
+          <a href="f1-5.html" class="btn-primary">Volgende</a>
+          <a href="f1-3.html" class="btn-text">← Terug</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
