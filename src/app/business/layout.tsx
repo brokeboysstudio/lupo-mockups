@@ -11,6 +11,7 @@ const nav = [
   { href: "/business", label: "Overzicht" },
   { href: "/business/positionering", label: "Positionering" },
   { href: "/business/model", label: "Model en prijzen" },
+  { href: "/business/dfrnt", label: "DFRNT tryouts" },
   { href: "/business/gameplan", label: "Gameplan" },
   { href: "/business/funding", label: "Funding en subsidies" },
   { href: "/business/oprichting", label: "Oprichting" },

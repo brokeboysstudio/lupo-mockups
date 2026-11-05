@@ -13,6 +13,11 @@ const parts = [
     desc: "Gratis, Premium en Pack. Prijzen, proefperiode in blokken, unit economics en break-even.",
   },
   {
+    href: "/business/dfrnt",
+    title: "DFRNT tryouts",
+    desc: "Vier niveaus van app tot LUPO Athlete, twee deuren naar de tryout, normtabel per leeftijdsgroep.",
+  },
+  {
     href: "/business/gameplan",
     title: "Gameplan",
     desc: "Van vandaag tot 500 betalend, in fases met gates. Killcriteria en de hypotheses voor de 12 gesprekken.",

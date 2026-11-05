@@ -119,7 +119,7 @@ export default function Model() {
         </ul>
       </Section>
 
-      <NextLink href="/business/gameplan">Gameplan</NextLink>
+      <NextLink href="/business/dfrnt">DFRNT: niveaus en normen</NextLink>
     </>
   );
 }
