@@ -18,6 +18,7 @@ SECTIES = {
     "D": ("Vandaag", "Elke ochtend één beslissing, met de reden erbij. Afwijken kan, en telt eerlijk mee."),
     "P": ("Plan", "Week verslepen met regelcontrole, seizoen richting de A-race, pre-mortem uit eigen data."),
     "L": ("Ladder", "Een absolute score, een percentiel op de ladder, acht treden en een Combine per kwartaal."),
+    "T": ("Tryout", "Geen permanente gratis laag: gratis meedoen in vaste golven. Nulmeting, 8 tot 12 weken schema, hertest. Top 5% progressie bij weinig volume naar de fysieke Combine en Pack Talent."),
     "S": ("Samen", "Een crew zonder feed, een matcher, Race Boards en clubs. Voorbeelddata; later in de roadmap."),
     "C": ("Coach en Ik", "Coachgesprek over het schema, eigen data importeren en privé-instellingen."),
     "W": ("Webversie", "Mobiel beslist, web verklaart en plant. Zijbalk, panelen naast elkaar, ⌘K."),
@@ -260,6 +261,82 @@ scherm("l5", "L", "Proefperiode", "Zes weken, verdiend in blokken van twee. Opge
 <div class="row dim"><span>Blok 3 · week 5–6</span><span class="r">nog niet</span></div>
 <div class="card" style="margin-top:8px"><div class="p">Haal je 80% van de sessies in een blok, dan krijg je het volgende blok. Rust van LUPO telt als gehaald.</div></div>
 """, tab="Ladder")
+
+
+# ── TRYOUT ───────────────────────────────────────────────────────────────────
+scherm("t1", "T", "Tryout: meedoen", "De instap: gratis, in een vaste golf. Wie denkt dat hij een potential is, toont het hier.", """
+<div class="lbl acc">Tryout · golf maart 2027</div>
+<div class="h-xl">TOON WAT JE <span class="acc">KAN.</span></div>
+<p class="p" style="margin:10px 0 14px">Tien weken, gratis. Een nulmeting, het LUPO-schema, een hertest. Wie het meest vooruitgaat met het minste volume, krijgt een uitnodiging.</p>
+<div class="row"><span>Inschrijven tot</span><span class="r">28 feb</span></div>
+<div class="row"><span>Nulmeting</span><span class="r">1 – 7 mrt</span></div>
+<div class="row"><span>Schema</span><span class="r">10 weken</span></div>
+<div class="row"><span>Hertest</span><span class="r">17 – 23 mei</span></div>
+<div class="spacer"></div>
+<a class="btn-primary" href="t2.html">Schrijf me in</a>
+<p class="p" style="text-align:center;font-size:11px">Onder 18: met toestemming van een ouder. HRV en slaap tellen dan niet mee.</p>
+""", fab=False)
+
+scherm("t2", "T", "Tryout: nulmeting", "Vast protocol, zodat elke deelnemer op dezelfde manier gemeten wordt.", """
+<a class="btn-text" style="text-align:left;padding-left:0" href="t1.html">← Tryout</a>
+<div class="h-l">NUL<span class="acc">METING</span></div>
+<p class="p" style="margin:6px 0 10px">Kies je variant. Elke test één keer, binnen de meetweek.</p>
+<div class="seg"><a class="on" href="t2.html">Duur</a><a href="t2.html">Hybrid</a></div>
+<div class="row"><span>3 km loop</span><span class="r">volle inzet, vlak parcours</span></div>
+<div class="row"><span>20 min FTP</span><span class="r">fiets of rollen, × 95%</span></div>
+<div class="row"><span>400 m zwemmen</span><span class="r">25 of 50 m bad</span></div>
+<div class="row dim"><span>Hybrid: Hyrox-variant</span><span class="r">in plaats van zwemmen</span></div>
+<div class="card" style="margin-top:8px"><div class="p">Je resultaat telt pas als het met een horlogebestand of een officiële tijd is vastgelegd.</div></div>
+<a class="btn-primary" href="t3.html">Resultaten invoeren</a>
+""", fab=False)
+
+scherm("t3", "T", "Tryout: tijdens de golf", "Het LUPO-schema zonder coachtaal. Beslissing en regel blijven, de uitleg in gewone taal is voor Premium.", """
+<div class="lbl acc">Tryout · week 6 van 10</div>
+<div class="h-xl">AFBOUWEN</div>
+<div class="why">HRV <b>−15%</b> onder je gemiddelde. Drempel −5%.</div>
+<div class="card hl"><div class="h-m">Zone 2 · 45 min</div><div class="p">Was drempel 4×8, 70 min.</div></div>
+<div class="row"><span>Nakomen deze golf</span><span class="r acc">88%</span></div>
+<div class="row"><span>Volume per week</span><span class="r">5u20 gemiddeld</span></div>
+<a class="row" href="t4.html"><span>Ladder van deze golf</span><span class="r">→</span></a>
+<div class="card" style="margin-top:4px"><div class="p">Coachgesprek en uitleg in gewone taal zitten in Premium.</div></div>
+""", tab="Vandaag", fab=False)
+
+scherm("t4", "T", "Tryout: ladder per golf", "Een ladder per golf, op progressie ten opzichte van de nulmeting en gecorrigeerd voor volume.", """
+<a class="btn-text" style="text-align:left;padding-left:0" href="t3.html">← Vandaag</a>
+<div class="h-l">GOLF <span class="acc">MRT 27</span></div>
+<p class="p" style="margin:6px 0 10px">1.240 deelnemers. Progressie per uur training, tussentijds op de testsessies.</p>
+<div class="demo">Voorbeelddata</div>
+<div class="card" style="padding:6px 10px"><table class="t"><tr><th>#</th><th>Atleet</th><th>Progressie</th><th>Uur/wk</th></tr>
+<tr><td>1</td><td>Atleet R</td><td class="acc">+11,4%</td><td>4u10</td></tr>
+<tr><td>2</td><td>Atleet S</td><td class="acc">+10,9%</td><td>5u00</td></tr>
+<tr><td>…</td><td></td><td></td><td></td></tr>
+<tr style="outline:1px solid var(--accent)"><td>48</td><td>Jij</td><td class="acc">+8,2%</td><td>5u20</td></tr></table></div>
+<div class="row"><span>Top 5% van deze golf</span><span class="r">tot plaats 62</span></div>
+<a class="btn-primary" href="t5.html">Naar de hertest</a>
+""", fab=False)
+
+scherm("t5", "T", "Tryout: uitslag top 5%", "Bij top 5% volgt een uitnodiging voor de fysieke Combine. Pas na bevestiging daar: Pack Talent.", """
+<div class="lbl acc">Hertest · 23 mei</div>
+<div class="h-xl">TOP <span class="acc">4%.</span></div>
+<p class="p" style="margin:10px 0 12px">Plaats 48 van 1.240. +8,2% met 5u20 per week.</p>
+<div class="row"><span>3 km</span><span class="r">11:42 → 10:58</span></div>
+<div class="row"><span>FTP</span><span class="r">248 → 268 W</span></div>
+<div class="row"><span>400 m</span><span class="r">7:05 → 6:41</span></div>
+<div class="card hl" style="margin-top:8px"><div class="h-m">Uitnodiging: fysieke Combine</div><div class="p">Zaterdag 14 juni. Bevestigt je resultaat onder toezicht. Daarna: Pack Talent.</div></div>
+<a class="btn-primary" href="t5.html">Bevestig je plaats</a>
+<a class="btn-text" href="t6.html">Zo ziet het eruit buiten de top 5% →</a>
+""", fab=False)
+
+scherm("t6", "T", "Tryout: uitslag en aanbod", "Wie niet in de top 5% zit, ziet zijn eigen vooruitgang en krijgt een Premium-aanbod.", """
+<div class="lbl acc">Hertest · 23 mei</div>
+<div class="h-l">+5,1% IN <span class="acc">10 WEKEN</span></div>
+<p class="p" style="margin:8px 0 12px">Plaats 310 van 1.240. Je nakomen was 91%: het schema werkte, het volume was de grens.</p>
+<div class="row"><span>3 km</span><span class="r">12:30 → 12:02</span></div>
+<div class="row"><span>FTP</span><span class="r">210 → 221 W</span></div>
+<div class="card hl" style="margin-top:8px"><div class="h-m">Premium</div><div class="p">Verder met je schema richting een race, coachgesprek, uitleg bij elke beslissing. €19 per maand of €169 per jaar.</div></div>
+<a class="btn-primary" href="d1.html">Ga verder met Premium</a>
+<a class="btn-text" href="t1.html">Volgende golf: september</a>
+""", fab=False)
 
 # ── SAMEN ────────────────────────────────────────────────────────────────────
 CREW = [("Jij", "g g r g . . .", "4/7", "2× gezien"), ("Atleet A", "g m g g . . .", "3/7", "Gezien"),

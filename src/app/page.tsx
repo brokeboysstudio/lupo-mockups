@@ -11,9 +11,9 @@ const categories = [
   {
     num: 2,
     title: "De app",
-    desc: "Vandaag met de reden bij elke beslissing, Niet 100%, één vraag na de training, plan, Ladder, Samen, coach en privacy.",
+    desc: "Tryout in golven, Vandaag met de reden bij elke beslissing, Niet 100%, één vraag na de training, plan, Ladder, Samen, coach en privacy.",
     status: "doorklikbaar",
-    screens: "25 schermen",
+    screens: "31 schermen",
     href: "/mockups/app/index.html",
     active: true,
   },
