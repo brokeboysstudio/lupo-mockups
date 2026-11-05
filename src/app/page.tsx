@@ -11,9 +11,9 @@ const categories = [
   {
     num: 2,
     title: "De app",
-    desc: "Validatiedemo: korte onboarding, ochtend met en zonder waarom, Niet 100%, DFRNT tryout, raceblok €49. Verder Vandaag met de reden bij elke beslissing, Niet 100%, één vraag na de training, plan, Ladder, Samen, coach en privacy.",
+    desc: "Validatiedemo: korte onboarding, ochtend met en zonder waarom, Niet 100%, DFRNT tryout, raceblok €49. Verder Vandaag met de reden bij elke beslissing, Niet 100%, één vraag na de training, plan, Ladder, vergelijken (waar sta je, naast een vriend, het pad van wie je doel haalde, openbaar profiel), Samen, coach en privacy.",
     status: "doorklikbaar",
-    screens: "36 schermen",
+    screens: "41 schermen",
     href: "/mockups/app/index.html",
     active: true,
   },

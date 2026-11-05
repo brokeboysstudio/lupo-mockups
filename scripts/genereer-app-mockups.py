@@ -20,6 +20,7 @@ SECTIES = {
     "P": ("Plan", "Week verslepen met regelcontrole, seizoen richting de A-race, pre-mortem uit eigen data."),
     "L": ("Ladder", "Een absolute score, een percentiel op de ladder, acht treden en een Combine per kwartaal."),
     "T": ("DFRNT tryout", "Werknaam voor de tryouts. Geen permanente gratis laag: gratis meedoen in vaste golven. Nulmeting, 8 tot 12 weken schema, hertest. Top 5% progressie bij weinig volume naar de fysieke Combine en Pack Talent."),
+    "V": ("Vergelijken", "Waar sta je? Tegen atleten zoals jij, naast je vrienden, en tegen het pad van wie jouw doel al haalde. Alleen wat je zelf deelt, nooit HRV of slaap."),
     "S": ("Samen", "Een crew zonder feed, een matcher, Race Boards en clubs. Voorbeelddata; later in de roadmap."),
     "C": ("Coach en Ik", "Coachgesprek over het schema, eigen data importeren en privé-instellingen."),
     "W": ("Webversie", "Mobiel beslist, web verklaart en plant. Zijbalk, panelen naast elkaar, ⌘K."),
@@ -301,13 +302,16 @@ scherm("l2", "L", "Hoe je score werkt", "De uitleg die bij de score hoort. Geen 
 <div class="card"><div class="p">Bronnen: afgevinkte LUPO-sessies, je eigen import, geclaimde officiële uitslagen en de Combine. Nooit Strava.</div></div>
 """, tab="Ladder")
 
-TREDEN = ["00 Start", "01 Ritme", "02 Basis", "03 Opbouw", "04 Atleet", "05 Gevorderd", "06 Elite-amateur", "07 Talent"]
-tr = "".join(f'<div class="row{" on" if i == 3 else (" dim" if i > 3 else "")}"><span>{t}</span><span class="r{" acc" if i == 3 else ""}">{"jij" if i == 3 else ("✓" if i < 3 else "")}</span></div>' for i, t in enumerate(TREDEN))
+TREDEN = [("07", "Pack Elite · Tier A", "top 1% met podia op grote races"), ("06", "Pack · Tier B", "top 5% met meerdere PR's"),
+          ("05", "Pack Talent · Tier C", "top 10% seizoen of top 5–10 Combine"), ("04", "Je wordt gemeten", "Fysieke Combine · top 25%, 3 maanden actief"),
+          ("03", "Je valt op", "top 5% progressie bij ondergemiddeld volume"), ("02", "Je hebt een datum", "een race in de agenda · Premium"),
+          ("01", "Je wordt meetbaar", "Digitale Combine, elk kwartaal"), ("00", "Je staat op de kaart", "een account")]
+tr = "".join(f'<div class="row{" on" if n == "02" else (" dim" if n > "02" else "")}"><span style="display:flex;gap:12px;align-items:center"><span class="h-m{" acc" if n == "02" else " mut"}">{n}</span><span>{t}<br/><span class="mut" style="font-size:11px">{e}</span></span></span><span class="r">{"<span class=\'pill acc\'>jij</span>" if n == "02" else ("✓" if n < "02" else "")}</span></div>' for n, t, e in TREDEN)
 scherm("l3", "L", "Treden", "Acht treden van 00 tot 07. Wat nodig is voor de volgende staat erbij.", f"""
 <div class="lbl">Ladder</div>
 <div class="seg"><a href="l1.html">Score</a><a class="on" href="l3.html">Treden</a><a href="l4.html">Combine</a><a href="l5.html">Proef</a></div>
 {tr}
-<div class="card hl"><div class="p">Naar 04: score 680 en één Combine-test in dit kwartaal.</div></div>
+<div class="p" style="margin-top:6px">Niemand valt van de ladder. Naar 03: top 5% progressie bij ondergemiddeld volume, zoals in een DFRNT-golf.</div>
 """, tab="Ladder")
 
 scherm("l4", "L", "Digitale Combine", "Vier tests per kwartaal, in de laatste 14 dagen. Eén meting, één getal.", """
@@ -415,7 +419,7 @@ def dots(s):
     m = {"g": "g", "r": "r", "m": "m", ".": ""}
     return '<div class="dots">' + "".join(f'<i class="{m[c]}"></i>' for c in s.split()) + "</div>"
 crew = "".join(f'<div class="row"><span>{n}{dots(d)}</span><span class="r">{x} &nbsp; <span class="pill{" acc" if "✓" in g else ""}">{g}</span></span></div>' for n, d, x, g in CREW)
-SEG_S = lambda a: '<div class="seg">' + "".join(f'<a class="{"on" if k == a else ""}" href="{h}.html">{k}</a>' for k, h in [("Crew", "s1"), ("Matcher", "s2"), ("Races", "s3"), ("Club", "s4")]) + "</div>"
+SEG_S = lambda a: '<div class="seg">' + "".join(f'<a class="{"on" if k == a else ""}" href="{h}.html">{k}</a>' for k, h in [("Vergelijk", "v1"), ("Crew", "s1"), ("Races", "s3"), ("Club", "s4")]) + "</div>"
 scherm("s1", "S", "Crew", "Wie trainde. Geen scores, geen HRV, geen feed. Eén reactie: gezien.", f"""
 <div class="lbl">Samen</div>{SEG_S("Crew")}
 <div class="demo">Voorbeelddata</div>
@@ -558,7 +562,7 @@ def pagina(s):
 
 
 PAD = [("o1", "Onboarding: race kiezen"), ("o2", "Niveau"), ("o3", "Eerste week"), ("d1", "Ochtend met waarom"),
-       ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("a1", "Raceblok €49")]
+       ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("v1", "Waar sta je (vergelijken)"), ("a1", "Raceblok €49")]
 VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Validatiedemo — volgorde voor de 12 gesprekken</div>'
              '<p class="lead" style="margin-bottom:16px">Toon D1 en D1Z apart en vraag welke de atleet zou volgen. Ladder, Samen en de webversie wachten.</p>'
              '<div class="screen-grid">' + "".join(

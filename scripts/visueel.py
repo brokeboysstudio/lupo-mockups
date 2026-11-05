@@ -505,3 +505,121 @@ vervang("w1", body=desk("Vandaag", "VANDAAG", "Donderdag 6 november", [
     ("Waarom", f'<div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">HRV · 14 dagen</span>{lijn(HRV, (58, 64), h=110, labels=HRV_LABELS, laatste_kleur="#ffb020")}</div><div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">Slaap</span>{staven([7.4, 7.1, 7.8, 6.9, 7.2, 6.5, 6.2], ["V", "Z", "Z", "M", "D", "W", "D"], h=70, markeer=6)}</div>'),
     ("Laatste sessie", f'<div class="media">{kaart(160, "thun", "8,4 KM · DINSDAG")}</div><div class="card" style="padding:10px 12px">{zoneverdeling([(1, 12), (2, 81), (3, 7)])}</div><a class="btn-text" href="w1.html">Exporteer tabel</a>'),
 ]))
+
+# ── VERGELIJKEN ──────────────────────────────────────────────────────────────
+# Wat klanten willen: "waar sta ik", "ben ik op schema voor mijn doel", "hoe doe ik het naast mijn maat".
+# Regels: alleen wat de atleet zelf deelt; nooit HRV, slaap of scorecomponenten; nooit Strava-data.
+# Wie anoniem bijdraagt aan de vergelijking, krijgt de vergelijking te zien.
+
+def plaats(label, waarde, pct, sub=""):
+    return (f'<div class="row" style="display:block;padding:10px 12px"><div style="display:flex;justify-content:space-between;align-items:baseline">'
+            f'<span>{label} <span class="mut" style="font-size:11px">{sub}</span></span><span style="font-family:Anton;font-size:17px">{waarde}</span></div>'
+            f'<div style="position:relative;height:16px;margin-top:8px"><div style="position:absolute;inset:6px 0;border-radius:3px;background:linear-gradient(90deg,#1d1d1d,#3a3a3a 50%,#1d1d1d)"></div>'
+            f'<div style="position:absolute;left:{pct}%;top:0;width:3px;height:16px;background:{ACC};border-radius:2px;transform:translateX(-1px)"></div>'
+            f'<div style="position:absolute;left:50%;top:4px;width:1px;height:8px;background:rgba(237,237,235,0.3)"></div></div>'
+            f'<div style="display:flex;justify-content:space-between;font-family:JetBrains Mono;font-size:9px;color:var(--muted)"><span>trager</span><span class="acc">beter dan {pct}%</span><span>sneller</span></div></div>')
+
+def pad_naar_doel(b=300, h=160):
+    """Fitheid per week voor de race: band van wie het doel haalde, en jouw lijn tot nu."""
+    x = lambda w: 24 + (w + 52) / 52 * (b - 30)
+    y = lambda v: h - 20 - v / 120 * (h - 34)
+    boven = [(x(w), y(40 + 75 * ((w + 52) / 52) ** 1.1 + 8)) for w in range(-52, 1, 2)]
+    onder = [(x(w), y(28 + 62 * ((w + 52) / 52) ** 1.1)) for w in range(-52, 1, 2)]
+    mid = [(x(w), y(34 + 69 * ((w + 52) / 52) ** 1.1 + 4)) for w in range(-52, 1, 2)]
+    jij = [(x(w), y(30 + 60 * ((w + 52) / 52) ** 1.05 + 3 * math.sin(w / 2))) for w in range(-52, -33)]
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
+    s += f'<polygon fill="rgba(216,255,0,0.10)" points="{_pad(boven)} {_pad(list(reversed(onder)))}"/>'
+    s += f'<polyline fill="none" stroke="rgba(216,255,0,0.35)" stroke-dasharray="3 3" points="{_pad(mid)}"/>'
+    s += f'<polyline fill="none" stroke="#ededeb" stroke-width="2.2" points="{_pad(jij)}"/>'
+    jx, jy = jij[-1]
+    s += f'<circle cx="{jx:.1f}" cy="{jy:.1f}" r="5" fill="{ACC}" stroke="#050505" stroke-width="2"/><text x="{jx+8:.1f}" y="{jy+14:.1f}" fill="{ACC}" font-family="JetBrains Mono" font-size="9">jij, nu</text>'
+    s += f'<line x1="24" y1="{h-20}" x2="{b}" y2="{h-20}" stroke="#2a2a2a"/>'
+    for w, t in [(-52, "−52 wk"), (-34, "−34"), (-12, "−12"), (0, "THUN")]:
+        s += f'<text x="{x(w):.1f}" y="{h-6}" text-anchor="{'end' if w == 0 else 'middle'}" fill="{ACC if w == 0 else "rgba(237,237,235,0.4)"}" font-family="JetBrains Mono" font-size="8">{t}</text>'
+    s += f'<text x="{b-4}" y="{y(120)+12:.1f}" text-anchor="end" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="8">FITHEID (CTL)</text>'
+    return s + "</svg>"
+
+def duo(label, ik, hij, verschil, beter):
+    kleur = "good" if beter else "warn"
+    return (f'<div class="row" style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px"><span style="font-family:Anton;font-size:16px">{ik}</span>'
+            f'<span class="mut" style="font-size:11px;text-align:center">{label}<br/><span class="{kleur}" style="font-family:JetBrains Mono">{verschil}</span></span>'
+            f'<span style="font-family:Anton;font-size:16px;text-align:right">{hij}</span></div>')
+
+SEG_V = SEG_S("Vergelijk")
+
+scherm("v1", "V", "Waar sta je", "Tegen atleten zoals jij: zelfde leeftijd, zelfde soort race, zelfde volume. Anoniem, alleen van wie zelf bijdraagt.", f"""
+<div class="lbl">Samen</div>{SEG_V}
+<div class="demo">Voorbeelddata</div>
+<div class="h-l">WAAR <span class="acc">STA JE?</span></div>
+<div class="chips" style="margin:8px 0"><span style="border-color:var(--accent);color:var(--accent)">M 40–44</span><span style="border-color:var(--accent);color:var(--accent)">Ironman</span><span style="border-color:var(--accent);color:var(--accent)">6–9 u/week</span><span>+ filter</span></div>
+<p class="p" style="margin-bottom:8px">1.860 atleten zoals jij</p>
+{plaats("3 km", "11:42", 62)}
+{plaats("FTP", "3,6 W/kg", 71, "268 W")}
+{plaats("Nakomen", "86%", 80, "12 weken")}
+{plaats("Volume", "7u20", 48, "per week")}
+<div class="row dim"><span>400 m zwemmen</span><span class="r">nog niet getest</span></div>
+<div class="tiles t2" style="margin-top:6px">
+  <a class="tile" href="v2.html"><div class="k">Naast een vriend</div><div class="avs" style="margin-top:6px">{avatar("JIJ", ACC)}{avatar("B", "#7d9400")}</div></a>
+  <a class="tile" href="v3.html"><div class="k">Wie sub 9u30 haalde</div><div class="v acc" style="font-size:18px">Op schema?</div></a>
+</div>
+<a class="btn-text" href="v5.html">Wat deel ik? →</a>
+""", tab="Samen")
+
+scherm("v2", "V", "Naast een vriend", "Twee atleten naast elkaar, alleen op wat beiden delen. Een vriend vraagt en de ander bevestigt; er zijn geen volgers.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="v1.html">← Waar sta je</a>
+<div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px">
+  <div style="display:flex;gap:8px;align-items:center">{avatar("JIJ", ACC)}<span>Jij</span></div><span class="mut" style="font-family:JetBrains Mono;font-size:10px">VS</span>
+  <div style="display:flex;gap:8px;align-items:center"><span>Bob</span>{avatar("B", "#5a5a58")}</div></div>
+<div class="demo">Voorbeelddata</div>
+<div class="card" style="display:flex;flex-direction:column;align-items:center;padding:6px">{radar([0.7, 0.58, 0.66, 0.74, 0.6], [0.62, 0.71, 0.3, 0.8, 0.48], ["3 KM", "FTP", "ZWEM", "NAKOMEN", "VOLUME"], 196)}
+<div class="legend"><span><b style="background:{ACC}"></b>jij</span><span><b style="background:rgba(237,237,235,0.5)"></b>Bob</span></div></div>
+{duo("3 km", "11:42", "11:20", "Bob −22 s", False)}
+{duo("FTP", "3,6 W/kg", "3,3 W/kg", "jij +0,3", True)}
+{duo("Nakomen", "86%", "81%", "jij +5%", True)}
+<div class="card hl"><div class="p">Allebei Thun. Bob stond 34 weken voor zijn eerste ironman op dezelfde fitheid als jij nu, en finishte in 10u05.</div></div>
+""", tab="Samen")
+
+scherm("v3", "V", "Het pad van wie je doel haalde", "Jouw fitheid per week voor de race, naast de band van atleten die sub 9u30 haalden. Een vergelijking, geen voorspelling.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="v1.html">← Waar sta je</a>
+<div class="h-l">OP SCHEMA VOOR <span class="acc">SUB 9U30?</span></div>
+<div class="demo">Voorbeelddata · 140 openbare profielen</div>
+<div class="card" style="padding:8px">{pad_naar_doel()}
+<div class="legend"><span><b style="background:rgba(216,255,0,0.4)"></b>wie sub 9u30 haalde</span><span><b style="background:#ededeb"></b>jij</span></div></div>
+<div class="why">Je zit <b>in de band, onderste helft</b>. Wie vanaf hier in de onderste helft zat en het haalde, trainde de 20 weken erna gemiddeld <b>1u10 meer per week</b>, vooral op de fiets.</div>
+<div class="tiles"><div class="tile"><div class="k">Jouw fitheid</div><div class="v">58</div></div><div class="tile"><div class="k">Midden band</div><div class="v acc">64</div></div><div class="tile"><div class="k">Achterstand</div><div class="v warn">−6</div></div></div>
+<p class="p" style="font-size:11px">Een vergelijking met wie het al deed, geen voorspelling. Data van atleten die hun profiel openbaar zetten.</p>
+""", tab="Samen")
+
+scherm("v4", "V", "Openbaar profiel", "Wie zijn profiel openbaar zet, wordt vindbaar en vergelijkbaar. Voor een potential is dit de plek om op te vallen.", f"""
+<div class="media" style="margin-top:4px">{beeld("baan", 120, "ATLEET R · 21", "Leuven • DFRNT golf sep 26: top 2%", "OPENBAAR PROFIEL")}</div>
+<div class="tiles"><div class="tile"><div class="k">LUPO-score</div><div class="v acc">812</div><div class="s">top 6%</div></div><div class="tile"><div class="k">Trede</div><div class="v">05</div><div class="s">Pack Talent</div></div><div class="tile"><div class="k">Races</div><div class="v">7</div><div class="s">geclaimd</div></div></div>
+<div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">Score · 12 maanden</span>{lijn([520, 548, 575, 590, 620, 655, 690, 712, 735, 770, 795, 812], h=62, labels=[(0, "nov"), (11, "nu")])}</div>
+<div class="row"><span>Antwerp 10 Miles 2026</span><span class="r">56:40 · M20 #3</span></div>
+<div class="row"><span>Combine Q3 · 3 km</span><span class="r">9:12</span></div>
+<a class="btn-primary" href="v2.html">Vraag om te vergelijken</a>
+<p class="p" style="text-align:center;font-size:11px">Geen volgers. Atleet R ziet je vraag en beslist.</p>
+""", tab="Samen")
+
+def deel(t, v, o, a, slot=False):
+    cel = lambda x: f'<span class="pill{" acc" if x == "aan" else ""}" style="min-width:46px;text-align:center">{x}</span>'
+    if slot:
+        return f'<div class="row dim" style="display:grid;grid-template-columns:1fr 150px;gap:6px"><span>{t}</span><span class="r" style="text-align:right">nooit gedeeld</span></div>'
+    return f'<div class="row" style="display:grid;grid-template-columns:1fr 50px 50px 50px;gap:4px"><span style="font-size:12px">{t}</span>{cel(v)}{cel(o)}{cel(a)}</div>'
+
+scherm("v5", "V", "Wat je deelt", "Per onderdeel kies je met wie: vrienden, openbaar, of anoniem in de vergelijking. Wie anoniem bijdraagt, ziet de vergelijking.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="v1.html">← Waar sta je</a>
+<div class="h-l">WAT JE <span class="acc">DEELT</span></div>
+<div style="display:grid;grid-template-columns:1fr 50px 50px 50px;gap:4px;font-family:JetBrains Mono;font-size:8px;color:var(--muted);letter-spacing:0.08em;margin:10px 12px 4px"><span></span><span>VRIENDEN</span><span>OPENBAAR</span><span>ANONIEM</span></div>
+{deel("LUPO-score en percentiel", "aan", "uit", "aan")}
+{deel("Combine-resultaten", "aan", "uit", "aan")}
+{deel("Geclaimde uitslagen", "aan", "uit", "aan")}
+{deel("Volume en nakomen per week", "aan", "uit", "aan")}
+{deel("Fitheidslijn naar je race", "uit", "uit", "aan")}
+{deel("HRV en slaap", "", "", "", True)}
+{deel("Scorecomponenten", "", "", "", True)}
+<div class="card hl" style="margin-top:6px"><div class="p">Je profiel staat standaard op privé. Zet je "anoniem" uit, dan zie je zelf ook geen vergelijking met atleten zoals jij.</div></div>
+<p class="p" style="font-size:11px">Data uit Strava wordt nooit gedeeld of vergeleken.</p>
+""", tab="Samen")
+
+# Crew: matcher blijft bereikbaar vanuit de crew.
+SCHERMEN[_INDEX["s1"]]["body"] = SCHERMEN[_INDEX["s1"]]["body"].replace(SEG_S("Crew").replace("Vergelijk", "Vergelijk"), SEG_S("Crew")) + '<a class="btn-text" href="s2.html">Zoek een trainingsmaatje →</a>'
