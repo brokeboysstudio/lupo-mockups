@@ -10,7 +10,7 @@ import html
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public" / "mockups" / "app"
-FONTS = '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>'
+FONTS = '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>'
 
 TABS = [("Vandaag", "d1"), ("Plan", "p1"), ("Ladder", "l1"), ("Samen", "s1"), ("Ik", "i1")]
 
@@ -18,6 +18,7 @@ SECTIES = {
     "O": ("Onboarding", "Eerst geven, dan vragen. Race kiezen uit de database, drie tikken tot je eerste week."),
     "D": ("Vandaag", "Elke ochtend één beslissing, met de reden erbij. Afwijken kan, en telt eerlijk mee."),
     "P": ("Plan", "Week verslepen met regelcontrole, seizoen richting de A-race, pre-mortem uit eigen data."),
+    "R": ("Trainingen en inzichten", "Elke afgewerkte training zoals Strava hem toont, met kaart, splits en grafiek. Daarbovenop wat LUPO erin ziet en wat het plan ermee doet. Uit de eigen import."),
     "L": ("Ladder", "Een absolute score, een percentiel op de ladder, acht treden en een Combine per kwartaal."),
     "T": ("DFRNT tryout", "Werknaam voor de tryouts. Geen permanente gratis laag: gratis meedoen in vaste golven. Nulmeting, 8 tot 12 weken schema, hertest. Top 5% progressie bij weinig volume naar de fysieke Combine en Pack Talent."),
     "V": ("Vergelijken", "Waar sta je? Tegen atleten zoals jij, naast je vrienden, en tegen het pad van wie jouw doel al haalde. Alleen wat je zelf deelt, nooit HRV of slaap."),
@@ -155,8 +156,8 @@ scherm("d2", "D", "Waarom deze beslissing", "De regels achter de beslissing. Det
 <div class="card"><div class="p">Intensiteit eruit, duur naar 60%, minstens 20 minuten. Rusten pas vanaf −15% én slechte slaap, of op jouw signaal.</div></div>
 <div class="lbl">Je HRV, 14 dagen</div>
 <div class="card">
-  <svg viewBox="0 0 300 70" width="100%" height="70"><rect x="0" y="18" width="300" height="22" fill="rgba(216,255,0,0.07)"/>
-  <polyline fill="none" stroke="#d8ff00" stroke-width="2" points="0,30 23,26 46,28 69,24 92,29 115,27 138,31 161,25 184,28 207,30 230,33 253,38 276,44 300,52"/></svg>
+  <svg viewBox="0 0 300 70" width="100%" height="70"><rect x="0" y="18" width="300" height="22" fill="rgba(200,241,53,0.07)"/>
+  <polyline fill="none" stroke="#c8f135" stroke-width="2" points="0,30 23,26 46,28 69,24 92,29 115,27 138,31 161,25 184,28 207,30 230,33 253,38 276,44 300,52"/></svg>
   <div class="p">Groene band = jouw normale bereik. Vanochtend eronder.</div>
 </div>
 <div class="demo">Drempels wachten op de sportarts vóór echte gebruikers</div>
@@ -510,7 +511,7 @@ W1 = desk("Vandaag", "VANDAAG", "Donderdag 6 november", [
 <div class="tiles"><a class="tile" href="d2.html"><div class="k">HRV</div><div class="v warn">52</div></a><div class="tile"><div class="k">Slaap</div><div class="v">6u10</div></div><div class="tile"><div class="k">Belasting</div><div class="v">1.12</div></div></div>
 <div class="card hl"><div class="h-m">Zone 2 · 45 min</div><div class="p">Was drempel 4×8, 70 min.</div></div>"""),
     ("Waarom", """<div class="row on"><span>HRV vs gemiddelde</span><span class="r warn">−15%</span></div><div class="row"><span>Slaap</span><span class="r">6u10</span></div><div class="row"><span>Belasting</span><span class="r">1.12</span></div>
-<div class="card"><svg viewBox="0 0 300 70" width="100%" height="80"><rect x="0" y="18" width="300" height="22" fill="rgba(216,255,0,0.07)"/><polyline fill="none" stroke="#d8ff00" stroke-width="2" points="0,30 23,26 46,28 69,24 92,29 115,27 138,31 161,25 184,28 207,30 230,33 253,38 276,44 300,52"/></svg></div>"""),
+<div class="card"><svg viewBox="0 0 300 70" width="100%" height="80"><rect x="0" y="18" width="300" height="22" fill="rgba(200,241,53,0.07)"/><polyline fill="none" stroke="#c8f135" stroke-width="2" points="0,30 23,26 46,28 69,24 92,29 115,27 138,31 161,25 184,28 207,30 230,33 253,38 276,44 300,52"/></svg></div>"""),
     ("Progressie", """<div class="tiles t2"><div class="tile"><div class="k">Nakomen 4 wkn</div><div class="v">86%</div></div><div class="tile"><div class="k">Uren deze week</div><div class="v">6u50</div></div></div>
 <div class="row"><span>Week 44</span><span class="r">92% ✓</span></div><div class="row"><span>Week 43</span><span class="r">78%</span></div><div class="row"><span>Week 42</span><span class="r">88% ✓</span></div><a class="btn-text" href="w1.html">Exporteer tabel</a>"""),
 ])
@@ -557,12 +558,12 @@ def pagina(s):
                   f'<div class="status-bar"><span>07:12</span><span>5G</span></div><div class="screen">{s["body"]}'
                   f'{tabbar(s["tab"]) if s["tab"] else ""}</div>{fab}</div></div></div>')
     return (f'<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>'
-            f'<title>{titel} | LUPO</title>{FONTS}<link rel="stylesheet" href="../onboarding-fase-1/styles.css"/><link rel="stylesheet" href="app.css"/></head>'
+            f'<title>{titel} | LUPO</title>{FONTS}<link rel="stylesheet" href="app.css"/></head>'
             f'<body>{terug}{inhoud}{"" if s["desk"] else noot}</body></html>\n')
 
 
 PAD = [("o1", "Onboarding: race kiezen"), ("o2", "Niveau"), ("o3", "Eerste week"), ("d1", "Ochtend met waarom"),
-       ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("v1", "Waar sta je (vergelijken)"), ("a1", "Raceblok €49")]
+       ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("r2", "Afgewerkte training met inzichten"), ("v1", "Waar sta je (vergelijken)"), ("a1", "Raceblok €49")]
 VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Validatiedemo — volgorde voor de 12 gesprekken</div>'
              '<p class="lead" style="margin-bottom:16px">Toon D1 en D1Z apart en vraag welke de atleet zou volgen. Ladder, Samen en de webversie wachten.</p>'
              '<div class="screen-grid">' + "".join(
@@ -594,7 +595,7 @@ def overzicht():
             for s in SCHERMEN if s["sectie"] == k)
         blokken.append(f'<div class="super" style="margin-top:40px">⌗ {naam}</div><p class="lead" style="margin-bottom:16px">{uitleg}</p><div class="screen-grid">{kaarten}</div>')
     return (f'<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>'
-            f'<title>LUPO Mockups — De app</title>{FONTS}<link rel="stylesheet" href="../onboarding-fase-1/styles.css"/><link rel="stylesheet" href="app.css"/></head><body>'
+            f'<title>LUPO Mockups — De app</title>{FONTS}<link rel="stylesheet" href="app.css"/></head><body>'
             f'<div class="overview"><a href="/" class="back-link" style="position:static;display:inline-block;margin-bottom:24px">← Mockups</a>'
             f'<div class="overview-header"><div class="super">⌗ LUPO — De app — {len(SCHERMEN)} schermen</div>'
             f'<h1>Elke ochtend <span class="em">één beslissing.</span></h1>'
@@ -604,7 +605,12 @@ def overzicht():
 
 
 OUT.mkdir(parents=True, exist_ok=True)
-(OUT / "app.css").write_text((Path(__file__).parent / "app_css.css").read_text() + CSS_EXTRA)
+# Huisstijl van het productbeeld: DM Sans voor tekst en labels, Bebas Neue voor koppen, accent #c8f135.
+BASIS = (OUT.parent / "onboarding-fase-1" / "styles.css").read_text()
+for oud, nieuw in [("'JetBrains Mono', monospace", "'DM Sans', sans-serif"), ("'Bricolage Grotesque', sans-serif", "'DM Sans', sans-serif"),
+                   ("'Anton', sans-serif", "'Bebas Neue', sans-serif"), ("#d8ff00", "#c8f135"), ("216,255,0", "200,241,53"), ("216, 255, 0", "200, 241, 53")]:
+    BASIS = BASIS.replace(oud, nieuw)
+(OUT / "app.css").write_text(BASIS + (Path(__file__).parent / "app_css.css").read_text() + CSS_EXTRA + THEMA)
 for s in SCHERMEN:
     (OUT / f"{s['id']}.html").write_text(pagina(s))
 (OUT / "index.html").write_text(overzicht())

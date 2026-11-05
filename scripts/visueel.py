@@ -5,8 +5,8 @@
 
 import math
 
-ACC = "#d8ff00"
-ZONE_KLEUR = {1: "#4a4a4a", 2: "#7d9400", 3: "#d8ff00", 4: "#ffb020", 5: "#ff4d4d"}
+ACC = "#c8f135"
+ZONE_KLEUR = {1: "#4a4a4a", 2: "#7d9400", 3: "#c8f135", 4: "#ffb020", 5: "#ff4d4d"}
 
 
 def _pad(punten):
@@ -20,8 +20,8 @@ def ring(pct, kleur, groot, klein, maat=132):
             f'<circle cx="{maat/2}" cy="{maat/2}" r="{r}" fill="none" stroke="#1d1d1d" stroke-width="10"/>'
             f'<circle cx="{maat/2}" cy="{maat/2}" r="{r}" fill="none" stroke="{kleur}" stroke-width="10" stroke-linecap="round" '
             f'stroke-dasharray="{omtrek*pct:.1f} {omtrek:.1f}" transform="rotate(-90 {maat/2} {maat/2})"/>'
-            f'<text x="50%" y="48%" text-anchor="middle" fill="#ededeb" font-family="Anton" font-size="{maat*0.25:.0f}">{groot}</text>'
-            f'<text x="50%" y="66%" text-anchor="middle" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">{klein}</text></svg>')
+            f'<text x="50%" y="48%" text-anchor="middle" fill="#ededeb" font-family="Bebas Neue" font-size="{maat*0.25:.0f}">{groot}</text>'
+            f'<text x="50%" y="66%" text-anchor="middle" fill="rgba(237,237,235,0.5)" font-family="DM Sans" font-size="9" letter-spacing="1.5">{klein}</text></svg>')
 
 
 def lijn(waarden, band=None, b=300, h=90, kleur=ACC, labels=None, laatste_kleur=None):
@@ -31,7 +31,7 @@ def lijn(waarden, band=None, b=300, h=90, kleur=ACC, labels=None, laatste_kleur=
     pts = [(sx(i), sy(v)) for i, v in enumerate(waarden)]
     s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
     if band:
-        s += f'<rect x="0" y="{sy(band[1]):.1f}" width="{b}" height="{sy(band[0]) - sy(band[1]):.1f}" fill="rgba(216,255,0,0.08)"/>'
+        s += f'<rect x="0" y="{sy(band[1]):.1f}" width="{b}" height="{sy(band[0]) - sy(band[1]):.1f}" fill="rgba(200,241,53,0.08)"/>'
     s += f'<polygon fill="url(#g{len(waarden)})" points="{_pad(pts)} {pts[-1][0]:.1f},{h-14} {pts[0][0]:.1f},{h-14}"/>'
     s += f'<defs><linearGradient id="g{len(waarden)}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{kleur}" stop-opacity="0.25"/><stop offset="1" stop-color="{kleur}" stop-opacity="0"/></linearGradient></defs>'
     s += f'<polyline fill="none" stroke="{kleur}" stroke-width="2" stroke-linejoin="round" points="{_pad(pts)}"/>'
@@ -39,7 +39,7 @@ def lijn(waarden, band=None, b=300, h=90, kleur=ACC, labels=None, laatste_kleur=
     s += f'<circle cx="{lx:.1f}" cy="{ly:.1f}" r="4" fill="{laatste_kleur or kleur}" stroke="#050505" stroke-width="2"/>'
     if labels:
         for i, t in labels:
-            s += f'<text x="{sx(i):.1f}" y="{h-2}" text-anchor="middle" fill="rgba(237,237,235,0.35)" font-family="JetBrains Mono" font-size="8">{t}</text>'
+            s += f'<text x="{sx(i):.1f}" y="{h-2}" text-anchor="middle" fill="rgba(237,237,235,0.35)" font-family="DM Sans" font-size="8">{t}</text>'
     return s + "</svg>"
 
 
@@ -67,6 +67,9 @@ def kaart(h=170, route="thun", label=""):
     if route == "thun":
         pad = [(30, 140), (52, 120), (70, 118), (92, 100), (118, 96), (140, 80), (160, 82), (186, 64), (210, 60), (236, 44), (262, 40), (282, 52), (270, 72), (246, 84), (220, 100), (196, 116), (170, 122), (140, 132), (110, 138), (78, 146), (46, 150), (30, 140)]
         water = "M0,170 L0,120 C40,110 70,150 120,150 C170,150 200,128 250,110 C280,100 300,104 300,104 L300,170 Z"
+    elif route == "rit":
+        pad = [(20, 100), (44, 76), (70, 70), (96, 52), (128, 46), (150, 28), (184, 24), (214, 36), (246, 30), (276, 50), (266, 78), (236, 92), (206, 104), (170, 98), (136, 108), (100, 112), (64, 110), (38, 108), (20, 100)]
+        water = "M0,170 L0,150 C80,140 160,160 300,150 L300,170 Z"
     else:
         pad = [(40, 130), (60, 100), (90, 92), (120, 70), (160, 66), (200, 50), (240, 60), (262, 90), (230, 116), (190, 124), (150, 130), (100, 140), (60, 142), (40, 130)]
         water = "M0,170 L0,150 C60,140 120,165 300,140 L300,170 Z"
@@ -74,11 +77,11 @@ def kaart(h=170, route="thun", label=""):
     straten += "".join(f'<line x1="0" y1="{y}" x2="300" y2="{y+18}" stroke="#141414" stroke-width="1"/>' for y in range(0, h, 22))
     s = (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="map"><rect width="300" height="{h}" fill="#0b0d0c"/>{straten}'
          f'<path d="{water}" fill="#0d1b22"/>'
-         f'<polyline fill="none" stroke="rgba(216,255,0,0.25)" stroke-width="7" stroke-linejoin="round" points="{_pad(pad)}"/>'
+         f'<polyline fill="none" stroke="rgba(200,241,53,0.25)" stroke-width="7" stroke-linejoin="round" points="{_pad(pad)}"/>'
          f'<polyline fill="none" stroke="{ACC}" stroke-width="2.5" stroke-linejoin="round" points="{_pad(pad)}"/>'
          f'<circle cx="{pad[0][0]}" cy="{pad[0][1]}" r="5" fill="#050505" stroke="{ACC}" stroke-width="2.5"/>')
     if label:
-        s += f'<text x="10" y="18" fill="rgba(237,237,235,0.6)" font-family="JetBrains Mono" font-size="9" letter-spacing="1">{label}</text>'
+        s += f'<text x="10" y="18" fill="rgba(237,237,235,0.6)" font-family="DM Sans" font-size="9" letter-spacing="1">{label}</text>'
     return s + "</svg>"
 
 
@@ -101,18 +104,18 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
     elif scene == "weg":
         lucht = ("#10141a", "#3a4a58")
         lagen = ('<path d="M0,100 L80,80 L160,92 L240,74 L300,86 L300,150 L0,150Z" fill="#161c22"/>'
-                 '<path d="M130,150 L148,96 L152,96 L170,150Z" fill="#2a2f35"/><path d="M149,150 L150,98 L151,150Z" fill="#d8ff00" opacity="0.5"/>')
+                 '<path d="M130,150 L148,96 L152,96 L170,150Z" fill="#2a2f35"/><path d="M149,150 L150,98 L151,150Z" fill="#c8f135" opacity="0.5"/>')
     else:  # baan
         lucht = ("#0e1012", "#1e2a1e")
         lagen = ('<ellipse cx="150" cy="128" rx="170" ry="46" fill="#3a1e18"/><ellipse cx="150" cy="128" rx="130" ry="30" fill="#1d3320"/>'
                  '<ellipse cx="150" cy="128" rx="150" ry="38" fill="none" stroke="#e8e4dc" stroke-opacity="0.25" stroke-dasharray="3 5"/>')
     tekst = ""
     if tag:
-        tekst += f'<text x="14" y="22" fill="{ACC}" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">{tag}</text>'
+        tekst += f'<text x="14" y="22" fill="{ACC}" font-family="DM Sans" font-size="9" letter-spacing="1.5">{tag}</text>'
     if titel:
-        tekst += f'<text x="14" y="{h-28}" fill="#ededeb" font-family="Anton" font-size="22">{titel}</text>'
+        tekst += f'<text x="14" y="{h-28}" fill="#ededeb" font-family="Bebas Neue" font-size="22">{titel}</text>'
     if sub:
-        tekst += f'<text x="14" y="{h-12}" fill="rgba(237,237,235,0.7)" font-family="Bricolage Grotesque" font-size="11">{sub}</text>'
+        tekst += f'<text x="14" y="{h-12}" fill="rgba(237,237,235,0.7)" font-family="DM Sans" font-size="11">{sub}</text>'
     return (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="beeld" preserveAspectRatio="xMinYMid slice">'
             f'<defs><linearGradient id="l{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{lucht[0]}"/><stop offset="1" stop-color="{lucht[1]}"/></linearGradient>'
             f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0.45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.75"/></linearGradient></defs>'
@@ -131,7 +134,7 @@ def staven(waarden, labels, h=70, b=300, markeer=None, gepland=None):
         vh = v / m * (h - 16)
         kleur = ACC if markeer is None or i == markeer else "#3a3a3a"
         s += f'<rect x="{x:.1f}" y="{h-12-vh:.1f}" width="{w*0.6:.1f}" height="{vh:.1f}" rx="3" fill="{kleur}"/>'
-        s += f'<text x="{x + w*0.3:.1f}" y="{h-1}" text-anchor="middle" fill="rgba(237,237,235,0.4)" font-family="JetBrains Mono" font-size="8">{labels[i]}</text>'
+        s += f'<text x="{x + w*0.3:.1f}" y="{h-1}" text-anchor="middle" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8">{labels[i]}</text>'
     return s + "</svg>"
 
 
@@ -142,24 +145,24 @@ def verdeling(pct, h=80, b=300, label="jij"):
     yj = h - 14 - 56 * math.exp(-((xj - 150) / 55) ** 2)
     return (f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
             f'<polygon fill="rgba(237,237,235,0.07)" points="{_pad(pts)} {b},{h-14} 0,{h-14}"/>'
-            f'<polygon fill="rgba(216,255,0,0.18)" points="{_pad([p for p in pts if p[0] >= xj])} {b},{h-14} {xj:.1f},{h-14}"/>'
+            f'<polygon fill="rgba(200,241,53,0.18)" points="{_pad([p for p in pts if p[0] >= xj])} {b},{h-14} {xj:.1f},{h-14}"/>'
             f'<polyline fill="none" stroke="rgba(237,237,235,0.4)" stroke-width="1.5" points="{_pad(pts)}"/>'
             f'<line x1="{xj:.1f}" y1="{yj-6:.1f}" x2="{xj:.1f}" y2="{h-14}" stroke="{ACC}" stroke-width="2"/>'
             f'<circle cx="{xj:.1f}" cy="{yj-6:.1f}" r="4" fill="{ACC}"/>'
-            f'<text x="{xj:.1f}" y="{yj-14:.1f}" text-anchor="middle" fill="{ACC}" font-family="JetBrains Mono" font-size="9">{label}</text>'
+            f'<text x="{xj:.1f}" y="{yj-14:.1f}" text-anchor="middle" fill="{ACC}" font-family="DM Sans" font-size="9">{label}</text>'
             f'<line x1="0" y1="{h-14}" x2="{b}" y2="{h-14}" stroke="#1d1d1d"/></svg>')
 
 
 def spreiding(punten, ik, top_y, b=300, h=170):
     """Progressie tegen volume: wie wint met het minste uren, staat linksboven."""
-    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}"><rect x="24" y="8" width="{b-30}" height="{top_y-8}" fill="rgba(216,255,0,0.07)"/>'
-    s += f'<text x="{b-8}" y="20" text-anchor="end" fill="{ACC}" font-family="JetBrains Mono" font-size="8">TOP 5%</text>'
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}"><rect x="24" y="8" width="{b-30}" height="{top_y-8}" fill="rgba(200,241,53,0.07)"/>'
+    s += f'<text x="{b-8}" y="20" text-anchor="end" fill="{ACC}" font-family="DM Sans" font-size="8">TOP 5%</text>'
     s += f'<line x1="24" y1="{h-20}" x2="{b}" y2="{h-20}" stroke="#2a2a2a"/><line x1="24" y1="8" x2="24" y2="{h-20}" stroke="#2a2a2a"/>'
-    s += f'<text x="{b-4}" y="{h-6}" text-anchor="end" fill="rgba(237,237,235,0.4)" font-family="JetBrains Mono" font-size="8">UUR PER WEEK →</text>'
-    s += f'<text x="10" y="{h/2}" fill="rgba(237,237,235,0.4)" font-family="JetBrains Mono" font-size="8" transform="rotate(-90 10 {h/2})" text-anchor="middle">PROGRESSIE →</text>'
+    s += f'<text x="{b-4}" y="{h-6}" text-anchor="end" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8">UUR PER WEEK →</text>'
+    s += f'<text x="10" y="{h/2}" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8" transform="rotate(-90 10 {h/2})" text-anchor="middle">PROGRESSIE →</text>'
     for x, y in punten:
         s += f'<circle cx="{x}" cy="{y}" r="2.6" fill="rgba(237,237,235,0.28)"/>'
-    s += f'<circle cx="{ik[0]}" cy="{ik[1]}" r="6" fill="{ACC}" stroke="#050505" stroke-width="2"/><text x="{ik[0]+10}" y="{ik[1]+4}" fill="{ACC}" font-family="JetBrains Mono" font-size="9">jij</text>'
+    s += f'<circle cx="{ik[0]}" cy="{ik[1]}" r="6" fill="{ACC}" stroke="#050505" stroke-width="2"/><text x="{ik[0]+10}" y="{ik[1]+4}" fill="{ACC}" font-family="DM Sans" font-size="9">jij</text>'
     return s + "</svg>"
 
 
@@ -173,9 +176,9 @@ def radar(voor, na, labels, maat=210):
         s += f'<polygon fill="none" stroke="#1f1f1f" points="{_pad([p(i, k) for i in range(n)])}"/>'
     for i, t in enumerate(labels):
         x, y = p(i, 1.22)
-        s += f'<text x="{x:.1f}" y="{y+3:.1f}" text-anchor="middle" fill="rgba(237,237,235,0.55)" font-family="JetBrains Mono" font-size="9">{t}</text>'
+        s += f'<text x="{x:.1f}" y="{y+3:.1f}" text-anchor="middle" fill="rgba(237,237,235,0.55)" font-family="DM Sans" font-size="9">{t}</text>'
     s += f'<polygon fill="rgba(237,237,235,0.08)" stroke="rgba(237,237,235,0.4)" stroke-dasharray="3 3" points="{_pad([p(i, v) for i, v in enumerate(voor)])}"/>'
-    s += f'<polygon fill="rgba(216,255,0,0.2)" stroke="{ACC}" stroke-width="2" points="{_pad([p(i, v) for i, v in enumerate(na)])}"/>'
+    s += f'<polygon fill="rgba(200,241,53,0.2)" stroke="{ACC}" stroke-width="2" points="{_pad([p(i, v) for i, v in enumerate(na)])}"/>'
     return s + "</svg>"
 
 
@@ -190,12 +193,12 @@ def periodisering(b=300, h=110, nu=0.42):
     s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
     for t, a, z, k in blokken:
         s += f'<rect x="{a*b:.1f}" y="{h-26}" width="{(z-a)*b-2:.1f}" height="10" rx="2" fill="{k}"/>'
-        s += f'<text x="{a*b+2:.1f}" y="{h-4}" fill="rgba(237,237,235,0.45)" font-family="JetBrains Mono" font-size="7.5">{t}</text>'
+        s += f'<text x="{a*b+2:.1f}" y="{h-4}" fill="rgba(237,237,235,0.45)" font-family="DM Sans" font-size="7.5">{t}</text>'
     ctl = [(x * b / 40, h - 34 - 60 * (min(x / 37, 1) ** 0.9) + (6 if x > 37 else 0)) for x in range(41)]
     s += f'<polyline fill="none" stroke="{ACC}" stroke-width="2" points="{_pad(ctl)}"/>'
     s += f'<line x1="{nu*b:.1f}" y1="6" x2="{nu*b:.1f}" y2="{h-26}" stroke="#ededeb" stroke-opacity="0.5" stroke-dasharray="2 3"/>'
-    s += f'<text x="{nu*b+4:.1f}" y="14" fill="#ededeb" font-family="JetBrains Mono" font-size="8">NU</text>'
-    s += f'<text x="{b-2}" y="14" text-anchor="end" fill="{ACC}" font-family="JetBrains Mono" font-size="8">THUN</text>'
+    s += f'<text x="{nu*b+4:.1f}" y="14" fill="#ededeb" font-family="DM Sans" font-size="8">NU</text>'
+    s += f'<text x="{b-2}" y="14" text-anchor="end" fill="{ACC}" font-family="DM Sans" font-size="8">THUN</text>'
     return s + "</svg>"
 
 
@@ -206,14 +209,14 @@ CSS_EXTRA = """
 .hero { display: flex; align-items: center; gap: 14px; margin: 6px 0 4px; }
 .zbar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 2px; margin-top: 6px; }
 .zbar i { display: block; height: 100%; }
-.zleg { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted-2); }
+.zleg { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; font-family: 'DM Sans', sans-serif; font-size: 9px; color: var(--muted-2); }
 .zleg b { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 6px; margin: 10px 0; }
-.stats .k { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.stats .v { font-family: 'Anton', sans-serif; font-size: 20px; }
+.stats .k { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.stats .v { font-family: 'Bebas Neue', sans-serif; font-size: 20px; }
 .av { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 11px; font-weight: 600; color: #050505; flex-shrink: 0; }
 .avs { display: flex; } .avs .av { margin-left: -8px; border: 2px solid var(--bg); } .avs .av:first-child { margin-left: 0; }
-.legend { display:flex; gap:12px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted-2); margin-top:4px; }
+.legend { display:flex; gap:12px; font-family:'DM Sans',monospace; font-size:9px; color:var(--muted-2); margin-top:4px; }
 .legend b { display:inline-block; width:10px; height:3px; margin-right:4px; vertical-align:2px; }
 .scroll-x { display: flex; gap: 8px; overflow-x: auto; margin: 0 -18px; padding: 0 18px 4px; scrollbar-width: none; }
 .scroll-x > * { flex: 0 0 78%; }
@@ -221,8 +224,8 @@ CSS_EXTRA = """
 .fab::after { content: ""; width: 16px; height: 14px; border: 2px solid #050505; border-radius: 4px 4px 4px 0; }
 .daycol { display:grid; grid-template-columns: 34px 1fr auto; gap:10px; align-items:center; padding:8px 10px; background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:6px; font-size:12px; text-decoration:none; color:inherit; }
 .daycol.on { border-color: var(--accent); }
-.daycol .d { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); line-height:1.2; }
-.daycol .d b { display:block; font-family:'Anton'; font-size:16px; color:var(--text); font-weight:400; }
+.daycol .d { font-family:'DM Sans',monospace; font-size:10px; color:var(--muted); line-height:1.2; }
+.daycol .d b { display:block; font-family:Bebas Neue; font-size:16px; color:var(--text); font-weight:400; }
 .speed { display:grid; grid-template-columns: 1fr 120px; gap:10px; align-items:center; }
 """
 
@@ -276,7 +279,7 @@ WEEK1 = [("MA", "3", "Rust", None, "—"), ("DI", "4", "Loop · zone 2", [(5, 1)
 def daglijst(week, link="d1.html", on=None):
     return "".join(f'<a class="daycol{" on" if d == on else ""}" href="{link}"><div class="d">{d}<b>{n}</b></div>'
                    f'<div><div style="font-size:12px;margin-bottom:4px">{t}</div>{workout(w, 18) if w else "<div class=mut style=font-size:11px>herstel</div>"}</div>'
-                   f'<span class="r" style="font-family:JetBrains Mono;font-size:10px;color:var(--muted-2)">{m}</span></a>' for d, n, t, w, m in week)
+                   f'<span class="r" style="font-family:DM Sans;font-size:10px;color:var(--muted-2)">{m}</span></a>' for d, n, t, w, m in week)
 
 vervang("o3", body=f"""
 <div class="lbl acc">3 van 3</div>
@@ -296,7 +299,7 @@ def ochtend(met_waarom):
   <div><div class="h-l">AFBOUWEN</div><div class="p" style="margin-top:4px">Intensiteit eruit.<br/>Duur naar 60%.</div></div></div>
 {waarom}
 <a class="card" href="d2.html" style="padding:10px 12px 6px">
-  <div style="display:flex;justify-content:space-between"><span class="k lbl" style="margin:0">HRV · 14 dagen</span><span class="warn" style="font-family:Anton;font-size:18px">52 ms</span></div>
+  <div style="display:flex;justify-content:space-between"><span class="k lbl" style="margin:0">HRV · 14 dagen</span><span class="warn" style="font-family:Bebas Neue;font-size:18px">52 ms</span></div>
   {lijn(HRV, (58, 64), h=78, labels=HRV_LABELS, laatste_kleur="#ffb020")}
 </a>
 <div class="tiles t2">
@@ -331,8 +334,8 @@ vervang("d2", body=f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="d1.html">← Vandaag</a>
 <div class="h-l">WAAROM <span class="acc">AFBOUWEN</span></div>
 <p class="p" style="margin:6px 0 10px">Drie signalen, vaste drempels. Eén regel kantelde.</p>
-<div class="card warnc" style="padding:10px 12px 6px"><div style="display:flex;justify-content:space-between"><span>HRV vs 7-daags gemiddelde</span><span class="warn" style="font-family:JetBrains Mono;font-size:11px">−15% · grens −5%</span></div>
-{lijn(HRV, (58, 64), h=90, labels=HRV_LABELS, laatste_kleur="#ffb020")}<div class="legend"><span><b style="background:rgba(216,255,0,0.3)"></b>jouw band</span><span><b style="background:{ACC}"></b>HRV per nacht</span></div></div>
+<div class="card warnc" style="padding:10px 12px 6px"><div style="display:flex;justify-content:space-between"><span>HRV vs 7-daags gemiddelde</span><span class="warn" style="font-family:DM Sans;font-size:11px">−15% · grens −5%</span></div>
+{lijn(HRV, (58, 64), h=90, labels=HRV_LABELS, laatste_kleur="#ffb020")}<div class="legend"><span><b style="background:rgba(200,241,53,0.3)"></b>jouw band</span><span><b style="background:{ACC}"></b>HRV per nacht</span></div></div>
 <div class="card" style="padding:10px 12px 6px"><div style="display:flex;justify-content:space-between"><span>Slaap</span><span class="r">6u10 · grens 6u</span></div>
 {staven([7.4, 7.1, 7.8, 6.9, 7.2, 6.5, 6.2], ["V", "Z", "Z", "M", "D", "W", "D"], h=60, markeer=6)}</div>
 <div class="card" style="padding:10px 12px 6px"><div style="display:flex;justify-content:space-between"><span>Belasting 7 vs 28 dagen</span><span class="r">1.12 · band 0,8–1,3</span></div>
@@ -373,7 +376,7 @@ vervang("d6", body=f"""
 <div class="why">Twee keer <b>te zwaar</b> in 7 dagen. Het volgende blok gaat 10% lichter.</div>
 <div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">Gevoel na de training · 7 dagen</span>
 <svg viewBox="0 0 300 70" width="100%" height="70">{"".join(f'<circle cx="{20+i*43}" cy="{ {"l":56,"g":35,"z":14}[c] }" r="7" fill="{ {"l":"#4a4a4a","g":ACC,"z":"#ffb020"}[c] }"/>' for i, c in enumerate("zgg" + "zg" + "gg"))}
-<text x="296" y="17" text-anchor="end" fill="#ffb020" font-family="JetBrains Mono" font-size="8">TE ZWAAR</text><text x="296" y="38" text-anchor="end" fill="{ACC}" font-family="JetBrains Mono" font-size="8">GOED</text><text x="296" y="59" text-anchor="end" fill="#888" font-family="JetBrains Mono" font-size="8">TE LICHT</text></svg></div>
+<text x="296" y="17" text-anchor="end" fill="#ffb020" font-family="DM Sans" font-size="8">TE ZWAAR</text><text x="296" y="38" text-anchor="end" fill="{ACC}" font-family="DM Sans" font-size="8">GOED</text><text x="296" y="59" text-anchor="end" fill="#888" font-family="DM Sans" font-size="8">TE LICHT</text></svg></div>
 <div class="lbl">Volgend blok</div>
 <div class="card"><div style="opacity:0.35">{workout(DREMPEL, 22)}</div><div style="margin-top:6px">{workout([(10, 1), (8, 2), (6, 2), (7, 4), (4, 1), (7, 4), (4, 1), (7, 4), (12, 1)], 30)}</div><div class="p" style="font-size:11px">4×8 → 3×7 min drempel</div></div>
 <div class="spacer"></div>
@@ -387,11 +390,11 @@ WOLK = [(random.uniform(40, 290), min(146, max(30, random.gauss(108, 20)))) for 
 
 vervang("t1", body=f"""
 <div class="media">{beeld("baan", 170, "TOON WAT JE KAN.", "Golf maart 2027 • 10 weken • gratis", "DFRNT TRYOUT")}</div>
-<div style="display:flex;align-items:center;gap:10px;margin:4px 0 10px"><div class="avs">{avatar("JW", "#d8ff00")}{avatar("BV", "#7d9400")}{avatar("AM", "#ffb020")}{avatar("+", "#2a2a2a")}</div><span class="p">1.240 ingeschreven</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:4px 0 10px"><div class="avs">{avatar("JW", "#c8f135")}{avatar("BV", "#7d9400")}{avatar("AM", "#ffb020")}{avatar("+", "#2a2a2a")}</div><span class="p">1.240 ingeschreven</span></div>
 <div class="card" style="padding:10px 12px"><svg viewBox="0 0 300 50" width="100%" height="50">
 <line x1="10" y1="20" x2="290" y2="20" stroke="#2a2a2a" stroke-width="2"/><rect x="10" y="17" width="34" height="6" rx="3" fill="{ACC}"/><rect x="250" y="17" width="40" height="6" rx="3" fill="{ACC}"/><rect x="44" y="18" width="206" height="4" fill="#4b5a00"/>
-<text x="10" y="42" fill="#ededeb" font-family="JetBrains Mono" font-size="8">NULMETING</text><text x="150" y="42" text-anchor="middle" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="8">10 WEKEN SCHEMA</text><text x="290" y="42" text-anchor="end" fill="#ededeb" font-family="JetBrains Mono" font-size="8">HERTEST</text>
-<text x="10" y="10" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="8">1 MRT</text><text x="290" y="10" text-anchor="end" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="8">23 MEI</text></svg></div>
+<text x="10" y="42" fill="#ededeb" font-family="DM Sans" font-size="8">NULMETING</text><text x="150" y="42" text-anchor="middle" fill="rgba(237,237,235,0.5)" font-family="DM Sans" font-size="8">10 WEKEN SCHEMA</text><text x="290" y="42" text-anchor="end" fill="#ededeb" font-family="DM Sans" font-size="8">HERTEST</text>
+<text x="10" y="10" fill="rgba(237,237,235,0.5)" font-family="DM Sans" font-size="8">1 MRT</text><text x="290" y="10" text-anchor="end" fill="rgba(237,237,235,0.5)" font-family="DM Sans" font-size="8">23 MEI</text></svg></div>
 <p class="p" style="margin:6px 0 10px">Wie het meest vooruitgaat met het minste volume, krijgt een uitnodiging voor de fysieke Combine.</p>
 <a class="btn-primary" href="t2.html">Schrijf me in</a>
 <p class="p" style="text-align:center;font-size:11px">Onder 18: met toestemming van een ouder.</p>
@@ -463,7 +466,7 @@ WEEK45 = [("MA", "3", "Rust", None, "—"), ("DI", "4", "Loop · drempel 4×8", 
 vervang("p1", body=f"""
 <div class="lbl">Plan</div>
 <div class="seg"><a class="on" href="p1.html">Week</a><a href="p3.html">Seizoen</a><a href="p5.html">Races</a></div>
-<div style="display:flex;justify-content:space-between;align-items:baseline"><div class="h-l">WEEK <span class="acc">45</span></div><span class="r" style="font-family:JetBrains Mono;font-size:11px;color:var(--muted-2)">TSS 520 • 9u35</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div class="h-l">WEEK <span class="acc">45</span></div><span class="r" style="font-family:DM Sans;font-size:11px;color:var(--muted-2)">TSS 520 • 9u35</span></div>
 <div class="card" style="padding:8px 10px">{staven([0, 82, 40, 95, 38, 150, 115], ["M", "D", "W", "D", "V", "Z", "Z"], h=64, markeer=3, gepland=[0, 82, 40, 95, 38, 150, 115])}</div>
 {daglijst(WEEK45, "p2.html", on="DO")}
 """)
@@ -485,7 +488,7 @@ vervang("l1", body=f"""
 <a class="btn-text" href="l2.html">Hoe je score werkt →</a>
 """)
 
-KLEUREN = ["#d8ff00", "#7d9400", "#ffb020", "#4ade80"]
+KLEUREN = ["#c8f135", "#7d9400", "#ffb020", "#4ade80"]
 CREW2 = [("JIJ", "Jij", "g g r g . . .", "4/7"), ("A", "Atleet A", "g m g g . . .", "3/7"), ("B", "Atleet B", "r g g m . . .", "3/7"), ("C", "Atleet C", "g g g g . . .", "4/7")]
 crewrijen = "".join(
     f'<div class="row"><span style="display:flex;gap:10px;align-items:center">{avatar(i, KLEUREN[n])}<span>{naam}{dots(d)}</span></span>'
@@ -513,11 +516,11 @@ vervang("w1", body=desk("Vandaag", "VANDAAG", "Donderdag 6 november", [
 
 def plaats(label, waarde, pct, sub=""):
     return (f'<div class="row" style="display:block;padding:10px 12px"><div style="display:flex;justify-content:space-between;align-items:baseline">'
-            f'<span>{label} <span class="mut" style="font-size:11px">{sub}</span></span><span style="font-family:Anton;font-size:17px">{waarde}</span></div>'
+            f'<span>{label} <span class="mut" style="font-size:11px">{sub}</span></span><span style="font-family:Bebas Neue;font-size:17px">{waarde}</span></div>'
             f'<div style="position:relative;height:16px;margin-top:8px"><div style="position:absolute;inset:6px 0;border-radius:3px;background:linear-gradient(90deg,#1d1d1d,#3a3a3a 50%,#1d1d1d)"></div>'
             f'<div style="position:absolute;left:{pct}%;top:0;width:3px;height:16px;background:{ACC};border-radius:2px;transform:translateX(-1px)"></div>'
             f'<div style="position:absolute;left:50%;top:4px;width:1px;height:8px;background:rgba(237,237,235,0.3)"></div></div>'
-            f'<div style="display:flex;justify-content:space-between;font-family:JetBrains Mono;font-size:9px;color:var(--muted)"><span>trager</span><span class="acc">beter dan {pct}%</span><span>sneller</span></div></div>')
+            f'<div style="display:flex;justify-content:space-between;font-family:DM Sans;font-size:9px;color:var(--muted)"><span>trager</span><span class="acc">beter dan {pct}%</span><span>sneller</span></div></div>')
 
 def pad_naar_doel(b=300, h=160):
     """Fitheid per week voor de race: band van wie het doel haalde, en jouw lijn tot nu."""
@@ -528,22 +531,22 @@ def pad_naar_doel(b=300, h=160):
     mid = [(x(w), y(34 + 69 * ((w + 52) / 52) ** 1.1 + 4)) for w in range(-52, 1, 2)]
     jij = [(x(w), y(30 + 60 * ((w + 52) / 52) ** 1.05 + 3 * math.sin(w / 2))) for w in range(-52, -33)]
     s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
-    s += f'<polygon fill="rgba(216,255,0,0.10)" points="{_pad(boven)} {_pad(list(reversed(onder)))}"/>'
-    s += f'<polyline fill="none" stroke="rgba(216,255,0,0.35)" stroke-dasharray="3 3" points="{_pad(mid)}"/>'
+    s += f'<polygon fill="rgba(200,241,53,0.10)" points="{_pad(boven)} {_pad(list(reversed(onder)))}"/>'
+    s += f'<polyline fill="none" stroke="rgba(200,241,53,0.35)" stroke-dasharray="3 3" points="{_pad(mid)}"/>'
     s += f'<polyline fill="none" stroke="#ededeb" stroke-width="2.2" points="{_pad(jij)}"/>'
     jx, jy = jij[-1]
-    s += f'<circle cx="{jx:.1f}" cy="{jy:.1f}" r="5" fill="{ACC}" stroke="#050505" stroke-width="2"/><text x="{jx+8:.1f}" y="{jy+14:.1f}" fill="{ACC}" font-family="JetBrains Mono" font-size="9">jij, nu</text>'
+    s += f'<circle cx="{jx:.1f}" cy="{jy:.1f}" r="5" fill="{ACC}" stroke="#050505" stroke-width="2"/><text x="{jx+8:.1f}" y="{jy+14:.1f}" fill="{ACC}" font-family="DM Sans" font-size="9">jij, nu</text>'
     s += f'<line x1="24" y1="{h-20}" x2="{b}" y2="{h-20}" stroke="#2a2a2a"/>'
     for w, t in [(-52, "−52 wk"), (-34, "−34"), (-12, "−12"), (0, "THUN")]:
-        s += f'<text x="{x(w):.1f}" y="{h-6}" text-anchor="{'end' if w == 0 else 'middle'}" fill="{ACC if w == 0 else "rgba(237,237,235,0.4)"}" font-family="JetBrains Mono" font-size="8">{t}</text>'
-    s += f'<text x="{b-4}" y="{y(120)+12:.1f}" text-anchor="end" fill="rgba(237,237,235,0.5)" font-family="JetBrains Mono" font-size="8">FITHEID (CTL)</text>'
+        s += f'<text x="{x(w):.1f}" y="{h-6}" text-anchor="{'end' if w == 0 else 'middle'}" fill="{ACC if w == 0 else "rgba(237,237,235,0.4)"}" font-family="DM Sans" font-size="8">{t}</text>'
+    s += f'<text x="{b-4}" y="{y(120)+12:.1f}" text-anchor="end" fill="rgba(237,237,235,0.5)" font-family="DM Sans" font-size="8">FITHEID (CTL)</text>'
     return s + "</svg>"
 
 def duo(label, ik, hij, verschil, beter):
     kleur = "good" if beter else "warn"
-    return (f'<div class="row" style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px"><span style="font-family:Anton;font-size:16px">{ik}</span>'
-            f'<span class="mut" style="font-size:11px;text-align:center">{label}<br/><span class="{kleur}" style="font-family:JetBrains Mono">{verschil}</span></span>'
-            f'<span style="font-family:Anton;font-size:16px;text-align:right">{hij}</span></div>')
+    return (f'<div class="row" style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px"><span style="font-family:Bebas Neue;font-size:16px">{ik}</span>'
+            f'<span class="mut" style="font-size:11px;text-align:center">{label}<br/><span class="{kleur}" style="font-family:DM Sans">{verschil}</span></span>'
+            f'<span style="font-family:Bebas Neue;font-size:16px;text-align:right">{hij}</span></div>')
 
 SEG_V = SEG_S("Vergelijk")
 
@@ -568,7 +571,7 @@ scherm("v1", "V", "Waar sta je", "Tegen atleten zoals jij: zelfde leeftijd, zelf
 scherm("v2", "V", "Naast een vriend", "Twee atleten naast elkaar, alleen op wat beiden delen. Een vriend vraagt en de ander bevestigt; er zijn geen volgers.", f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="v1.html">← Waar sta je</a>
 <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px">
-  <div style="display:flex;gap:8px;align-items:center">{avatar("JIJ", ACC)}<span>Jij</span></div><span class="mut" style="font-family:JetBrains Mono;font-size:10px">VS</span>
+  <div style="display:flex;gap:8px;align-items:center">{avatar("JIJ", ACC)}<span>Jij</span></div><span class="mut" style="font-family:DM Sans;font-size:10px">VS</span>
   <div style="display:flex;gap:8px;align-items:center"><span>Bob</span>{avatar("B", "#5a5a58")}</div></div>
 <div class="demo">Voorbeelddata</div>
 <div class="card" style="display:flex;flex-direction:column;align-items:center;padding:6px">{radar([0.7, 0.58, 0.66, 0.74, 0.6], [0.62, 0.71, 0.3, 0.8, 0.48], ["3 KM", "FTP", "ZWEM", "NAKOMEN", "VOLUME"], 196)}
@@ -584,7 +587,7 @@ scherm("v3", "V", "Het pad van wie je doel haalde", "Jouw fitheid per week voor 
 <div class="h-l">OP SCHEMA VOOR <span class="acc">SUB 9U30?</span></div>
 <div class="demo">Voorbeelddata · 140 openbare profielen</div>
 <div class="card" style="padding:8px">{pad_naar_doel()}
-<div class="legend"><span><b style="background:rgba(216,255,0,0.4)"></b>wie sub 9u30 haalde</span><span><b style="background:#ededeb"></b>jij</span></div></div>
+<div class="legend"><span><b style="background:rgba(200,241,53,0.4)"></b>wie sub 9u30 haalde</span><span><b style="background:#ededeb"></b>jij</span></div></div>
 <div class="why">Je zit <b>in de band, onderste helft</b>. Wie vanaf hier in de onderste helft zat en het haalde, trainde de 20 weken erna gemiddeld <b>1u10 meer per week</b>, vooral op de fiets.</div>
 <div class="tiles"><div class="tile"><div class="k">Jouw fitheid</div><div class="v">58</div></div><div class="tile"><div class="k">Midden band</div><div class="v acc">64</div></div><div class="tile"><div class="k">Achterstand</div><div class="v warn">−6</div></div></div>
 <p class="p" style="font-size:11px">Een vergelijking met wie het al deed, geen voorspelling. Data van atleten die hun profiel openbaar zetten.</p>
@@ -609,7 +612,7 @@ def deel(t, v, o, a, slot=False):
 scherm("v5", "V", "Wat je deelt", "Per onderdeel kies je met wie: vrienden, openbaar, of anoniem in de vergelijking. Wie anoniem bijdraagt, ziet de vergelijking.", f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="v1.html">← Waar sta je</a>
 <div class="h-l">WAT JE <span class="acc">DEELT</span></div>
-<div style="display:grid;grid-template-columns:1fr 50px 50px 50px;gap:4px;font-family:JetBrains Mono;font-size:8px;color:var(--muted);letter-spacing:0.08em;margin:10px 12px 4px"><span></span><span>VRIENDEN</span><span>OPENBAAR</span><span>ANONIEM</span></div>
+<div style="display:grid;grid-template-columns:1fr 50px 50px 50px;gap:4px;font-family:DM Sans;font-size:8px;color:var(--muted);letter-spacing:0.08em;margin:10px 12px 4px"><span></span><span>VRIENDEN</span><span>OPENBAAR</span><span>ANONIEM</span></div>
 {deel("LUPO-score en percentiel", "aan", "uit", "aan")}
 {deel("Combine-resultaten", "aan", "uit", "aan")}
 {deel("Geclaimde uitslagen", "aan", "uit", "aan")}
@@ -623,3 +626,257 @@ scherm("v5", "V", "Wat je deelt", "Per onderdeel kies je met wie: vrienden, open
 
 # Crew: matcher blijft bereikbaar vanuit de crew.
 SCHERMEN[_INDEX["s1"]]["body"] = SCHERMEN[_INDEX["s1"]]["body"].replace(SEG_S("Crew").replace("Vergelijk", "Vergelijk"), SEG_S("Crew")) + '<a class="btn-text" href="s2.html">Zoek een trainingsmaatje →</a>'
+
+
+# ── TRAININGEN EN INZICHTEN ─────────────────────────────────────────────────
+# Zoals Strava een activiteit toont (kaart, getallen, grafiek, splits), plus wat LUPO ziet:
+# gepland tegen gedaan, drift, dezelfde sessie van vroeger, en wat dat betekent voor het plan.
+# Alles uit de eigen import (Garmin, FIT, TrainingPeaks-export). Nooit Strava-data.
+
+HR_KLEUR = "#ff6b5a"
+
+
+def _drempelrit():
+    """Minuut per minuut: (tempo s/km, hartslag) voor 15 opwarmen, 3×10 drempel met 3 rust, 10 uitlopen."""
+    t, uit = [], []
+    for m in range(15):
+        t.append((340 - m, 128 + m * 1.1))
+    for r in range(3):
+        for m in range(10):
+            t.append((261 - r - (m % 3), 158 + r * 2 + min(m, 6) * 1.2))
+        if r < 2:
+            for m in range(3):
+                t.append((365, 150 - m * 4))
+    for m in range(10):
+        t.append((345 + m, 140 - m * 1.2))
+    return t
+
+
+def analyse(b=300, h=130):
+    d = _drempelrit()
+    n = len(d)
+    sx = lambda i: 26 + i * (b - 30) / (n - 1)
+    sp = lambda v: 10 + (v - 250) / (380 - 250) * (h - 40)     # sneller = hoger
+    sh = lambda v: h - 22 - (v - 110) / (180 - 110) * (h - 40)
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
+    for r in range(3):
+        a = 15 + r * 13
+        s += f'<rect x="{sx(a):.1f}" y="6" width="{sx(a+10)-sx(a):.1f}" height="{h-26}" fill="rgba(200,241,53,0.07)"/>'
+        s += f'<text x="{(sx(a)+sx(a+10))/2:.1f}" y="16" text-anchor="middle" fill="rgba(200,241,53,0.7)" font-family="DM Sans" font-size="8">{r+1}</text>'
+    s += f'<polyline fill="none" stroke="{HR_KLEUR}" stroke-width="1.6" stroke-opacity="0.85" points="{_pad([(sx(i), sh(v[1])) for i, v in enumerate(d)])}"/>'
+    s += f'<polyline fill="none" stroke="{ACC}" stroke-width="2" points="{_pad([(sx(i), sp(v[0])) for i, v in enumerate(d)])}"/>'
+    s += f'<line x1="26" y1="{h-16}" x2="{b}" y2="{h-16}" stroke="#2a2a2a"/>'
+    for m in (0, 15, 30, 45, 60):
+        s += f'<text x="{sx(min(m, n-1)):.1f}" y="{h-4}" text-anchor="middle" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8">{m}′</text>'
+    s += f'<text x="0" y="{sp(260)+3:.1f}" fill="{ACC}" font-family="DM Sans" font-size="8">4:20</text>'
+    s += f'<text x="0" y="{sp(360)+3:.1f}" fill="{ACC}" font-family="DM Sans" font-size="8" opacity="0.6">6:00</text>'
+    return s + "</svg>"
+
+
+def splits(rijen):
+    """Splits per km als Strava: tempo, balk, hartslag."""
+    snel = min(sec for _, sec, _ in rijen)
+    traag = max(sec for _, sec, _ in rijen)
+    uit = '<div class="spl"><div class="spl-h"><span>km</span><span>tempo</span><span></span><span>hs</span></div>'
+    for km, sec, hs in rijen:
+        w = 35 + 65 * (traag - sec) / (traag - snel or 1)
+        drempel = sec < 280
+        uit += (f'<div class="spl-r"><span>{km}</span><span>{sec//60}:{sec%60:02d}</span>'
+                f'<span><i style="width:{w:.0f}%;background:{ACC if drempel else "#4b5a00"}"></i></span><span>{hs}</span></div>')
+    return uit + "</div>"
+
+
+def vermogenscurve(b=300, h=120):
+    duur = [5, 15, 60, 300, 1200, 3600, 7200]
+    nu = [820, 610, 410, 300, 262, 228, 205]
+    toen = [760, 540, 360, 268, 246, 200, 172]
+    lx = lambda d: 28 + (math.log(d) - math.log(5)) / (math.log(7200) - math.log(5)) * (b - 34)
+    ly = lambda w: h - 18 - (w - 150) / (850 - 150) * (h - 28)
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
+    s += f'<polyline fill="none" stroke="rgba(237,237,235,0.35)" stroke-dasharray="3 3" stroke-width="1.5" points="{_pad([(lx(d), ly(w)) for d, w in zip(duur, toen)])}"/>'
+    s += f'<polyline fill="none" stroke="{ACC}" stroke-width="2.2" points="{_pad([(lx(d), ly(w)) for d, w in zip(duur, nu)])}"/>'
+    s += f'<line x1="28" y1="{h-18}" x2="{b}" y2="{h-18}" stroke="#2a2a2a"/>'
+    for d, t in zip(duur, ["5s", "15s", "1′", "5′", "20′", "1u", "2u"]):
+        s += f'<text x="{lx(d):.1f}" y="{h-5}" text-anchor="middle" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8">{t}</text>'
+    s += f'<circle cx="{lx(1200):.1f}" cy="{ly(262):.1f}" r="4" fill="{ACC}" stroke="#0a0a0a" stroke-width="2"/>'
+    s += f'<text x="{lx(1200)+6:.1f}" y="{ly(262)-8:.1f}" fill="{ACC}" font-family="DM Sans" font-size="9">262 W</text>'
+    for w in (300, 600):
+        s += f'<text x="0" y="{ly(w)+3:.1f}" fill="rgba(237,237,235,0.35)" font-family="DM Sans" font-size="8">{w}</text>'
+    return s + "</svg>"
+
+
+def fitheid_vorm(b=300, h=130):
+    """Fitheid (CTL), vermoeidheid (ATL) en vorm (TSB) over 12 weken."""
+    ctl, atl, tsb = [], [], []
+    c, a = 38.0, 40.0
+    for d in range(84):
+        week = d // 7
+        tss = 0 if d % 7 == 0 else (55 + week * 2.2) * (0.6 if week in (3, 7) else 1) * (1.6 if d % 7 == 6 else 1)
+        c += (tss - c) / 42
+        a += (tss - a) / 7
+        ctl.append(c); atl.append(a); tsb.append(c - a)
+    sx = lambda i: 4 + i * (b - 8) / 83
+    sy = lambda v: 10 + (95 - v) / (95 - 20) * (h - 60)
+    st = lambda v: h - 30 - v * 1.1
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
+    s += f'<line x1="0" y1="{h-30}" x2="{b}" y2="{h-30}" stroke="#2a2a2a"/>'
+    for i in range(0, 84, 2):
+        v = tsb[i]
+        y0, y1 = sorted((st(0), st(v)))
+        s += f'<rect x="{sx(i)-1:.1f}" y="{y0:.1f}" width="2.4" height="{max(y1-y0, 0.5):.1f}" fill="{"#7d9400" if v > 0 else "#5a3a2a"}"/>'
+    s += f'<polyline fill="none" stroke="#ff6b5a" stroke-opacity="0.6" stroke-width="1.3" points="{_pad([(sx(i), sy(v)) for i, v in enumerate(atl)])}"/>'
+    s += f'<polyline fill="none" stroke="{ACC}" stroke-width="2.2" points="{_pad([(sx(i), sy(v)) for i, v in enumerate(ctl)])}"/>'
+    s += f'<circle cx="{sx(83):.1f}" cy="{sy(ctl[-1]):.1f}" r="4" fill="{ACC}" stroke="#0a0a0a" stroke-width="2"/>'
+    for i, t in [(0, "aug"), (31, "sep"), (61, "okt"), (83, "nu")]:
+        s += f'<text x="{sx(i):.1f}" y="{h-2}" text-anchor="{"end" if i == 83 else "start" if i == 0 else "middle"}" fill="rgba(237,237,235,0.4)" font-family="DM Sans" font-size="8">{t}</text>'
+    return s + "</svg>"
+
+
+def inzicht(icoon, titel, tekst, kleur="acc"):
+    return (f'<div class="inz"><span class="inz-i {kleur}">{icoon}</span><div><div class="inz-t">{titel}</div>'
+            f'<div class="inz-p">{tekst}</div></div></div>')
+
+
+def activiteit(href, dag, titel, sport, getallen, beeldje, label, regel, labelkleur="acc"):
+    return (f'<a class="act" href="{href}"><div class="act-top"><span class="act-d">{dag} · {sport}</span>'
+            f'<span class="pill {labelkleur}">{label}</span></div><div class="act-t">{titel}</div>'
+            f'<div class="act-g">{getallen}</div><div class="act-b">{beeldje}</div>'
+            f'<div class="act-r">{regel}</div></a>')
+
+
+SEG_P = lambda a: '<div class="seg">' + "".join(
+    f'<a class="{"on" if k == a else ""}" href="{h}.html">{k}</a>'
+    for k, h in [("Week", "p1"), ("Logboek", "r1"), ("Seizoen", "p3"), ("Races", "p5")]) + "</div>"
+
+for s in SCHERMEN:
+    for oud in ('<div class="seg"><a class="on" href="p1.html">Week</a><a href="p3.html">Seizoen</a><a href="p5.html">Races</a></div>',
+                '<div class="seg"><a href="p1.html">Week</a><a class="on" href="p3.html">Seizoen</a><a href="p5.html">Races</a></div>',
+                '<div class="seg"><a href="p1.html">Week</a><a href="p3.html">Seizoen</a><a class="on" href="p5.html">Races</a></div>'):
+        if oud in s["body"]:
+            actief = "Week" if 'class="on" href="p1' in oud else ("Seizoen" if 'class="on" href="p3' in oud else "Races")
+            s["body"] = s["body"].replace(oud, SEG_P(actief))
+    if s["id"] == "d5":
+        s["body"] += '<a class="btn-text" href="r1.html">Naar je logboek →</a>'
+
+scherm("r1", "R", "Logboek", "Elke afgewerkte training als kaart, met wat LUPO erin zag. Bovenaan de week: gepland tegen gedaan.", f"""
+<div class="lbl">Plan</div>
+{SEG_P("Logboek")}
+<div class="h-l">WEEK 44</div>
+<p class="p" style="margin:2px 0 6px">27 oktober – 2 november · fase opbouw</p>
+<div class="card" style="padding:12px 12px 6px">{staven([0.8, 3.1, 0, 1.04, 0.75, 1.5, 0], ["M", "D", "W", "D", "V", "Z", "Z"], 74, gepland=[1.0, 3.0, 0.8, 1.0, 0.75, 1.5, 0], markeer=None)}</div>
+<div class="tiles t4"><div class="tile"><div class="k">Uren</div><div class="v">7u10</div></div><div class="tile"><div class="k">TSS</div><div class="v">412</div></div><div class="tile"><div class="k">Afstand</div><div class="v">138</div><div class="s">km</div></div><div class="tile"><div class="k">Nagekomen</div><div class="v acc">7/7</div></div></div>
+{activiteit("r2.html", "Donderdag 07:10", "Drempel 3×10 min", "Lopen", "<b>12,4</b> km · <b>1:02:18</b> · <b>5:01</b> /km", workout(DREMPEL, 26), "✓ zoals gepland", "Zelfde tempo als 6 weken geleden, 3 slagen lager.")}
+{activiteit("r1.html", "Woensdag", "Rust van LUPO", "Rust", "HRV 9% onder je band", "", "telt mee", "Opgelegde rust telt als nagekomen.", "")}
+{activiteit("r3.html", "Dinsdag", "Lange rit zone 2", "Fietsen", "<b>92</b> km · <b>3:05:40</b> · <b>212</b> W NP", workout([(15, 1), (150, 2), (15, 1)], 26), "✓ zoals gepland", "Ontkoppeling 3,8% over drie uur: de basis draagt.")}
+{activiteit("r1.html", "Maandag", "Zwemmen CSS 10×100", "Zwemmen", "<b>2,4</b> km · <b>48:20</b> · <b>1:38</b> /100 m", workout([(6, 1), (2, 3), (1, 1), (2, 3), (1, 1), (2, 3), (1, 1), (2, 3), (1, 1), (2, 3), (6, 1)], 26), "aangepast", "Na 6×100 gestopt: schouder. Het schema schoof de rest.", "")}
+<a class="btn-text" href="r4.html">Inzichten over weken →</a>
+<p class="p" style="font-size:11px">Uit je Garmin-import. Strava-data blijft bij Strava.</p>
+""", tab="Plan", fab=False)
+
+scherm("r2", "R", "Een training, volledig", "Zoals Strava: kaart, getallen, grafiek en splits. Daarbovenop wat LUPO ziet: gepland tegen gedaan, drift, dezelfde sessie van vroeger, en wat dat voor het plan betekent.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="r1.html">← Logboek</a>
+<div class="lbl" style="margin-top:0">Donderdag 30 oktober · 07:10 · Lopen · Antwerpen</div>
+<div class="h-l">DREMPEL 3×10 MIN</div>
+<div class="media" style="margin-top:10px">{kaart(150, "weg", "")}<div class="in">{hoogte([12, 14, 18, 22, 19, 15, 13, 16, 24, 28, 21, 15, 12], 28)}</div></div>
+<div class="stats"><div><div class="k">Afstand</div><div class="v">12,4 km</div></div><div><div class="k">Tijd</div><div class="v">1:02:18</div></div><div><div class="k">Tempo</div><div class="v">5:01</div></div>
+<div><div class="k">Hartslag</div><div class="v">151</div></div><div><div class="k">Hoogte</div><div class="v">64 m</div></div><div><div class="k">TSS</div><div class="v">78</div></div></div>
+<div class="lbl acc">Wat LUPO ziet</div>
+<div class="card">
+{inzicht("✓", "Uitgevoerd zoals gepland", "3×10 min op 4:18 tot 4:21. Het plan vroeg 4:20.")}
+{inzicht("↗", "Sneller bij dezelfde hartslag", "Zelfde sessie op 18 september: 4:26 bij 168. Vandaag 4:20 bij 165.")}
+{inzicht("—", "Drift 2,1%", "Hartslag liep in blok 3 niet weg. Onder 5% betekent: dit tempo is houdbaar.")}
+{inzicht("→", "Wat dit verandert", "Het schema zet de drempel vanaf volgende week op 4:16.", "acc")}
+</div>
+<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between"><span class="lbl" style="margin:0">Tempo en hartslag</span><span class="legend" style="margin:0"><span><b style="background:{ACC}"></b>tempo</span><span><b style="background:{HR_KLEUR}"></b>hartslag</span></span></div>{analyse()}</div>
+<div class="lbl">Intervallen</div>
+<table class="t"><tr><th>#</th><th>Tempo</th><th>Plan</th><th>Hs</th></tr>
+<tr><td>1</td><td>4:21</td><td class="acc">4:20 ✓</td><td>163</td></tr><tr><td>2</td><td>4:20</td><td class="acc">4:20 ✓</td><td>165</td></tr><tr><td>3</td><td>4:18</td><td class="acc">4:20 ✓</td><td>167</td></tr></table>
+<div class="lbl">Splits</div>
+{splits([(1, 338, 131), (2, 329, 138), (3, 312, 146), (4, 262, 160), (5, 260, 163), (6, 300, 156), (7, 261, 165), (8, 259, 166), (9, 295, 158), (10, 258, 167), (11, 330, 150), (12, 344, 141)])}
+<div class="card" style="padding:10px 12px;margin-top:8px"><span class="lbl" style="margin:0">Tijd in zone</span>{zoneverdeling([(1, 18), (2, 34), (3, 10), (4, 38)])}</div>
+<div class="lbl">Beste prestaties</div>
+<div class="row"><span>5 km</span><span class="r acc">21:24 · beste sinds maart</span></div>
+<div class="row"><span>10 km</span><span class="r">45:02</span></div>
+<div class="lbl">Je antwoord en notitie</div>
+<div class="card"><span class="pill acc">Goed</span><div class="p" style="margin-top:6px">"Linkerkuit trok even bij km 9, daarna weg." Bij de volgende loop vraagt LUPO ernaar.</div></div>
+<p class="p" style="font-size:11px">Uit je Garmin-import. Strava-data blijft bij Strava.</p>
+""", tab="Plan", fab=False)
+
+scherm("r3", "R", "Fietsrit met vermogen", "Voor fietsers: vermogenscurve tegen zes weken geleden, NP en IF, ontkoppeling, en voeding naar de race toe.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="r1.html">← Logboek</a>
+<div class="lbl" style="margin-top:0">Dinsdag 28 oktober · Fietsen · Kempen</div>
+<div class="h-l">LANGE RIT ZONE 2</div>
+<div class="media" style="margin-top:10px">{kaart(130, "rit", "")}<div class="in">{hoogte([20, 24, 30, 28, 26, 34, 40, 36, 30, 26, 24, 22, 20], 28)}</div></div>
+<div class="stats"><div><div class="k">Afstand</div><div class="v">92 km</div></div><div><div class="k">Tijd</div><div class="v">3:05:40</div></div><div><div class="k">NP</div><div class="v">212 W</div></div>
+<div><div class="k">IF</div><div class="v">0,71</div></div><div><div class="k">TSS</div><div class="v">156</div></div><div><div class="k">Plan</div><div class="v acc">102%</div></div></div>
+<div class="lbl acc">Wat LUPO ziet</div>
+<div class="card">
+{inzicht("✓", "Ontkoppeling 3,8%", "Vermogen en hartslag bleven drie uur samen. De rit van vier uur in week 48 blijft staan.")}
+{inzicht("↗", "Beste 20 minuten: 262 W", "16 W meer dan zes weken geleden. Een nieuwe FTP-test staat in de Combine.")}
+{inzicht("!", "Voeding: 55 g per uur", "Thun vraagt 80 tot 90. De volgende lange rit vraagt 70 g per uur.", "warn")}
+</div>
+<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between"><span class="lbl" style="margin:0">Vermogenscurve</span><span class="legend" style="margin:0"><span><b style="background:{ACC}"></b>nu</span><span><b style="background:rgba(237,237,235,0.4)"></b>6 wk geleden</span></span></div>{vermogenscurve()}</div>
+<div class="card" style="padding:10px 12px"><span class="lbl" style="margin:0">Tijd in zone</span>{zoneverdeling([(1, 22), (2, 71), (3, 7)])}</div>
+""", tab="Plan", fab=False)
+
+scherm("r4", "R", "Inzichten over weken", "Fitheid en vorm over twaalf weken, efficiëntie, records. Elk inzicht met de reden en wat het plan ermee doet.", f"""
+<div class="lbl">Plan</div>
+{SEG_P("Logboek")}
+<div class="h-l">FITHEID <span class="acc">EN VORM</span></div>
+<div class="card" style="padding:12px;margin-top:10px">{fitheid_vorm()}
+<div class="legend"><span><b style="background:{ACC}"></b>fitheid 58</span><span><b style="background:#ff6b5a"></b>vermoeidheid</span><span><b style="background:#7d9400"></b>vorm</span></div></div>
+<div class="why">Je fitheid steeg van 38 naar 58 in twaalf weken, met twee rustweken. <b>Op koers voor de opbouw</b>; de piek valt in mei.</div>
+<div class="lbl">Wat beter wordt</div>
+<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span>Tempo bij hartslag 145</span><span class="h-m acc">5:18</span></div>
+{lijn([342, 340, 337, 336, 333, 331, 330, 327, 325, 322, 320, 318], b=300, h=70, labels=[(0, "aug"), (11, "nu")])}<div class="p" style="font-size:11px">Was 5:42. Zelfde moeite, 24 seconden per km sneller.</div></div>
+<div class="lbl">Records uit je eigen data</div>
+<div class="row"><span>5 km</span><span class="r acc">21:24 · 30 okt</span></div>
+<div class="row"><span>FTP (20 min × 0,95)</span><span class="r">249 W · 28 okt</span></div>
+<div class="row"><span>CSS zwemmen</span><span class="r">1:38 /100 m · okt</span></div>
+<a class="btn-text" href="v3.html">Op schema voor sub 9u30? →</a>
+""", tab="Plan", fab=False)
+
+CSS_EXTRA += """
+.act { display:block; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px; margin-bottom:8px; color:inherit; text-decoration:none; }
+a.act:hover { border-color: var(--accent); }
+.act-top { display:flex; justify-content:space-between; align-items:center; }
+.act-d { font-size:11px; color:var(--muted-2); }
+.act-t { font-weight:600; font-size:15px; margin:4px 0 2px; }
+.act-g { font-size:12px; color:var(--muted-2); } .act-g b { color:var(--text); font-weight:600; }
+.act-b { margin:8px 0 4px; border-radius:8px; overflow:hidden; } .act-b:empty { display:none; }
+.act-r { font-size:12px; color:var(--text); border-top:1px solid var(--line); padding-top:8px; margin-top:6px; }
+.inz { display:grid; grid-template-columns:26px 1fr; gap:10px; padding:8px 0; border-top:1px solid var(--line); }
+.inz:first-child { border-top:0; padding-top:0; }
+.inz-i { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; background:rgba(200,241,53,0.12); }
+.inz-i.warn { background:rgba(255,176,32,0.14); }
+.inz-t { font-weight:600; font-size:13px; } .inz-p { font-size:12px; color:var(--muted-2); line-height:1.45; margin-top:2px; }
+.spl { font-size:12px; }
+.spl-h, .spl-r { display:grid; grid-template-columns:26px 40px 1fr 30px; gap:8px; align-items:center; padding:5px 0; }
+.spl-h { font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.spl-r { border-top:1px solid var(--line); }
+.spl-r i { display:block; height:8px; border-radius:4px; }
+.spl-r span:last-child, .spl-h span:last-child { text-align:right; color:var(--muted-2); }
+"""
+
+# ── HUISSTIJL VAN HET PRODUCTBEELD ──────────────────────────────────────────
+# Rustiger: leesbare labels zonder monospace, koppen in Bebas Neue, tabbalk in gewone woorden
+# met een streepje boven de actieve tab, kaarten met iets meer lucht.
+THEMA = """
+:root { --bg:#0a0a0a; --card:#161616; --line:rgba(255,255,255,0.08); --line-strong:rgba(255,255,255,0.14); --accent:#c8f135; --muted:rgba(240,237,230,0.5); --muted-2:rgba(240,237,230,0.68); --text:#f0ede6; }
+body { font-family:'DM Sans', sans-serif; }
+.screen > * { flex-shrink:0; }
+.h-xl { font-size:56px; line-height:0.9; letter-spacing:0; }
+.h-l { font-size:36px; line-height:0.92; letter-spacing:0; }
+.h-m { font-size:22px; letter-spacing:0.01em; }
+.lbl, .tile .k, .stats .k, .pill, .demo, .legend, .zleg, table.t th { font-weight:500; letter-spacing:0.12em; }
+.lbl { font-size:10.5px; }
+.p { font-weight:400; font-size:13.5px; }
+.row { padding:13px 14px; font-size:13.5px; }
+.row .r { font-size:12px; }
+.card { padding:16px; border-radius:16px; }
+.tile .v, .stats .v { font-size:26px; letter-spacing:0.01em; }
+.tabbar { padding:0 8px 20px; }
+.tabbar a { font-size:11px; letter-spacing:0; text-transform:none; padding:14px 6px 0; position:relative; color:var(--muted-2); }
+.tabbar a.on::before { content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:18px; height:3px; border-radius:2px; background:var(--accent); }
+.btn-primary { font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0; }
+"""
