@@ -28,6 +28,15 @@ const categories = [
   },
   {
     num: 4,
+    title: "Website",
+    desc: "Volledige website voor lupo.coach en de Garmin-aanvraag: home, hoe het werkt, je data, DFRNT, prijzen met wachtlijst, over, contact, privacy, voorwaarden en cookies.",
+    status: "klaar voor review",
+    screens: "10 pagina's",
+    href: "/site",
+    active: true,
+  },
+  {
+    num: 5,
     title: "Business",
     desc: "Gameplan, funding, subsidies en positionering.",
     status: "in opbouw",
@@ -36,7 +45,7 @@ const categories = [
     active: true,
   },
   {
-    num: 5,
+    num: 6,
     title: "Workout uitvoering",
     desc: "Live workout, zone targets, intervaltimer.",
     status: "nog niet uitgewerkt",
@@ -45,7 +54,7 @@ const categories = [
     active: false,
   },
   {
-    num: 6,
+    num: 7,
     title: "Race day",
     desc: "Taper, raceplan, uitslag claimen, blok na de race.",
     status: "na validatie",
