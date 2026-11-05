@@ -15,10 +15,11 @@ FONTS = '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Brico
 TABS = [("Vandaag", "d1"), ("Plan", "p1"), ("Ladder", "l1"), ("Samen", "s1"), ("Ik", "i1")]
 
 SECTIES = {
+    "O": ("Onboarding", "Eerst geven, dan vragen. Race kiezen uit de database, drie tikken tot je eerste week."),
     "D": ("Vandaag", "Elke ochtend één beslissing, met de reden erbij. Afwijken kan, en telt eerlijk mee."),
     "P": ("Plan", "Week verslepen met regelcontrole, seizoen richting de A-race, pre-mortem uit eigen data."),
     "L": ("Ladder", "Een absolute score, een percentiel op de ladder, acht treden en een Combine per kwartaal."),
-    "T": ("Tryout", "Geen permanente gratis laag: gratis meedoen in vaste golven. Nulmeting, 8 tot 12 weken schema, hertest. Top 5% progressie bij weinig volume naar de fysieke Combine en Pack Talent."),
+    "T": ("DFRNT tryout", "Werknaam voor de tryouts. Geen permanente gratis laag: gratis meedoen in vaste golven. Nulmeting, 8 tot 12 weken schema, hertest. Top 5% progressie bij weinig volume naar de fysieke Combine en Pack Talent."),
     "S": ("Samen", "Een crew zonder feed, een matcher, Race Boards en clubs. Voorbeelddata; later in de roadmap."),
     "C": ("Coach en Ik", "Coachgesprek over het schema, eigen data importeren en privé-instellingen."),
     "W": ("Webversie", "Mobiel beslist, web verklaart en plant. Zijbalk, panelen naast elkaar, ⌘K."),
@@ -36,6 +37,75 @@ def tabbar(actief):
         f'<a href="{h}.html" class="{"on" if n == actief else ""}">{n}</a>' for n, h in TABS
     ) + "</nav>"
 
+
+
+# ── ONBOARDING (kort) ────────────────────────────────────────────────────────
+scherm("o1", "O", "Kies je race", "Tik 1. Eerst de race: daaruit volgen atleettype en periodisering. Uit de database, geen vrij tekstveld.", """
+<div class="lbl acc">1 van 3</div>
+<div class="h-l">WAAR TRAIN JE <span class="acc">NAARTOE?</span></div>
+<div class="card" style="padding:10px 12px;margin-top:12px"><span>thu</span><span class="mut">|</span></div>
+<a class="row on" href="o2.html"><span>IRONMAN Switzerland Thun<br/><span class="mut" style="font-size:11px">Triatlon · volle afstand</span></span><span class="r acc">4 jul 2027</span></a>
+<div class="lbl">Populair in België</div>
+<a class="row" href="o2.html"><span>Antwerp 10 Miles</span><span class="r">~15 apr 2027</span></a>
+<a class="row" href="o2.html"><span>Brussels Marathon</span><span class="r">~3 okt 2027</span></a>
+<a class="btn-text" href="o2.html">Nog geen race — gewoon fitter worden</a>
+""", fab=False)
+
+scherm("o2", "O", "Niveau", "Tik 2. Vier buckets in uren per week. De rest vraagt LUPO later, wanneer het nodig is.", """
+<div class="lbl acc">2 van 3</div>
+<div class="h-l">HOEVEEL TRAIN JE <span class="acc">NU?</span></div>
+<p class="p" style="margin:8px 0 12px">IRONMAN Switzerland Thun • 34 weken</p>
+<a class="card" href="o3.html"><div class="h-m">Tot 4 uur per week</div><div class="p">Opbouwen naar de basis</div></a>
+<a class="card hl" href="o3.html"><div class="h-m">4 tot 8 uur</div><div class="p">Regelmatig, nog geen vaste structuur</div></a>
+<a class="card" href="o3.html"><div class="h-m">8 tot 12 uur</div><div class="p">Gestructureerd, eerdere races</div></a>
+<a class="card" href="o3.html"><div class="h-m">Meer dan 12 uur</div><div class="p">Competitief</div></a>
+""", fab=False)
+
+scherm("o3", "O", "Je eerste week", "Tik 3. Meteen het resultaat: de eerste week en de lijn naar de race. Account en data koppelen komen daarna.", """
+<div class="lbl acc">3 van 3</div>
+<div class="h-l">JE EERSTE <span class="acc">WEEK</span></div>
+<p class="p" style="margin:6px 0 10px">Basisfase • 7u20 • richting Thun</p>
+<div class="row"><span>Ma</span><span class="r">Rust</span></div>
+<div class="row"><span>Di</span><span class="r">Loop · zone 2 · 50 min</span></div>
+<div class="row"><span>Wo</span><span class="r">Zwem · techniek · 45 min</span></div>
+<div class="row"><span>Do</span><span class="r">Fiets · 3×10 tempo · 75 min</span></div>
+<div class="row"><span>Vr</span><span class="r">Rust</span></div>
+<div class="row"><span>Za</span><span class="r">Lange rit · 2u</span></div>
+<div class="row"><span>Zo</span><span class="r">Lange loop · 1u10</span></div>
+<div class="card" style="margin-top:6px"><div class="p">Koppel je horloge, dan krijg je elke ochtend één beslissing met de reden erbij.</div></div>
+<a class="btn-primary" href="d1.html">Start</a>
+""", fab=False)
+
+# Variant zonder waarom-regel, voor test H3 in de validatiegesprekken.
+scherm("d1z", "D", "Ochtend: afbouwen, zonder waarom", "Testvariant H3: dezelfde beslissing zonder de reden. Vergelijk met D1 in het gesprek.", """
+<div class="lbl">Donderdag 6 november</div>
+<div class="h-xl">AFBOUWEN</div>
+<div class="tiles" style="margin-top:12px">
+  <div class="tile"><div class="k">HRV</div><div class="v warn">52</div></div>
+  <div class="tile"><div class="k">Slaap</div><div class="v">6u10</div></div>
+  <div class="tile"><div class="k">Belasting</div><div class="v">1.12</div></div>
+</div>
+<div class="lbl">Training</div>
+<a class="card hl" href="d5.html"><div class="pill acc">Aangepast</div><div class="h-m" style="margin-top:8px">Zone 2 · 45 min</div></a>
+<a class="btn-primary" href="d5.html">Gedaan</a>
+<a class="btn-secondary" href="d3.html">Ik voel me niet 100%</a>
+""", tab="Vandaag")
+
+# ── AANBOD ───────────────────────────────────────────────────────────────────
+scherm("a1", "C", "Aanbod: raceblok €49", "Eén race, één prijs: het blok van nu tot de startlijn, met taper en raceplan.", """
+<div class="lbl acc">Raceblok</div>
+<div class="h-l">THUN, TOT AAN DE <span class="acc">STARTLIJN</span></div>
+<p class="p" style="margin:8px 0 12px">34 weken • basis, opbouw, piek en taper</p>
+<div class="h-xl">€49</div>
+<p class="p">Eenmalig, voor deze race.</p>
+<div class="row"><span>Elke ochtend één beslissing met de reden</span><span class="r acc">✓</span></div>
+<div class="row"><span>Niet 100% en week verslepen met regelcontrole</span><span class="r acc">✓</span></div>
+<div class="row"><span>Taper en raceplan voor Thun</span><span class="r acc">✓</span></div>
+<div class="row"><span>Coachgesprek over het schema</span><span class="r acc">✓</span></div>
+<div class="spacer"></div>
+<a class="btn-primary" href="d1.html">Kies het raceblok</a>
+<a class="btn-text" href="a1.html">Of Premium: €19 per maand, €169 per jaar</a>
+""", fab=False)
 
 # ── VANDAAG ──────────────────────────────────────────────────────────────────
 scherm("d1", "D", "Ochtend: afbouwen", "De beslissing van vandaag, met de regel die kantelde. Tik op een signaal of op Waarom voor de onderbouwing.", """
@@ -177,7 +247,7 @@ scherm("p3", "P", "Seizoen", "Blokken richting de A-race, berekend uit de raceda
 <div class="row on"><span>Opbouw</span><span class="r acc">nu · tot 5 mei</span></div>
 <div class="row"><span>Piek</span><span class="r">5 mei – 20 jun</span></div>
 <div class="row"><span>Taper</span><span class="r">laatste 14 dagen</span></div>
-<div class="row dim"><span>B-race · 70.3 Zell am See</span><span class="r">30 aug 2027</span></div>
+<div class="row dim"><span>B-race · 70.3 Zell am See</span><span class="r">datum volgt</span></div>
 <a class="card" href="p4.html" style="margin-top:8px"><div class="h-m">Pre-mortem →</div><div class="p">Wat kan Thun doen mislukken, uit je eigen data.</div></a>
 """, tab="Plan")
 
@@ -196,10 +266,10 @@ scherm("p5", "P", "Races", "Race kiezen uit de database. Volgende editie bevesti
 <div class="seg"><a href="p1.html">Week</a><a href="p3.html">Seizoen</a><a class="on" href="p5.html">Races</a></div>
 <div class="card" style="padding:10px 12px"><span class="mut">Zoek race of plaats…</span></div>
 <div class="row on"><span>IRONMAN Switzerland Thun</span><span class="r acc">A · 4 jul 2027</span></div>
-<div class="row"><span>IRONMAN 70.3 Zell am See</span><span class="r">B · ~30 aug 2027</span></div>
-<div class="row"><span>Antwerp 10 Miles</span><span class="r">~25 apr 2027</span></div>
-<div class="row"><span>Marathon Rotterdam</span><span class="r">~11 apr 2027</span></div>
-<div class="row"><span>Challenge Roth</span><span class="r">~4 jul 2027</span></div>
+<div class="row"><span>IRONMAN 70.3 Zell am See</span><span class="r">B · datum volgt</span></div>
+<div class="row"><span>Antwerp 10 Miles</span><span class="r">~15 apr 2027</span></div>
+<div class="row"><span>NN Rotterdam Marathon</span><span class="r">~4 apr 2027</span></div>
+<div class="row"><span>IRONMAN 70.3 Switzerland</span><span class="r">~13 jun 2027</span></div>
 <p class="p">~ = geschat op de editie van dit jaar. 48 races in de database.</p>
 """, tab="Plan")
 
@@ -264,8 +334,8 @@ scherm("l5", "L", "Proefperiode", "Zes weken, verdiend in blokken van twee. Opge
 
 
 # ── TRYOUT ───────────────────────────────────────────────────────────────────
-scherm("t1", "T", "Tryout: meedoen", "De instap: gratis, in een vaste golf. Wie denkt dat hij een potential is, toont het hier.", """
-<div class="lbl acc">Tryout · golf maart 2027</div>
+scherm("t1", "T", "DFRNT: meedoen", "De instap: gratis, in een vaste golf. Wie denkt dat hij een potential is, toont het hier.", """
+<div class="lbl acc">DFRNT · golf maart 2027</div>
 <div class="h-xl">TOON WAT JE <span class="acc">KAN.</span></div>
 <p class="p" style="margin:10px 0 14px">Tien weken, gratis. Een nulmeting, het LUPO-schema, een hertest. Wie het meest vooruitgaat met het minste volume, krijgt een uitnodiging.</p>
 <div class="row"><span>Inschrijven tot</span><span class="r">28 feb</span></div>
@@ -277,8 +347,8 @@ scherm("t1", "T", "Tryout: meedoen", "De instap: gratis, in een vaste golf. Wie 
 <p class="p" style="text-align:center;font-size:11px">Onder 18: met toestemming van een ouder. HRV en slaap tellen dan niet mee.</p>
 """, fab=False)
 
-scherm("t2", "T", "Tryout: nulmeting", "Vast protocol, zodat elke deelnemer op dezelfde manier gemeten wordt.", """
-<a class="btn-text" style="text-align:left;padding-left:0" href="t1.html">← Tryout</a>
+scherm("t2", "T", "DFRNT: nulmeting", "Vast protocol, zodat elke deelnemer op dezelfde manier gemeten wordt.", """
+<a class="btn-text" style="text-align:left;padding-left:0" href="t1.html">← DFRNT</a>
 <div class="h-l">NUL<span class="acc">METING</span></div>
 <p class="p" style="margin:6px 0 10px">Kies je variant. Elke test één keer, binnen de meetweek.</p>
 <div class="seg"><a class="on" href="t2.html">Duur</a><a href="t2.html">Hybrid</a></div>
@@ -290,8 +360,8 @@ scherm("t2", "T", "Tryout: nulmeting", "Vast protocol, zodat elke deelnemer op d
 <a class="btn-primary" href="t3.html">Resultaten invoeren</a>
 """, fab=False)
 
-scherm("t3", "T", "Tryout: tijdens de golf", "Het LUPO-schema zonder coachtaal. Beslissing en regel blijven, de uitleg in gewone taal is voor Premium.", """
-<div class="lbl acc">Tryout · week 6 van 10</div>
+scherm("t3", "T", "DFRNT: tijdens de golf", "Het LUPO-schema zonder coachtaal. Beslissing en regel blijven, de uitleg in gewone taal is voor Premium.", """
+<div class="lbl acc">DFRNT · week 6 van 10</div>
 <div class="h-xl">AFBOUWEN</div>
 <div class="why">HRV <b>−15%</b> onder je gemiddelde. Drempel −5%.</div>
 <div class="card hl"><div class="h-m">Zone 2 · 45 min</div><div class="p">Was drempel 4×8, 70 min.</div></div>
@@ -301,7 +371,7 @@ scherm("t3", "T", "Tryout: tijdens de golf", "Het LUPO-schema zonder coachtaal. 
 <div class="card" style="margin-top:4px"><div class="p">Coachgesprek en uitleg in gewone taal zitten in Premium.</div></div>
 """, tab="Vandaag", fab=False)
 
-scherm("t4", "T", "Tryout: ladder per golf", "Een ladder per golf, op progressie ten opzichte van de nulmeting en gecorrigeerd voor volume.", """
+scherm("t4", "T", "DFRNT: ladder per golf", "Een ladder per golf, op progressie ten opzichte van de nulmeting en gecorrigeerd voor volume.", """
 <a class="btn-text" style="text-align:left;padding-left:0" href="t3.html">← Vandaag</a>
 <div class="h-l">GOLF <span class="acc">MRT 27</span></div>
 <p class="p" style="margin:6px 0 10px">1.240 deelnemers. Progressie per uur training, tussentijds op de testsessies.</p>
@@ -315,7 +385,7 @@ scherm("t4", "T", "Tryout: ladder per golf", "Een ladder per golf, op progressie
 <a class="btn-primary" href="t5.html">Naar de hertest</a>
 """, fab=False)
 
-scherm("t5", "T", "Tryout: uitslag top 5%", "Bij top 5% volgt een uitnodiging voor de fysieke Combine. Pas na bevestiging daar: Pack Talent.", """
+scherm("t5", "T", "DFRNT: uitslag top 5%", "Bij top 5% volgt een uitnodiging voor de fysieke Combine. Pas na bevestiging daar: Pack Talent.", """
 <div class="lbl acc">Hertest · 23 mei</div>
 <div class="h-xl">TOP <span class="acc">4%.</span></div>
 <p class="p" style="margin:10px 0 12px">Plaats 48 van 1.240. +8,2% met 5u20 per week.</p>
@@ -327,7 +397,7 @@ scherm("t5", "T", "Tryout: uitslag top 5%", "Bij top 5% volgt een uitnodiging vo
 <a class="btn-text" href="t6.html">Zo ziet het eruit buiten de top 5% →</a>
 """, fab=False)
 
-scherm("t6", "T", "Tryout: uitslag en aanbod", "Wie niet in de top 5% zit, ziet zijn eigen vooruitgang en krijgt een Premium-aanbod.", """
+scherm("t6", "T", "DFRNT: uitslag en aanbod", "Wie niet in de top 5% zit, ziet zijn eigen vooruitgang en krijgt een Premium-aanbod.", """
 <div class="lbl acc">Hertest · 23 mei</div>
 <div class="h-l">+5,1% IN <span class="acc">10 WEKEN</span></div>
 <p class="p" style="margin:8px 0 12px">Plaats 310 van 1.240. Je nakomen was 91%: het schema werkte, het volume was de grens.</p>
@@ -484,6 +554,15 @@ def pagina(s):
             f'<body>{terug}{inhoud}{"" if s["desk"] else noot}</body></html>\n')
 
 
+PAD = [("o1", "Onboarding: race kiezen"), ("o2", "Niveau"), ("o3", "Eerste week"), ("d1", "Ochtend met waarom"),
+       ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("a1", "Raceblok €49")]
+VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Validatiedemo — volgorde voor de 12 gesprekken</div>'
+             '<p class="lead" style="margin-bottom:16px">Toon D1 en D1Z apart en vraag welke de atleet zou volgen. Ladder, Samen en de webversie wachten.</p>'
+             '<div class="screen-grid">' + "".join(
+                 f'<a href="{i}.html" class="screen-card"><div class="screen-num">{n+1:02d} · {i.upper()}</div><div class="screen-title">{t}</div></a>'
+                 for n, (i, t) in enumerate(PAD)) + '</div>')
+
+
 def overzicht():
     blokken = []
     for k, (naam, uitleg) in SECTIES.items():
@@ -498,8 +577,8 @@ def overzicht():
             f'<div class="overview-header"><div class="super">⌗ LUPO — De app — {len(SCHERMEN)} schermen</div>'
             f'<h1>Elke ochtend <span class="em">één beslissing.</span></h1>'
             f'<p class="lead">Met de reden erbij. Tot aan je startlijn. Elk scherm is klikbaar: knoppen, tegels en de tabbalk brengen je naar de volgende stap. '
-            f'Begin bij <a href="d1.html" style="color:var(--accent)">D1</a> voor de ochtendflow of <a href="w1.html" style="color:var(--accent)">W1</a> voor de webversie.</p></div>'
-            + "".join(blokken) + "</div></body></html>\n")
+            f'Begin bij <a href="o1.html" style="color:var(--accent)">O1</a> voor de validatiedemo of <a href="w1.html" style="color:var(--accent)">W1</a> voor de webversie.</p></div>'
+            + VALIDATIE + "".join(blokken) + "</div></body></html>\n")
 
 
 OUT.mkdir(parents=True, exist_ok=True)
