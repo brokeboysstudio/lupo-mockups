@@ -537,6 +537,9 @@ W5 = desk("Samen", "SAMEN", "Voorbeelddata", [("Crew", crew), ("Race Boards", '<
 scherm("w5", "W", "Web: Samen", "Crew, Race Boards en clubs naast elkaar.", W5, desk=True)
 
 
+# Visuele laag: grafieken, kaarten en beelden (vervangt schermen met dezelfde id).
+exec((Path(__file__).parent / "visueel.py").read_text())
+
 # ── UITVOER ──────────────────────────────────────────────────────────────────
 def pagina(s):
     titel = html.escape(s["titel"])
@@ -563,6 +566,21 @@ VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Validatiedemo — vo
                  for n, (i, t) in enumerate(PAD)) + '</div>')
 
 
+LES = [
+    ("Strava", "Elke sessie is een kaart met route, hoogte en splits.", "Na de training (D5): kaart, hoogteprofiel en zones uit je eigen import, dan één vraag."),
+    ("WHOOP", "Eén ring met één getal beslist de dag.", "Paraatheidsring op Vandaag (D1), met de reden eronder."),
+    ("TrainingPeaks", "Een workout is een profiel van blokjes per zone.", "Intervalprofiel op elke training, en het oude plan doorgestreept ernaast."),
+    ("Runna", "Je ziet de lijn naar de race vanaf dag één.", "Periodiseringsgrafiek in onboarding (O3), seizoen (P3) en raceblok (A1)."),
+    ("Zwift", "Vergelijken met anderen als beeld, niet als tabel.", "Spreidingsplot voor de DFRNT-golf (T4) en een verdelingscurve voor de Ladder (L1)."),
+    ("Ladder, Garmin", "Racefoto's en avatars maken het menselijk.", "Racebeelden met hoogteprofiel (O1), crew met avatars (S1). Geen feed, geen likes."),
+]
+LESSEN = ('<div class="super" style="margin-top:8px">⌗ Wat we leren van andere apps</div>'
+          '<p class="lead" style="margin-bottom:16px">Eerst een beeld, dan het getal, dan pas tekst. Elke grafiek komt uit eigen data, nooit uit Strava.</p>'
+          '<div class="screen-grid">' + "".join(
+              f'<div class="screen-card"><div class="screen-num">{a}</div><div class="screen-title" style="font-size:15px">{b}</div><div class="screen-desc">→ {c}</div></div>'
+              for a, b, c in LES) + '</div><div style="height:32px"></div>')
+
+
 def overzicht():
     blokken = []
     for k, (naam, uitleg) in SECTIES.items():
@@ -578,11 +596,11 @@ def overzicht():
             f'<h1>Elke ochtend <span class="em">één beslissing.</span></h1>'
             f'<p class="lead">Met de reden erbij. Tot aan je startlijn. Elk scherm is klikbaar: knoppen, tegels en de tabbalk brengen je naar de volgende stap. '
             f'Begin bij <a href="o1.html" style="color:var(--accent)">O1</a> voor de validatiedemo of <a href="w1.html" style="color:var(--accent)">W1</a> voor de webversie.</p></div>'
-            + VALIDATIE + "".join(blokken) + "</div></body></html>\n")
+            + LESSEN + VALIDATIE + "".join(blokken) + "</div></body></html>\n")
 
 
 OUT.mkdir(parents=True, exist_ok=True)
-(OUT / "app.css").write_text((Path(__file__).parent / "app_css.css").read_text())
+(OUT / "app.css").write_text((Path(__file__).parent / "app_css.css").read_text() + CSS_EXTRA)
 for s in SCHERMEN:
     (OUT / f"{s['id']}.html").write_text(pagina(s))
 (OUT / "index.html").write_text(overzicht())
