@@ -136,6 +136,17 @@ export default function Dfrnt() {
         />
       </Section>
 
+      <Section title="De finale" intro="Idee van Jan, 5 november: de besten van de tryouts tegen elkaar laten racen. Zo krijgt elk seizoen een einde en een verhaal.">
+        <Table
+          head={["Optie", "Wat", "Oordeel"]}
+          rows={[
+            ["Finale binnen een bestaande wedstrijd", "Een eigen DFRNT-reeks of -klassement in een bestaande triatlon, loop of pistemeeting", <Tag key="a" label="aanbeveling">eerste seizoenen</Tag>],
+            ["Tryout-dag als finale", "De fysieke dag zelf als wedstrijd met klassement", <Tag key="b" label="aanbeveling">goedkoopst</Tag>],
+            ["Eigen evenement", "LUPO organiseert zelf: vergunningen, tijdsregistratie, veiligheid, verzekering", <Tag key="c" label="open">pas op schaal</Tag>],
+          ]}
+        />
+      </Section>
+
       <Callout title="Kost en timing">
         Een fysieke dag vraagt een locatie, toestellen, verzekering en medische aanwezigheid. Start met één pilotdag voor 20–30 mensen samen met
         een club, ten vroegste in 2027. Erasmus+ Sport (met de club als aanvrager) past precies op dit deel.
