@@ -783,7 +783,7 @@ scherm("r2", "R", "Een training, volledig", "Zoals Strava: kaart, getallen, graf
 <div class="lbl acc">Wat LUPO ziet</div>
 <div class="card">
 {inzicht("✓", "Uitgevoerd zoals gepland", "3×10 min op 4:18 tot 4:21. Het plan vroeg 4:20.")}
-{inzicht("↗", "Sneller bij dezelfde hartslag", "Zelfde sessie op 18 september: 4:26 bij 168. Vandaag 4:20 bij 165.")}
+{inzicht("↗", "Sneller bij dezelfde hartslag", "Zelfde sessie op 18 september: 4:26 bij 168. Nu 4:20 bij 165.")}
 {inzicht("—", "Drift 2,1%", "Hartslag liep in blok 3 niet weg. Onder 5% betekent: dit tempo is houdbaar.")}
 {inzicht("→", "Wat dit verandert", "Het schema zet de drempel vanaf volgende week op 4:16.", "acc")}
 </div>
