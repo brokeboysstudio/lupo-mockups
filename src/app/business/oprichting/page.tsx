@@ -34,6 +34,8 @@ const groups: { title: string; when: string; rows: Row[] }[] = [
     rows: [
       ["Minderjarigen", "Ouderlijke toestemming tot 18, aparte privacytekst, geen HRV of slaap in de score.", "jurist"],
       ["Ladder-toestemming", "Zichtbaarheid op de Ladder is een aparte keuze; uitzetten kost de app niet.", "Claude bouwt"],
+      ["Vergelijken", "Cohortvergelijking anoniem en give-to-get; vriend pas na wederzijdse toestemming. Jurist toetst of de anonimisering volstaat (kleine groepen zijn herleidbaar).", "jurist"],
+      ["Openbaar profiel", "Opt-in, plek waar potentials opvallen. Voor 16–18: standaard uit, ouderlijke toestemming. Nooit HRV, slaap, scorecomponenten of Strava-data.", "jurist + Claude"],
       ["Pack-contracten", "Raamwerk ligt al in Notion; laten nalezen voor de eerste atleet tekent.", "jurist"],
       ["Partnerlabo's", "Doorverwijsafspraak; medische uitslagen interpreteert de arts.", "Jan"],
     ],
