@@ -14,9 +14,9 @@ Bronnen:
 | Website live op lupo.coach (home, product, contact, privacy, voorwaarden) | Klaar als concept in `/site` |
 | Privacyverklaring en voorwaarden juridisch nagekeken | Open |
 | Mailadressen hallo@, support@ en privacy@lupo.coach werken | Open |
-| De app stuurt geen HRV of slaap meer naar het taalmodel (zie hieronder) | Open, in de Lupo-repo |
+| De app stuurt geen HRV of slaap meer naar het taalmodel | Klaar in Lupo PR #5, nog te mergen |
 
-**Let op.** `src/app/api/coach/daily/route.ts` in de Lupo-repo stuurt vandaag de HRV-afwijking en de slaapduur in de prompt naar Claude. De privacyverklaring belooft het omgekeerde. Voor de Garmin-koppeling live gaat, moet die route alleen de beslissing ("afbouwen") en het plan krijgen, niet de ruwe waarden.
+**Opgelost.** `src/app/api/coach/daily/route.ts` in de Lupo-repo krijgt nu alleen de beslissing, de fase, de race en de training. De server gooit elk ander veld weg. De coachchat neemt geen reden met meetwaarden meer mee.
 
 ## Antwoorden voor het formulier (concept)
 
