@@ -99,3 +99,19 @@
   .site table.tab td, .site table.tab th { padding: 10px 8px; }
   .site .kop-in { gap: 16px; }
 }
+
+/* Foto's met fades naar de achtergrond */
+.site .foto-held { position: relative; background-size: cover; background-position: center 35%; padding-top: 120px; padding-bottom: 120px; }
+.site .foto-held::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.7) 45%, rgba(10,10,10,0.35) 100%),
+              linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 65%, var(--bg) 100%); }
+.site .foto-held > .wrap { position: relative; }
+.site .band { position: relative; min-height: 560px; display: flex; align-items: flex-end; background-size: cover; border-top: 0; }
+.site .band::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,10,0.25) 28%, rgba(10,10,10,0.25) 55%, var(--bg) 100%),
+              linear-gradient(90deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0) 60%); }
+.site .band + .sectie { border-top: 0; }
+.site .band-in { position: relative; padding-bottom: 72px; max-width: 1180px; }
+.site .band-in h2 { font-size: clamp(48px, 7vw, 96px); }
+.site .band-in .lead { max-width: 520px; margin-top: 14px; }
+@media (max-width: 900px) { .site .band { min-height: 420px; } .site .foto-held { padding-top: 72px; background-position: 30% 35%; } }

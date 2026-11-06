@@ -1,6 +1,19 @@
 import Link from "next/link";
 import { pad } from "./_ui/bedrijf";
 
+const FOTO = (id: string, w = 2000) => `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
+
+function Band({ id, pos = "center", kop, tekst }: { id: string; pos?: string; kop: string; tekst?: string }) {
+  return (
+    <section className="band" style={{ backgroundImage: `url(${FOTO(id)})`, backgroundPosition: pos }}>
+      <div className="wrap band-in">
+        <h2>{kop}</h2>
+        {tekst && <p className="lead">{tekst}</p>}
+      </div>
+    </section>
+  );
+}
+
 function Telefoon({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="telefoon">
@@ -13,14 +26,14 @@ function Telefoon({ src, alt }: { src: string; alt: string }) {
 export default function Home() {
   return (
     <>
-      <section className="sectie eerste">
+      <section className="sectie eerste foto-held" style={{ backgroundImage: `url(${FOTO("photo-1679769177248-727f4d1047a5")})` }}>
         <div className="wrap held">
           <div>
             <div className="lbl acc">Trainingscoach voor triatlon, lopen en hybride</div>
-            <h1 style={{ margin: "18px 0 22px" }}>Elke ochtend één beslissing. Met de reden erbij.</h1>
+            <h1 style={{ margin: "18px 0 22px" }}>Geen excuses. Alleen vooruitgang.</h1>
             <p className="lead">
-              LUPO leest je herstel en je plan, en zegt wat je vandaag doet: voluit, afbouwen of rusten. Altijd met de
-              reden erbij, zodat je weet waarom. Tot aan je startlijn.
+              Elke ochtend leest LUPO je herstel en je plan, en zegt wat je vandaag doet: voluit, afbouwen of rusten. Met de
+              reden erbij. Jij levert de discipline, LUPO zorgt dat ze telt. Tot aan je startlijn.
             </p>
             <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
               <Link href={pad("/prijzen#wachtlijst")} className="knop">Zet je op de wachtlijst</Link>
@@ -56,6 +69,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Band id="photo-1534787238916-9ba6764efd4f" pos="center 60%" kop="Elke sessie telt." tekst="Lopen, fietsen, zwemmen, kracht. Alles wat je doet, komt terug in één plan." />
+
       <section className="sectie">
         <div className="wrap duo">
           <div>
@@ -84,6 +99,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Band id="photo-1438029071396-1e831a7fa6d8" pos="center 45%" kop="Vroeg op. Ook in november." tekst="Het schema vraagt geen motivatie. Het vraagt dat je begint." />
+
       <section className="sectie">
         <div className="wrap">
           <div className="lbl">Voor wie</div>
@@ -101,6 +118,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Band id="photo-1461897104016-0b3b00cc81ee" pos="center 55%" kop="Talent laat zich meten." tekst="DFRNT: een nulmeting, acht tot twaalf weken schema, een hertest. Wie het meest vooruitgaat, krijgt een uitnodiging." />
 
       <section className="sectie">
         <div className="wrap duo">
@@ -131,7 +150,7 @@ export default function Home() {
 
       <section className="sectie">
         <div className="wrap smal" style={{ textAlign: "center" }}>
-          <h2>Tot aan je startlijn.</h2>
+          <h2>Geen excuses. Alleen vooruitgang.</h2>
           <p className="lead" style={{ margin: "18px auto 28px" }}>Premium vanaf €19 per maand, of €49 voor één racedoel. De tryouts zijn gratis.</p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <Link href={pad("/prijzen")} className="knop">Bekijk de prijzen</Link>

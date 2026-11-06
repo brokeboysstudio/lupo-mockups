@@ -62,6 +62,22 @@ def zoneverdeling(aandelen):
     return f'<div class="zbar">{balk}</div><div class="zleg">{leg}</div>'
 
 
+ROUTE_ANTWERPEN = "M120.4 49.9L119.3 49L122.2 41.8L124.3 42.6L127.1 34.7L130.5 29.5L130.8 23L133 16.1L140.7 15.8L140.7 9.8L140.7 16.1L144.6 16.4L147 17.2L157.9 17.2L158.5 17.6L160.1 15.3L160.8 15L171.7 15.1L172.5 16.2L175 16.7L176.3 17.4L177.9 17.5L180.1 18.5L181.2 18.4L184.2 20.1L188.1 20.6L190.4 22.5L193.1 22.2L196.6 22.9L199.4 18.1L202.9 19.8L203.5 19.6L204.6 17.7L203.5 19.6L202.9 19.8L199.4 18.1L196.8 22.7L193.1 22.2L190.9 22.7L190.2 23.1L189.7 25.1L189.3 24.9L189.1 25.6L185.2 24.7L183.2 28.5L183.4 29L182.1 29.5L181.6 31.3L180.3 33L179.2 46.7L176.7 47.1L176.7 48.2L174.6 48.7L168.4 74.6L170.5 91.5L168.6 91.8L169.8 95.4L167.8 95.6L168.7 95.8L169 97.3L168.7 97.9L166.8 98.3L152.2 94.9L148.9 98.9L146.4 100.6L123.3 113.6L118.1 118.5L116.4 120.7L110.2 130.4L109.2 132.7L107.5 131.7L103.5 137.9L100.3 137.2L99.8 139L98.6 138.9L98.2 140L97.5 140.2L95.4 138.8L97.5 140.2L98.2 140L98.6 138.9L99.8 139L100.3 137.2L101.5 137.5L101.9 134.7L101.1 129.1L99.3 125.6L100 122.6L98.8 119.8L97.6 118.6L99.2 107.8L98.4 107.4L98.4 106.4L106.3 95.7L103.9 87.5L104.4 86.8L103.8 86.4L108.6 76.9L109.5 74.1L110.7 74.7L120.6 51.7L120.2 51.4L120.4 49.9"
+
+
+def kaart_antwerpen(label=""):
+    """Echte kaart: OpenStreetMap-data van Antwerpen, route Steenplein, Eilandje, Park Spoor Noord, Stadspark, Zuid."""
+    s = ('<svg viewBox="0 0 300 150" width="100%" height="150" class="map">'
+         '<image href="kaart-antwerpen.jpg" width="300" height="150" preserveAspectRatio="xMidYMid slice"/>'
+         f'<path d="{ROUTE_ANTWERPEN}" fill="none" stroke="rgba(200,241,53,0.22)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>'
+         f'<path d="{ROUTE_ANTWERPEN}" fill="none" stroke="{ACC}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
+         f'<circle cx="120.4" cy="49.9" r="4" fill="#050505" stroke="{ACC}" stroke-width="2"/>'
+         '<text x="294" y="145" text-anchor="end" fill="rgba(237,237,235,0.45)" font-family="DM Sans" font-size="6">© OpenStreetMap-bijdragers</text>')
+    if label:
+        s += f'<text x="10" y="18" fill="rgba(237,237,235,0.6)" font-family="DM Sans" font-size="9" letter-spacing="1">{label}</text>'
+    return s + "</svg>"
+
+
 def kaart(h=170, route="thun", label=""):
     """Gestileerde kaart met route, uit de eigen import (GPX of FIT)."""
     if route == "thun":
@@ -109,6 +125,10 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         lucht = ("#0e1012", "#1e2a1e")
         lagen = ('<ellipse cx="150" cy="128" rx="170" ry="46" fill="#3a1e18"/><ellipse cx="150" cy="128" rx="130" ry="30" fill="#1d3320"/>'
                  '<ellipse cx="150" cy="128" rx="150" ry="38" fill="none" stroke="#e8e4dc" stroke-opacity="0.25" stroke-dasharray="3 5"/>')
+    # Echte foto (Unsplash) over de illustratie; laadt die niet, dan blijft de illustratie staan.
+    foto = {"thun": "photo-1627156399021-721b0f720f8d", "weg": "photo-1502224562085-639556652f33", "baan": "photo-1474546652694-a33dd8161d66"}.get(scene)
+    if foto:
+        lagen += f'<image href="https://images.unsplash.com/{foto}?w=900&amp;q=75&amp;auto=format&amp;fit=crop" width="300" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
     tekst = ""
     if tag:
         tekst += f'<text x="14" y="22" fill="{ACC}" font-family="DM Sans" font-size="9" letter-spacing="1.5">{tag}</text>'
@@ -118,7 +138,7 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         tekst += f'<text x="14" y="{h-12}" fill="rgba(237,237,235,0.7)" font-family="DM Sans" font-size="11">{sub}</text>'
     return (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="beeld" preserveAspectRatio="xMinYMid slice">'
             f'<defs><linearGradient id="l{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{lucht[0]}"/><stop offset="1" stop-color="{lucht[1]}"/></linearGradient>'
-            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0.45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.75"/></linearGradient></defs>'
+            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.45"/><stop offset="0.3" stop-color="#000" stop-opacity="0"/><stop offset="0.5" stop-color="#000" stop-opacity="0.1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="0.92"/></linearGradient></defs>'
             f'<rect width="300" height="{h}" fill="url(#l{scene})"/>{lagen}<rect width="300" height="{h}" fill="url(#v{scene})"/>{tekst}</svg>')
 
 
@@ -777,7 +797,7 @@ scherm("r2", "R", "Een training, volledig", "Zoals Strava: kaart, getallen, graf
 <a class="btn-text" style="text-align:left;padding-left:0" href="r1.html">← Logboek</a>
 <div class="lbl" style="margin-top:0">Donderdag 29 oktober · 07:10 · Lopen · Antwerpen</div>
 <div class="h-l">DREMPEL 3×10 MIN</div>
-<div class="media" style="margin-top:10px">{kaart(150, "weg", "")}<div class="in">{hoogte([12, 14, 18, 22, 19, 15, 13, 16, 24, 28, 21, 15, 12], 28)}</div></div>
+<div class="media" style="margin-top:10px">{kaart_antwerpen()}<div class="in">{hoogte([12, 14, 18, 22, 19, 15, 13, 16, 24, 28, 21, 15, 12], 28)}</div></div>
 <div class="stats"><div><div class="k">Afstand</div><div class="v">12,4 km</div></div><div><div class="k">Tijd</div><div class="v">1:02:18</div></div><div><div class="k">Tempo</div><div class="v">5:01</div></div>
 <div><div class="k">Hartslag</div><div class="v">151</div></div><div><div class="k">Hoogte</div><div class="v">64 m</div></div><div><div class="k">TSS</div><div class="v">78</div></div></div>
 <div class="lbl acc">Wat LUPO ziet</div>

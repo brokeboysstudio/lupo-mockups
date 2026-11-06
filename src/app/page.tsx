@@ -82,7 +82,7 @@ export default function Home() {
           LUPO <span className="text-accent">Mockups</span>
         </h1>
         <p className="text-muted-2 text-base leading-relaxed max-w-[600px] font-light">
-          Elke ochtend één beslissing, met de reden erbij. Tot aan je startlijn.
+          Geen excuses. Alleen vooruitgang. Elke ochtend één beslissing, met de reden erbij.
           Klikbare flows van de app, de webversie en het businessplan.
         </p>
       </div>
