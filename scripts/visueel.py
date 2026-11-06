@@ -1238,3 +1238,84 @@ CSS_EXTRA += """
 .sbar i { display:block; }
 .ktoast { position:absolute; right:150px; bottom:16px; width:600px; background:#141a08 !important; box-shadow:0 20px 40px rgba(0,0,0,0.6); border:1px solid rgba(200,241,53,0.4); background:rgba(200,241,53,0.06); border-radius:10px; padding:10px 14px; font-size:12px; }
 """
+
+
+# ── UIT TRAININGPEAKS (6 nov): band per signaal, impact van een training, gepland tegen gedaan, vorm per week ──
+def _scherm(id):
+    return next(s for s in SCHERMEN if s["id"] == id)
+
+def bandrij(naam, waarde, lo, hi, gem, s_lo, s_hi, pos, status, kl=""):
+    """Eén signaal tegenover je eigen band: balk = band, streep = vannacht, punt = gemiddelde 7 dagen."""
+    x = lambda v: (v - s_lo) / (s_hi - s_lo) * 100
+    return (f'<div class="brij"><div class="brij-k"><span>{naam}</span><b class="{kl}">{waarde}</b></div>'
+            f'<div class="band"><span style="left:{x(lo):.0f}%;width:{x(hi) - x(lo):.0f}%"></span><em style="left:{x(gem):.0f}%"></em><i style="left:{x(pos):.0f}%;{"background:#ffb020" if kl == "warn" else ""}"></i></div>'
+            f'<div class="brij-s">{status}</div></div>')
+
+BANDEN = f"""<a class="card" href="d2.html" style="padding:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span class="lbl" style="margin:0">Vannacht tegen je band</span><span class="legend" style="margin:0"><span><b style="background:rgba(200,241,53,0.3)"></b>band</span><span><b style="background:#f0ede6;border-radius:50%"></b>7 dagen</span></span></div>
+{bandrij("HRV", "52 ms", 58, 64, 61, 45, 70, 52, "15% onder je gemiddelde van 61 · grens −5%", "warn")}
+{bandrij("Rusthartslag", "50", 46, 52, 49, 40, 60, 50, "binnen je band")}
+{bandrij("Slaap", "6u10", 6.8, 7.8, 7.1, 5, 9, 6.17, "onder je band, boven de grens van 6u")}
+</a>"""
+
+d = _scherm("d1")
+d["body"] = d["body"].replace(d["body"][d["body"].index('<div class="tiles t2">'):d["body"].index('<div class="lbl">Training · aangepast</div>')], BANDEN + "\n")
+
+def impact(fit, verm, vorm_woord, pos, zin):
+    """Wat de training deed met fitheid en vermoeidheid, en waar je vorm nu staat."""
+    rij = lambda n, a, b, kl: f'<div class="row"><span>{n}</span><span class="r">{a} → <b class="{kl}">{b}</b> <span class="mut">({b - a:+d})</span></span></div>'
+    return (f'<div class="lbl">Wat deze training deed</div><div class="card" style="padding:12px">'
+            f'{rij("Fitheid", *fit, "acc")}{rij("Vermoeidheid", *verm, "")}'
+            f'<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px"><span class="lbl" style="margin:0">Vorm</span><span class="h-m">{vorm_woord}</span></div>'
+            f'<div class="vorm"><span>Zwaar</span><span>Opbouwen</span><span>In balans</span><span>Fris</span><i style="left:{pos}%"></i></div>'
+            f'<div class="p" style="margin:8px 0 0">{zin}</div></div>')
+
+def gepland_gedaan(rijen):
+    return ('<div class="lbl">Gepland tegen gedaan</div><table class="t"><tr><th></th><th>Gepland</th><th>Gedaan</th><th></th></tr>'
+            + "".join(f'<tr><td>{n}</td><td class="mut">{p}</td><td>{g}</td><td class="{"acc" if ok else "warn"}">{"✓" if ok else "!"}</td></tr>' for n, p, g, ok in rijen) + "</table>")
+
+r2 = _scherm("r2")
+r2["body"] = r2["body"].replace('<div class="lbl">Intervallen</div>',
+    gepland_gedaan([("Duur", "1:00:00", "1:02:18", True), ("Afstand", "12,0 km", "12,4 km", True), ("Drempeltempo", "4:20", "4:18–4:21", True), ("Hartslag", "&lt; 168", "165", True), ("TSS", "75", "78", True)])
+    + impact((56, 57), (61, 69), "Opbouwen", 34, "Zoals gepland voor een opbouwweek. Vrijdag blijft rustig, dan sta je zaterdag weer in balans.")
+    + '\n<div class="lbl">Intervallen</div>', 1)
+
+r3 = _scherm("r3")
+r3["body"] = r3["body"].replace('<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between"><span class="lbl" style="margin:0">Vermogenscurve',
+    gepland_gedaan([("Duur", "3:00:00", "3:05:40", True), ("Afstand", "90 km", "92 km", True), ("Vermogen", "205–215 W", "212 W NP", True), ("Voeding", "70 g/u", "55 g/u", False), ("TSS", "150", "156", True)])
+    + impact((55, 57), (54, 70), "Zwaar", 12, "De zwaarste dag van de week, bewust. Je vermoeidheid zakt pas na een rustige dag.")
+    + '\n<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between"><span class="lbl" style="margin:0">Vermogenscurve', 1)
+
+x4 = _scherm("x4")
+x4["body"] = x4["body"].replace('<a class="btn-primary" href="d5.html">Naar de analyse</a>',
+    impact((58, 59), (63, 71), "Opbouwen", 30, "Morgen staat een rustige loop. Je vorm blijft in de opbouwzone, zoals deze week vraagt.")
+    + '\n<a class="btn-primary" href="d5.html">Naar de analyse</a>')
+
+# Vorm per week in de kalender
+VORM = {44: (55, 60, "opbouwen"), 45: (58, 64, "opbouwen"), 46: (59, 66, "opbouwen"), 47: (56, 44, "fris"), 48: (60, 71, "zwaar"), 49: (61, 64, "in balans")}
+k1 = _scherm("k1")
+for wk, (f, v, w) in VORM.items():
+    k1["body"] = k1["body"].replace(_weekkol(wk), _weekkol(wk).replace("<b>", f'<span class="vw {w.replace(" ", "")}">{w}</span><b>', 1), 1)
+k1["body"] = k1["body"].replace('<div class="kh" style="text-align:right">Uren</div>', '<div class="kh" style="text-align:right">Week</div>', 1)
+w6 = _scherm("w6")
+for wk, (f, v, w) in VORM.items():
+    if wk <= 47:
+        w6["body"] = w6["body"].replace(f'<span class="lbl" style="margin:0">Week {wk}</span>',
+            f'<span class="lbl" style="margin:0">Week {wk}</span><span class="vw {w.replace(" ", "")}">{w}</span><span class="fvv">Fitheid <b>{f}</b> · Vermoeid <b>{v}</b> · Vorm <b>{f - v:+d}</b></span>', 1)
+
+CSS_EXTRA += """
+.brij { margin-top:10px; }
+.brij-k { display:flex; justify-content:space-between; align-items:baseline; font-size:13px; }
+.brij-k b { font-family:Bebas Neue; font-size:20px; font-weight:400; }
+.brij .band { margin:4px 0 3px; height:10px; }
+.brij .band em { position:absolute; top:2px; width:6px; height:6px; border-radius:50%; background:#f0ede6; transform:translateX(-3px); }
+.brij .band i { top:-3px; height:16px; }
+.brij-s { font-size:10.5px; color:var(--muted-2); }
+.vorm { position:relative; display:flex; gap:2px; margin-top:6px; }
+.vorm span { flex:1; text-align:center; font-size:9.5px; color:var(--muted-2); padding:12px 0 0; border-top:6px solid #2a2a2a; }
+.vorm span:nth-child(1) { border-top-color:#ff6b5a; } .vorm span:nth-child(2) { border-top-color:#7d9400; } .vorm span:nth-child(3) { border-top-color:var(--accent); } .vorm span:nth-child(4) { border-top-color:#4fc3c3; }
+.vorm i { position:absolute; top:-5px; width:4px; height:16px; background:#f0ede6; border-radius:2px; transform:translateX(-2px); }
+.vw { font-size:9px; letter-spacing:0.06em; text-transform:uppercase; font-weight:600; color:#7d9400; }
+.vw.zwaar { color:#ff6b5a; } .vw.inbalans { color:var(--accent); } .vw.fris { color:#4fc3c3; } .vw.opbouwen { color:#9db82a; }
+.fvv { font-size:10px; color:var(--muted-2); } .fvv b { color:var(--text); font-weight:600; }
+"""

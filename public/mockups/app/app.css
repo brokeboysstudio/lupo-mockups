@@ -663,6 +663,21 @@ a.act:hover { border-color: var(--accent); }
 .sbar i { display:block; }
 .ktoast { position:absolute; right:150px; bottom:16px; width:600px; background:#141a08 !important; box-shadow:0 20px 40px rgba(0,0,0,0.6); border:1px solid rgba(200,241,53,0.4); background:rgba(200,241,53,0.06); border-radius:10px; padding:10px 14px; font-size:12px; }
 
+.brij { margin-top:10px; }
+.brij-k { display:flex; justify-content:space-between; align-items:baseline; font-size:13px; }
+.brij-k b { font-family:Bebas Neue; font-size:20px; font-weight:400; }
+.brij .band { margin:4px 0 3px; height:10px; }
+.brij .band em { position:absolute; top:2px; width:6px; height:6px; border-radius:50%; background:#f0ede6; transform:translateX(-3px); }
+.brij .band i { top:-3px; height:16px; }
+.brij-s { font-size:10.5px; color:var(--muted-2); }
+.vorm { position:relative; display:flex; gap:2px; margin-top:6px; }
+.vorm span { flex:1; text-align:center; font-size:9.5px; color:var(--muted-2); padding:12px 0 0; border-top:6px solid #2a2a2a; }
+.vorm span:nth-child(1) { border-top-color:#ff6b5a; } .vorm span:nth-child(2) { border-top-color:#7d9400; } .vorm span:nth-child(3) { border-top-color:var(--accent); } .vorm span:nth-child(4) { border-top-color:#4fc3c3; }
+.vorm i { position:absolute; top:-5px; width:4px; height:16px; background:#f0ede6; border-radius:2px; transform:translateX(-2px); }
+.vw { font-size:9px; letter-spacing:0.06em; text-transform:uppercase; font-weight:600; color:#7d9400; }
+.vw.zwaar { color:#ff6b5a; } .vw.inbalans { color:var(--accent); } .vw.fris { color:#4fc3c3; } .vw.opbouwen { color:#9db82a; }
+.fvv { font-size:10px; color:var(--muted-2); } .fvv b { color:var(--text); font-weight:600; }
+
 :root { --bg:#0a0a0a; --card:#161616; --line:rgba(255,255,255,0.08); --line-strong:rgba(255,255,255,0.14); --accent:#c8f135; --muted:rgba(240,237,230,0.5); --muted-2:rgba(240,237,230,0.68); --text:#f0ede6; }
 body { font-family:'DM Sans', sans-serif; }
 .screen > * { flex-shrink:0; }
