@@ -30,7 +30,8 @@ export default function Home() {
         <div className="wrap held">
           <div>
             <div className="lbl acc">Trainingscoach voor triatlon, lopen en hybride</div>
-            <h1 style={{ margin: "18px 0 22px" }}>Geen excuses. Alleen vooruitgang.</h1>
+            <h1 style={{ margin: "18px 0 14px" }}>Geen excuses. Alleen vooruitgang.</h1>
+            <div className="onderkop">Zonder offer geen glorie.</div>
             <p className="lead">
               Elke ochtend leest LUPO je herstel en je plan, en zegt wat je vandaag doet: voluit, afbouwen of rusten. Met de
               reden erbij. Jij levert de discipline, LUPO zorgt dat ze telt. Tot aan je startlijn.
