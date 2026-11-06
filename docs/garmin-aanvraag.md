@@ -11,7 +11,7 @@ Bronnen:
 | Wat | Status |
 |---|---|
 | Juridische naam, ondernemingsnummer en adres | Jan levert aan |
-| Website live op lupo.coach (home, product, contact, privacy, voorwaarden) | Klaar als concept in `/site` |
+| Website live op lupo.coach (home, product, contact, privacy, voorwaarden) | Klaar als concept in `/site`, in het Engels (standaard), Nederlands (`/nl`) en Frans (`/fr`) |
 | Privacyverklaring en voorwaarden juridisch nagekeken | Open |
 | Mailadressen hallo@, support@ en privacy@lupo.coach werken | Open |
 | De app stuurt geen HRV of slaap meer naar het taalmodel | Klaar in Lupo PR #5, nog te mergen |
