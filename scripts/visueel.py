@@ -138,7 +138,7 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         tekst += f'<text x="14" y="{h-12}" fill="rgba(237,237,235,0.7)" font-family="DM Sans" font-size="11">{sub}</text>'
     return (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="beeld" preserveAspectRatio="xMinYMid slice">'
             f'<defs><linearGradient id="l{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{lucht[0]}"/><stop offset="1" stop-color="{lucht[1]}"/></linearGradient>'
-            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.45"/><stop offset="0.3" stop-color="#000" stop-opacity="0"/><stop offset="0.5" stop-color="#000" stop-opacity="0.1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="0.92"/></linearGradient></defs>'
+            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.7"/><stop offset="0.35" stop-color="#000" stop-opacity="0"/><stop offset="0.5" stop-color="#000" stop-opacity="0.1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="0.92"/></linearGradient></defs>'
             f'<rect width="300" height="{h}" fill="url(#l{scene})"/>{lagen}<rect width="300" height="{h}" fill="url(#v{scene})"/>{tekst}</svg>')
 
 
