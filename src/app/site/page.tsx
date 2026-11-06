@@ -26,7 +26,7 @@ function Telefoon({ src, alt }: { src: string; alt: string }) {
 export default function Home() {
   return (
     <>
-      <section className="sectie eerste foto-held" style={{ backgroundImage: `url(${FOTO("photo-1679769177248-727f4d1047a5")})` }}>
+      <section className="sectie eerste foto-held" style={{ backgroundImage: `url(${FOTO("photo-1502224562085-639556652f33")})` }}>
         <div className="wrap held">
           <div>
             <div className="lbl acc">Trainingscoach voor triatlon, lopen en hybride</div>

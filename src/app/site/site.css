@@ -101,7 +101,7 @@
 }
 
 /* Foto's met fades naar de achtergrond */
-.site .foto-held { position: relative; background-size: cover; background-position: center 35%; padding-top: 120px; padding-bottom: 120px; }
+.site .foto-held { position: relative; background-size: cover; background-position: center 40%; padding-top: 120px; padding-bottom: 120px; }
 .site .foto-held::before { content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.7) 45%, rgba(10,10,10,0.35) 100%),
               linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 65%, var(--bg) 100%); }
