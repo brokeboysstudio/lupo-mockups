@@ -125,8 +125,6 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         lucht = ("#0e1012", "#1e2a1e")
         lagen = ('<ellipse cx="150" cy="128" rx="170" ry="46" fill="#3a1e18"/><ellipse cx="150" cy="128" rx="130" ry="30" fill="#1d3320"/>'
                  '<ellipse cx="150" cy="128" rx="150" ry="38" fill="none" stroke="#e8e4dc" stroke-opacity="0.25" stroke-dasharray="3 5"/>')
-    if scene in ("thun", "weg", "baan"):
-        lagen += f'<image href="foto-{scene}.jpg" width="300" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
     tekst = ""
     if tag:
         tekst += f'<text x="14" y="22" fill="{ACC}" font-family="DM Sans" font-size="9" letter-spacing="1.5">{tag}</text>'
@@ -134,10 +132,18 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         tekst += f'<text x="14" y="{h-28}" fill="#ededeb" font-family="Bebas Neue" font-size="22">{titel}</text>'
     if sub:
         tekst += f'<text x="14" y="{h-12}" fill="rgba(237,237,235,0.7)" font-family="DM Sans" font-size="11">{sub}</text>'
+    if scene in ("thun", "weg", "baan"):
+        # Echte foto die aan alle kanten uitloopt in de achtergrond (masker), tekst erover.
+        return (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="beeld foto" preserveAspectRatio="xMinYMid slice"><defs>'
+                f'<linearGradient id="mv{scene}{h}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.22" stop-color="#fff" stop-opacity="0.9"/><stop offset="0.55" stop-color="#fff" stop-opacity="0.75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+                f'<linearGradient id="mh{scene}{h}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.15" stop-color="#fff" stop-opacity="1"/><stop offset="0.85" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+                f'<mask id="kv{scene}{h}"><rect width="300" height="{h}" fill="url(#mv{scene}{h})"/></mask><mask id="kh{scene}{h}"><rect width="300" height="{h}" fill="url(#mh{scene}{h})"/></mask></defs>'
+                f'<g mask="url(#kh{scene}{h})"><g mask="url(#kv{scene}{h})"><image href="foto-{scene}.jpg" width="300" height="{h}" preserveAspectRatio="xMidYMid slice"/></g></g>{tekst}</svg>')
     return (f'<svg viewBox="0 0 300 {h}" width="100%" height="{h}" class="beeld" preserveAspectRatio="xMinYMid slice">'
             f'<defs><linearGradient id="l{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{lucht[0]}"/><stop offset="1" stop-color="{lucht[1]}"/></linearGradient>'
-            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.7"/><stop offset="0.35" stop-color="#000" stop-opacity="0"/><stop offset="0.5" stop-color="#000" stop-opacity="0.1"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="0.92"/></linearGradient></defs>'
-            f'<rect width="300" height="{h}" fill="url(#l{scene})"/>{lagen}<rect width="300" height="{h}" fill="url(#v{scene})"/>{tekst}</svg>')
+            f'<linearGradient id="v{scene}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0a0a" stop-opacity="0.85"/><stop offset="0.3" stop-color="#0a0a0a" stop-opacity="0.1"/><stop offset="0.5" stop-color="#0a0a0a" stop-opacity="0.15"/><stop offset="0.82" stop-color="#0a0a0a" stop-opacity="0.85"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="1"/></linearGradient>'
+            f'<linearGradient id="z{scene}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a0a0a" stop-opacity="0.85"/><stop offset="0.12" stop-color="#0a0a0a" stop-opacity="0.35"/><stop offset="0.5" stop-color="#0a0a0a" stop-opacity="0"/><stop offset="0.88" stop-color="#0a0a0a" stop-opacity="0.35"/><stop offset="1" stop-color="#0a0a0a" stop-opacity="0.85"/></linearGradient></defs>'
+            f'<rect width="300" height="{h}" fill="url(#l{scene})"/>{lagen}<rect width="300" height="{h}" fill="url(#z{scene})"/><rect width="300" height="{h}" fill="url(#v{scene})"/>{tekst}</svg>')
 
 
 def staven(waarden, labels, h=70, b=300, markeer=None, gepland=None):
@@ -223,6 +229,8 @@ def periodisering(b=300, h=110, nu=0.42):
 CSS_EXTRA = """
 .beeld, .map { display:block; border-radius: 14px; }
 .media { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); margin-bottom: 8px; background: var(--card); }
+.media:has(> .beeld), a.media:has(.beeld) { border: 0; background: transparent; border-radius: 0; }
+.media .beeld { border-radius: 0; }
 .media .in { padding: 10px 12px 12px; }
 .hero { display: flex; align-items: center; gap: 14px; margin: 6px 0 4px; }
 .zbar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 2px; margin-top: 6px; }
