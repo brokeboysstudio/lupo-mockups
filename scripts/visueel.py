@@ -272,10 +272,10 @@ vervang("o2", body="""
     for i, (n, t, d) in enumerate([(0, "Tot 4 uur", "Opbouwen naar de basis"), (2, "4 tot 8 uur", "Regelmatig, nog geen structuur"),
                                    (4, "8 tot 12 uur", "Gestructureerd, eerdere races"), (6, "Meer dan 12 uur", "Competitief")])))
 
-WEEK1 = [("MA", "3", "Rust", None, "—"), ("DI", "4", "Loop · zone 2", [(5, 1), (40, 2), (5, 1)], "50 min"),
-         ("WO", "5", "Zwem · techniek", [(10, 1), (8, 2), (4, 3), (8, 2), (4, 3), (8, 2), (3, 1)], "45 min"),
-         ("DO", "6", "Fiets · 3×10 tempo", [(15, 1), (10, 3), (5, 1), (10, 3), (5, 1), (10, 3), (20, 2)], "75 min"),
-         ("VR", "7", "Rust", None, "—"), ("ZA", "8", "Lange rit", [(10, 1), (100, 2), (10, 1)], "2u"), ("ZO", "9", "Lange loop", [(5, 1), (60, 2), (5, 1)], "1u10")]
+WEEK1 = [("MA", "2", "Rust", None, "—"), ("DI", "3", "Loop · zone 2", [(5, 1), (40, 2), (5, 1)], "50 min"),
+         ("WO", "4", "Zwem · techniek", [(10, 1), (8, 2), (4, 3), (8, 2), (4, 3), (8, 2), (3, 1)], "45 min"),
+         ("DO", "5", "Fiets · 3×10 tempo", [(15, 1), (10, 3), (5, 1), (10, 3), (5, 1), (10, 3), (20, 2)], "75 min"),
+         ("VR", "6", "Rust", None, "—"), ("ZA", "7", "Lange rit", [(10, 1), (100, 2), (10, 1)], "2u"), ("ZO", "8", "Lange loop", [(5, 1), (60, 2), (5, 1)], "1u10")]
 def daglijst(week, link="d1.html", on=None):
     return "".join(f'<a class="daycol{" on" if d == on else ""}" href="{link}"><div class="d">{d}<b>{n}</b></div>'
                    f'<div><div style="font-size:12px;margin-bottom:4px">{t}</div>{workout(w, 18) if w else "<div class=mut style=font-size:11px>herstel</div>"}</div>'
@@ -294,7 +294,7 @@ vervang("o3", body=f"""
 def ochtend(met_waarom):
     waarom = ('<div class="why">HRV staat <b>15% onder je 7-daagse gemiddelde</b>. De drempel voor afbouwen is −5%.</div>' if met_waarom else "")
     return f"""
-<div class="lbl">Donderdag 6 november</div>
+<div class="lbl">Donderdag 5 november</div>
 <div class="hero">{ring(0.42, "#ffb020", "42", "PARAAT")}
   <div><div class="h-l">AFBOUWEN</div><div class="p" style="margin-top:4px">Intensiteit eruit.<br/>Duur naar 60%.</div></div></div>
 {waarom}
@@ -321,7 +321,7 @@ vervang("d1", body=ochtend(True) + '<a class="btn-text" href="d2.html">Waarom de
 vervang("d1z", body=ochtend(False))
 
 vervang("d1b", body=f"""
-<div class="lbl">Vrijdag 7 november</div>
+<div class="lbl">Vrijdag 6 november</div>
 <div class="hero">{ring(0.86, ACC, "86", "PARAAT")}<div><div class="h-l acc">VOLUIT</div><div class="p" style="margin-top:4px">Alles binnen je<br/>eigen band.</div></div></div>
 <a class="card" href="d2.html" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">HRV · 14 dagen</span>{lijn(HRV[:-3] + [57, 59, 61], (58, 64), h=70, labels=HRV_LABELS)}</a>
 <div class="lbl">Training</div>
@@ -414,7 +414,7 @@ vervang("t2", body=f"""
 <a class="btn-primary" href="t3.html">400 m invoeren</a>
 """)
 
-vervang("t3", body=ochtend(False).replace("Donderdag 6 november", "DFRNT · week 6 van 10").replace('<a class="btn-secondary" href="d3.html">Ik voel me niet 100%</a>', '<a class="btn-secondary" href="t4.html">Ladder van deze golf →</a>').replace('href="d5.html">Gedaan', 'href="t4.html">Gedaan'))
+vervang("t3", body=ochtend(False).replace("Donderdag 5 november", "DFRNT · week 6 van 10").replace('<a class="btn-secondary" href="d3.html">Ik voel me niet 100%</a>', '<a class="btn-secondary" href="t4.html">Ladder van deze golf →</a>').replace('href="d5.html">Gedaan', 'href="t4.html">Gedaan'))
 
 vervang("t4", body=f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="t3.html">← Vandaag</a>
@@ -460,9 +460,9 @@ vervang("a1", body=f"""
 """)
 
 # ── PLAN, LADDER, CREW ───────────────────────────────────────────────────────
-WEEK45 = [("MA", "3", "Rust", None, "—"), ("DI", "4", "Loop · drempel 4×8", DREMPEL, "70 min"), ("WO", "5", "Zwem · techniek", [(10, 1), (8, 2), (4, 3), (8, 2), (4, 3), (8, 2), (3, 1)], "50 min"),
-          ("DO", "6", "Fiets · 2×20 drempel", [(15, 1), (10, 2), (20, 4), (5, 1), (20, 4), (20, 2)], "90 min"), ("VR", "7", "Loop · zone 2", ZONE2, "45 min"),
-          ("ZA", "8", "Lange rit", [(10, 1), (160, 2), (10, 1)], "3u"), ("ZO", "9", "Lange loop", [(5, 1), (90, 2), (5, 1)], "1u40")]
+WEEK45 = [("MA", "2", "Rust", None, "—"), ("DI", "3", "Loop · drempel 4×8", DREMPEL, "70 min"), ("WO", "4", "Zwem · techniek", [(10, 1), (8, 2), (4, 3), (8, 2), (4, 3), (8, 2), (3, 1)], "50 min"),
+          ("DO", "5", "Fiets · 2×20 drempel", [(15, 1), (10, 2), (20, 4), (5, 1), (20, 4), (20, 2)], "90 min"), ("VR", "6", "Loop · zone 2", ZONE2, "45 min"),
+          ("ZA", "7", "Lange rit", [(10, 1), (160, 2), (10, 1)], "3u"), ("ZO", "8", "Lange loop", [(5, 1), (90, 2), (5, 1)], "1u40")]
 vervang("p1", body=f"""
 <div class="lbl">Plan</div>
 <div class="seg"><a class="on" href="p1.html">Week</a><a href="p3.html">Seizoen</a><a href="p5.html">Races</a></div>
@@ -503,7 +503,7 @@ vervang("s1", body=f"""
 """)
 
 # Webversie Vandaag: zelfde grafieken in de panelen.
-vervang("w1", body=desk("Vandaag", "VANDAAG", "Donderdag 6 november", [
+vervang("w1", body=desk("Vandaag", "VANDAAG", "Donderdag 5 november", [
     ("Beslissing", f'<div class="hero">{ring(0.42, "#ffb020", "42", "PARAAT")}<div class="h-l">AFBOUWEN</div></div><div class="why">HRV <b>15% onder</b> je 7-daagse gemiddelde. Drempel −5%.</div><div class="card hl"><div class="h-m">Zone 2 · 45 min</div><div style="margin-top:8px">{workout(ZONE2, 30)}</div></div>'),
     ("Waarom", f'<div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">HRV · 14 dagen</span>{lijn(HRV, (58, 64), h=110, labels=HRV_LABELS, laatste_kleur="#ffb020")}</div><div class="card" style="padding:10px 12px 6px"><span class="lbl" style="margin:0">Slaap</span>{staven([7.4, 7.1, 7.8, 6.9, 7.2, 6.5, 6.2], ["V", "Z", "Z", "M", "D", "W", "D"], h=70, markeer=6)}</div>'),
     ("Laatste sessie", f'<div class="media">{kaart(160, "thun", "8,4 KM · DINSDAG")}</div><div class="card" style="padding:10px 12px">{zoneverdeling([(1, 12), (2, 81), (3, 7)])}</div><a class="btn-text" href="w1.html">Exporteer tabel</a>'),
@@ -746,7 +746,7 @@ def activiteit(href, dag, titel, sport, getallen, beeldje, label, regel, labelkl
 
 SEG_P = lambda a: '<div class="seg">' + "".join(
     f'<a class="{"on" if k == a else ""}" href="{h}.html">{k}</a>'
-    for k, h in [("Week", "p1"), ("Logboek", "r1"), ("Seizoen", "p3"), ("Races", "p5")]) + "</div>"
+    for k, h in [("Week", "p1"), ("Kalender", "k1"), ("Logboek", "r1"), ("Seizoen", "p3"), ("Races", "p5")]) + "</div>"
 
 for s in SCHERMEN:
     for oud in ('<div class="seg"><a class="on" href="p1.html">Week</a><a href="p3.html">Seizoen</a><a href="p5.html">Races</a></div>',
@@ -762,7 +762,7 @@ scherm("r1", "R", "Logboek", "Elke afgewerkte training als kaart, met wat LUPO e
 <div class="lbl">Plan</div>
 {SEG_P("Logboek")}
 <div class="h-l">WEEK 44</div>
-<p class="p" style="margin:2px 0 6px">27 oktober – 2 november · fase opbouw</p>
+<p class="p" style="margin:2px 0 6px">26 oktober – 1 november · fase opbouw</p>
 <div class="card" style="padding:12px 12px 6px">{staven([0.8, 3.1, 0, 1.04, 0.75, 1.5, 0], ["M", "D", "W", "D", "V", "Z", "Z"], 74, gepland=[1.0, 3.0, 0.8, 1.0, 0.75, 1.5, 0], markeer=None)}</div>
 <div class="tiles t4"><div class="tile"><div class="k">Uren</div><div class="v">7u10</div></div><div class="tile"><div class="k">TSS</div><div class="v">412</div></div><div class="tile"><div class="k">Afstand</div><div class="v">138</div><div class="s">km</div></div><div class="tile"><div class="k">Nagekomen</div><div class="v acc">7/7</div></div></div>
 {activiteit("r2.html", "Donderdag 07:10", "Drempel 3×10 min", "Lopen", "<b>12,4</b> km · <b>1:02:18</b> · <b>5:01</b> /km", workout(DREMPEL, 26), "✓ zoals gepland", "Zelfde tempo als 6 weken geleden, 3 slagen lager.")}
@@ -775,7 +775,7 @@ scherm("r1", "R", "Logboek", "Elke afgewerkte training als kaart, met wat LUPO e
 
 scherm("r2", "R", "Een training, volledig", "Zoals Strava: kaart, getallen, grafiek en splits. Daarbovenop wat LUPO ziet: gepland tegen gedaan, drift, dezelfde sessie van vroeger, en wat dat voor het plan betekent.", f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="r1.html">← Logboek</a>
-<div class="lbl" style="margin-top:0">Donderdag 30 oktober · 07:10 · Lopen · Antwerpen</div>
+<div class="lbl" style="margin-top:0">Donderdag 29 oktober · 07:10 · Lopen · Antwerpen</div>
 <div class="h-l">DREMPEL 3×10 MIN</div>
 <div class="media" style="margin-top:10px">{kaart(150, "weg", "")}<div class="in">{hoogte([12, 14, 18, 22, 19, 15, 13, 16, 24, 28, 21, 15, 12], 28)}</div></div>
 <div class="stats"><div><div class="k">Afstand</div><div class="v">12,4 km</div></div><div><div class="k">Tijd</div><div class="v">1:02:18</div></div><div><div class="k">Tempo</div><div class="v">5:01</div></div>
@@ -804,7 +804,7 @@ scherm("r2", "R", "Een training, volledig", "Zoals Strava: kaart, getallen, graf
 
 scherm("r3", "R", "Fietsrit met vermogen", "Voor fietsers: vermogenscurve tegen zes weken geleden, NP en IF, ontkoppeling, en voeding naar de race toe.", f"""
 <a class="btn-text" style="text-align:left;padding-left:0" href="r1.html">← Logboek</a>
-<div class="lbl" style="margin-top:0">Dinsdag 28 oktober · Fietsen · Kempen</div>
+<div class="lbl" style="margin-top:0">Dinsdag 27 oktober · Fietsen · Kempen</div>
 <div class="h-l">LANGE RIT ZONE 2</div>
 <div class="media" style="margin-top:10px">{kaart(130, "rit", "")}<div class="in">{hoogte([20, 24, 30, 28, 26, 34, 40, 36, 30, 26, 24, 22, 20], 28)}</div></div>
 <div class="stats"><div><div class="k">Afstand</div><div class="v">92 km</div></div><div><div class="k">Tijd</div><div class="v">3:05:40</div></div><div><div class="k">NP</div><div class="v">212 W</div></div>
@@ -1054,4 +1054,187 @@ CSS_EXTRA += """
 .band i { position:absolute; top:-4px; width:4px; height:22px; background:var(--accent); border-radius:2px; transform:translateX(-2px); }
 .segbar { display:flex; gap:2px; height:26px; border-radius:6px; overflow:hidden; margin-bottom:6px; }
 .segbar span { display:flex; align-items:center; justify-content:center; font-size:9px; letter-spacing:0.1em; font-weight:600; color:#f0ede6; }
+"""
+
+
+# ── KALENDER ─────────────────────────────────────────────────────────────────
+# November 2026 met echte weekdagen: week 44 begint op maandag 26 oktober, vandaag is donderdag 5 november.
+import datetime as _dt
+
+SPORT_KLEUR = {"loop": ACC, "fiets": "#4fc3c3", "zwem": "#6b8cff", "kracht": "#b0a99a"}
+LANGE_RIT = [(10, 1), (160, 2), (10, 1)]
+LANGE_LOOP = [(5, 1), (90, 2), (5, 1)]
+ZWEM_T = [(10, 1), (8, 2), (4, 3), (8, 2), (4, 3), (8, 2), (3, 1)]
+FIETS_DR = [(15, 1), (10, 2), (20, 4), (5, 1), (20, 4), (20, 2)]
+KRACHT = [(40, 2)]
+
+def _normaal(st="gepland", za=180, zo=100):
+    return [[], [("loop", "Drempel 4×8", 70, 82, DREMPEL, st)], [("zwem", "Techniek", 50, 35, ZWEM_T, st), ("kracht", "Kracht", 40, 5, KRACHT, st)],
+            [("fiets", "2×20 drempel", 90, 95, FIETS_DR, st)], [("loop", "Zone 2", 45, 38, ZONE2, st)],
+            [("fiets", "Lange rit", za, round(za * 5 / 6), LANGE_RIT, st)], [("loop", "Lange loop", zo, round(zo * 1.15), LANGE_LOOP, st)]]
+
+KAL = {
+    44: [[("zwem", "CSS 10×100", 48, 30, ZWEM_T, "aangepast")], [("fiets", "Lange rit", 186, 156, LANGE_RIT, "gedaan")], "rust",
+         [("loop", "Drempel 3×10", 62, 78, DREMPEL, "gedaan")], [("loop", "Zone 2", 45, 38, ZONE2, "gedaan")], [("fiets", "Duurrit", 89, 110, LANGE_RIT, "gedaan")], []],
+    46: _normaal(), 48: _normaal(za=240, zo=110), 49: _normaal(),
+    47: [[], [("loop", "Zone 2", 40, 30, ZONE2, "gepland")], [("zwem", "Techniek", 40, 25, ZWEM_T, "gepland")], [("fiets", "Zone 2", 60, 45, LANGE_RIT, "gepland")],
+         [], [("fiets", "Duurrit", 90, 70, LANGE_RIT, "gepland")], [("loop", "Duurloop", 60, 55, LANGE_LOOP, "gepland")]],
+}
+_w45 = _normaal()
+_w45[1] = [(*_w45[1][0][:5], "gedaan")]
+_w45[2] = [(*x[:5], "gedaan") for x in _w45[2]]
+_w45[3] = [("fiets", "Zone 2 · afgebouwd", 45, 30, [(8, 1), (32, 2), (5, 1)], "vandaag")]
+KAL[45] = _w45
+KAL[49][5] = [("fiets", "Combine: FTP-test", 75, 85, [(20, 1), (5, 3), (10, 1), (20, 5), (20, 1)], "gepland")]
+VANDAAG = _dt.date(2026, 11, 5)
+SEL = _dt.date(2026, 11, 7)
+
+def _dag(wk, i):
+    return _dt.date(2026, 10, 26) + _dt.timedelta(days=(wk - 44) * 7 + i)
+
+def _uren(m):
+    return f"{m // 60}u{m % 60:02d}"
+
+def _link(d, sessies):
+    if d == VANDAAG: return "d1.html"
+    if d == _dt.date(2026, 10, 29): return "r2.html"
+    if d == _dt.date(2026, 10, 27): return "r3.html"
+    if d < VANDAAG: return "r1.html"
+    return "x1.html" if d == SEL else "k1.html"
+
+def _cel(wk, i):
+    d, inh = _dag(wk, i), KAL[wk][i]
+    kl = ["kd"] + (["vorig"] if d.month != 11 else []) + (["vandaag"] if d == VANDAAG else []) + (["sel"] if d == SEL else [])
+    binnen = f'<span class="kn">{d.day}</span>'
+    if inh == "rust":
+        binnen += '<span class="kr">rust</span>'
+    else:
+        for sp, t, m, tss, bl, st in inh:
+            binnen += f'<i class="ks {st}" style="--k:{SPORT_KLEUR[sp]};width:{max(28, min(100, m / 180 * 100)):.0f}%"></i>'
+    return f'<a class="{" ".join(kl)}" href="{_link(d, inh)}">{binnen}</a>'
+
+def _weektot(wk):
+    ss = [x for dag in KAL[wk] if dag != "rust" for x in dag]
+    tot = sum(x[2] for x in ss)
+    gedaan = sum(x[2] for x in ss if x[5] in ("gedaan", "aangepast"))
+    return ss, tot, gedaan
+
+def _weekkol(wk):
+    ss, tot, gedaan = _weektot(wk)
+    if wk == 44: s, pct = '<span class="acc">7/7 ✓</span>', 100
+    elif wk == 45: s, pct = f"{_uren(gedaan)} gedaan", round(gedaan / tot * 100)
+    elif wk == 47: s, pct = '<span class="tag-r">rustweek</span>', 0
+    else: s, pct = "gepland", 0
+    return f'<div class="kw"><b>{_uren(tot)}</b><span>{s}</span><span class="kwb"><i style="width:{pct}%"></i></span></div>'
+
+KOP = "".join(f'<div class="kh">{d}</div>' for d in ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"]) + '<div class="kh" style="text-align:right">Uren</div>'
+RASTER = KOP + "".join("".join(_cel(wk, i) for i in range(7)) + _weekkol(wk) for wk in range(44, 50))
+
+NOV_UREN = f"{sum(x[2] for wk in KAL for i, dag in enumerate(KAL[wk]) if dag != 'rust' and _dag(wk, i).month == 11 for x in dag) // 60}u"
+scherm("k1", "P", "Kalender", "De maand in één beeld: per dag de sport en of hij gedaan is, rust die LUPO oplegde, de rustweek en per week je uren. Tik een dag om hem te openen.", f"""
+<div class="lbl">Plan</div>
+{SEG_P("Kalender")}
+<div style="display:flex;justify-content:space-between;align-items:center;margin:2px 0 4px"><a class="mut" href="k1.html" style="font-size:18px;text-decoration:none">‹</a><div class="h-l">NOVEMBER <span class="acc">2026</span></div><a class="mut" href="k1.html" style="font-size:18px;text-decoration:none">›</a></div>
+<div class="fase"><span class="on">Opbouw 1 · wk 44–46</span><span>Rust · wk 47</span><span>Opbouw 2 · wk 48–51</span></div>
+<div class="kal">{RASTER}</div>
+<div class="kleg"><span><i class="ks gedaan" style="--k:#f0ede6"></i>gedaan</span><span><i class="ks aangepast" style="--k:#f0ede6"></i>aangepast</span><span><i class="ks gepland" style="--k:#f0ede6"></i>gepland</span><span><i class="ks gemist"></i>gemist</span><span><b class="kr">rust</b>van LUPO</span></div>
+<div class="kleg"><span><i class="dot" style="background:{SPORT_KLEUR['zwem']}"></i>zwemmen</span><span><i class="dot" style="background:{SPORT_KLEUR['fiets']}"></i>fietsen</span><span><i class="dot" style="background:{ACC}"></i>lopen</span><span><i class="dot" style="background:{SPORT_KLEUR['kracht']}"></i>kracht</span></div>
+<div class="card hl" style="margin-top:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span class="lbl" style="margin:0">Zaterdag 7 november</span><span class="pill">gepland</span></div>
+<div class="h-m" style="margin:6px 0 2px">Lange rit · 3u · zone 2</div>
+<div class="p" style="margin:0 0 8px">200 tot 215 watt, 70 g koolhydraten per uur. TSS 150.</div>
+{workout(LANGE_RIT, 30)}
+<div style="display:flex;gap:16px;margin-top:8px"><a class="btn-text" style="padding:0;white-space:nowrap" href="x1.html">Bekijk de training →</a><a class="btn-text" style="padding:0" href="p2.html">Verplaats</a></div>
+</div>
+<div class="tiles t4"><div class="tile"><div class="k">November</div><div class="v">{NOV_UREN}</div><div class="s">gepland</div></div><div class="tile"><div class="k">Nagekomen</div><div class="v acc">100%</div><div class="s">tot vandaag</div></div><div class="tile"><div class="k">Rustweek</div><div class="v">47</div><div class="s">16–22 nov</div></div><div class="tile"><div class="k">Thun</div><div class="v">34</div><div class="s">weken</div></div></div>
+<p class="p" style="font-size:11px">De rustweek staat vast in het plan. Rust die LUPO oplegt telt als nagekomen.</p>
+""", tab="Plan", fab=False)
+
+# Web: weekraster zoals TrainingPeaks, weken 44 tot 47, met een training die versleept wordt.
+def _wk(sp, t, m, tss, bl, st, extra=""):
+    return (f'<div class="wk {st} {extra}" style="--k:{SPORT_KLEUR[sp]}"><div class="t">{t}</div>'
+            f'<div class="m">{_uren(m) if m >= 60 else f"{m} min"} · TSS {tss}</div>{workout(bl, 14)}</div>')
+
+def _wcel(wk, i):
+    d, inh = _dag(wk, i), KAL[wk][i]
+    kl = "kc" + (" vandaag" if d == VANDAAG else "")
+    binnen = f'<span class="kn">{d.day} {"okt" if d.month == 10 else ("nov" if d.day == 1 or (wk == 44 and i == 6) else "")}{" · vandaag" if d == VANDAAG else ""}</span>'
+    if inh == "rust":
+        binnen += '<div class="wk rustl"><div class="t">Rust van LUPO</div><div class="m">HRV 9% onder je band · telt als nagekomen</div></div>'
+    elif wk == 45 and i == 5:
+        binnen += _wk(*inh[0][:5], "gepland", "ghost")
+    elif wk == 45 and i == 6:
+        binnen += _wk(*KAL[45][5][0][:5], "gepland", "drag") + '<div class="wk drop">Neerzetten op zondag</div>'
+    else:
+        binnen += "".join(_wk(*x) for x in inh) or '<span class="mut" style="font-size:11px">rustdag</span>'
+    return f'<div class="{kl}">{binnen}</div>'
+
+def _wtot(wk):
+    ss, tot, gedaan = _weektot(wk)
+    tss = sum(x[3] for x in ss)
+    per = {sp: sum(x[2] for x in ss if x[0] == sp) for sp in SPORT_KLEUR}
+    balk = "".join(f'<i style="flex:{m};background:{SPORT_KLEUR[sp]}"></i>' for sp, m in per.items() if m)
+    st = {44: '<span class="acc">7/7 nagekomen ✓</span>', 45: f"{_uren(gedaan)} van {_uren(tot)} gedaan", 47: '<span class="tag-r">rustweek</span>'}.get(wk, "gepland")
+    return (f'<div class="kweek"><span class="lbl" style="margin:0">Week {wk}</span><span class="h">{_uren(tot)}</span><span>TSS {tss}</span>'
+            f'<span class="sbar">{balk}</span><span>{st}</span></div>')
+
+W6 = (f'<div class="desk">{side("Plan")}<div class="main">'
+      f'<div class="mhead"><span class="h-l">KALENDER</span><span class="mut">November 2026 · opbouw 1, week 3 van 4 · sleep een training naar een andere dag</span>'
+      f'<span class="seg" style="margin:0 0 0 auto;width:210px"><a class="on" href="w6.html">Weken</a><a href="k1.html">Maand</a><a href="w2.html">Seizoen</a></span></div>'
+      f'<div class="kgrid">' + "".join(f'<div class="kh">{d}</div>' for d in ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag", "Week"])
+      + "".join("".join(_wcel(wk, i) for i in range(7)) + _wtot(wk) for wk in range(44, 48)) + '</div>'
+      f'<div class="ktoast"><b>Lange rit naar zondag.</b> De lange loop schuift naar zaterdag. Regels ✓ geen twee zware dagen na elkaar ✓ weektotaal blijft 8u50. <span class="acc">Loslaten om op te slaan.</span></div>'
+      f'</div></div>')
+scherm("w6", "W", "Web: Kalender", "Weekraster zoals TrainingPeaks: dagen als kolommen, elke training als kaart met profiel, per week de uren, TSS en verdeling per sport. Slepen verplaatst, LUPO controleert de regels voor het opslaat.", W6, desk=True)
+
+CSS_EXTRA += """
+.fase { display:flex; gap:3px; margin:6px 0 8px; }
+.fase span { flex:1; justify-content:center; height:18px; border-radius:5px; background:#1a1a1a; font-size:9.5px; color:var(--muted-2); display:flex; align-items:center; padding:0 7px; white-space:nowrap; overflow:hidden; }
+.fase span.on { background:rgba(200,241,53,0.16); color:var(--accent); }
+.kal { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)) 48px; gap:3px; }
+.kal .kh { font-size:10px; color:var(--muted-2); text-align:center; padding:0 0 3px; }
+.kd { min-height:54px; background:#131313; border-radius:8px; padding:4px 4px 5px; display:flex; flex-direction:column; gap:3px; text-decoration:none; color:var(--text); border:1px solid transparent; min-width:0; }
+.kd .kn { font-size:11px; color:var(--muted-2); line-height:1.1; }
+.kd.vorig { opacity:0.5; }
+.kd.vandaag { border-color:var(--accent); }
+.kd.vandaag .kn { color:var(--accent); font-weight:600; }
+.kd.sel { border-color:rgba(240,237,230,0.75); background:#1d1d1d; }
+.ks { display:block; height:7px; border-radius:4px; background:var(--k); }
+.ks.gepland { background:transparent; box-shadow:inset 0 0 0 1px var(--k); }
+.ks.vandaag { background:transparent; box-shadow:inset 0 0 0 1.5px var(--k); }
+.ks.aangepast { background:linear-gradient(90deg, var(--k) 0 60%, transparent 60%); box-shadow:inset 0 0 0 1px var(--k); }
+.ks.gemist { background:repeating-linear-gradient(45deg, #ff6b5a 0 2px, transparent 2px 4px); box-shadow:inset 0 0 0 1px #ff6b5a; }
+.kr { font-size:9px; color:var(--accent); border:1px solid var(--accent); border-radius:6px; padding:0 4px; align-self:flex-start; line-height:1.4; font-weight:500; }
+.kw { display:flex; flex-direction:column; justify-content:center; align-items:flex-end; gap:2px; font-size:9.5px; color:var(--muted-2); min-width:0; }
+.kw b { color:var(--text); font-weight:600; font-size:12px; }
+.kw span { white-space:nowrap; }
+.kwb { width:100%; height:3px; background:#222; border-radius:2px; overflow:hidden; display:block; }
+.kwb i { display:block; height:100%; background:var(--accent); }
+.tag-r { color:var(--text); background:#262626; border-radius:5px; padding:0 4px; }
+.kleg { display:flex; flex-wrap:wrap; gap:6px 12px; margin-top:8px; font-size:10.5px; color:var(--muted-2); align-items:center; }
+.kleg span { display:inline-flex; align-items:center; gap:5px; }
+.kleg .ks { width:16px; }
+.kleg .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+.kgrid { flex:1; display:grid; grid-template-columns:repeat(7, minmax(0,1fr)) 128px; grid-template-rows:30px repeat(4, minmax(0,1fr)); min-height:0; }
+.kgrid .kh { border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:11px; color:var(--muted-2); padding:8px 10px; }
+.kc { border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:6px 7px; display:flex; flex-direction:column; gap:5px; min-width:0; position:relative; }
+.kc .kn { font-size:11px; color:var(--muted-2); }
+.kc.vandaag { background:rgba(200,241,53,0.035); }
+.kc.vandaag .kn { color:var(--accent); font-weight:600; }
+.wk { background:#171717; border:1px solid var(--line); border-left:3px solid var(--k); border-radius:8px; padding:5px 7px 6px; line-height:1.3; }
+.wk .t { font-weight:600; font-size:11.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.wk .m { color:var(--muted-2); font-size:10px; margin-bottom:3px; }
+.wk.gedaan .t::after, .wk.aangepast .t::after { content:" ✓"; color:var(--accent); }
+.wk.aangepast .t::after { content:" ✓"; color:#ffb020; }
+.wk.gepland { background:#101010; border-style:dashed; border-left-style:solid; }
+.wk.vandaag { border-color:rgba(200,241,53,0.5); border-left-color:var(--k); }
+.wk.rustl { --k:var(--accent); background:rgba(200,241,53,0.05); }
+.wk.ghost { opacity:0.22; }
+.wk.drag { transform:rotate(-2.5deg) translate(-10px,-2px); box-shadow:0 18px 34px rgba(0,0,0,0.7); border-color:var(--accent); border-style:solid; background:#1d1d1d; z-index:3; }
+.wk.drop { border:1px dashed var(--accent); color:var(--accent); text-align:center; padding:12px 6px; background:rgba(200,241,53,0.05); font-size:11px; }
+.kweek { padding:8px 12px; border-bottom:1px solid var(--line); font-size:10.5px; color:var(--muted-2); display:flex; flex-direction:column; gap:4px; background:#0e0e0e; }
+.kweek .h { font-family:Bebas Neue; font-size:26px; color:var(--text); line-height:1; }
+.sbar { display:flex; height:5px; border-radius:3px; overflow:hidden; gap:1px; }
+.sbar i { display:block; }
+.ktoast { position:absolute; right:150px; bottom:16px; width:600px; background:#141a08 !important; box-shadow:0 20px 40px rgba(0,0,0,0.6); border:1px solid rgba(200,241,53,0.4); background:rgba(200,241,53,0.06); border-radius:10px; padding:10px 14px; font-size:12px; }
 """

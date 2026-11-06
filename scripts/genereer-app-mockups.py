@@ -82,7 +82,7 @@ scherm("o3", "O", "Je eerste week", "Tik 3. Meteen het resultaat: de eerste week
 
 # Variant zonder waarom-regel, voor test H3 in de validatiegesprekken.
 scherm("d1z", "D", "Ochtend: afbouwen, zonder waarom", "Testvariant H3: dezelfde beslissing zonder de reden. Vergelijk met D1 in het gesprek.", """
-<div class="lbl">Donderdag 6 november</div>
+<div class="lbl">Donderdag 5 november</div>
 <div class="h-xl">AFBOUWEN</div>
 <div class="tiles" style="margin-top:12px">
   <div class="tile"><div class="k">HRV</div><div class="v warn">52</div></div>
@@ -113,7 +113,7 @@ scherm("a1", "C", "Aanbod: raceblok €49", "Eén race, één prijs: het blok va
 
 # ── VANDAAG ──────────────────────────────────────────────────────────────────
 scherm("d1", "D", "Ochtend: afbouwen", "De beslissing van vandaag, met de regel die kantelde. Tik op een signaal of op Waarom voor de onderbouwing.", """
-<div class="lbl">Donderdag 6 november</div>
+<div class="lbl">Donderdag 5 november</div>
 <div class="h-xl">AFBOUWEN</div>
 <div class="why">HRV staat <b>15% onder je 7-daagse gemiddelde</b>. De drempel voor afbouwen is −5%. Slaap 6u10.</div>
 <div class="tiles">
@@ -133,7 +133,7 @@ scherm("d1", "D", "Ochtend: afbouwen", "De beslissing van vandaag, met de regel 
 """, tab="Vandaag")
 
 scherm("d1b", "D", "Ochtend: voluit", "Dezelfde plek op een goede ochtend. Alles binnen je eigen band.", """
-<div class="lbl">Vrijdag 7 november</div>
+<div class="lbl">Vrijdag 6 november</div>
 <div class="h-xl acc">VOLUIT</div>
 <div class="why">HRV, slaap en belasting liggen binnen je eigen band. Het schema gaat door zoals gepland.</div>
 <div class="tiles">
@@ -208,7 +208,7 @@ scherm("d6", "D", "Bijsturing", "Wat het antwoord doet: na twee keer te zwaar in
 """, tab="Vandaag")
 
 scherm("d7", "D", "Honest Check", "Bij een grote afwijking vraagt LUPO hoe je je voelt. Eerlijk antwoorden telt mee in je score.", """
-<div class="lbl">Zaterdag 8 november</div>
+<div class="lbl">Zaterdag 7 november</div>
 <div class="h-l">HONEST <span class="acc">CHECK</span></div>
 <div class="why">HRV staat <b>12% onder</b> je gemiddelde. Hoe voel je je echt?</div>
 <a class="card" href="d1.html"><div class="h-m">Goed</div><div class="p">Het schema blijft afbouwen; het signaal weegt zwaarder dan gevoel.</div></a>
@@ -508,7 +508,7 @@ def desk(actief, kop, sub, panelen, extra=""):
     ps = "".join(f'<section class="panel"><div class="lbl">{t}</div>{b}</section>' for t, b in panelen)
     return f'<div class="desk">{side(actief)}<div class="main"><div class="mhead"><span class="h-l">{kop}</span><span class="mut">{sub}</span></div><div class="panels">{ps}</div></div>{extra}</div>'
 
-W1 = desk("Vandaag", "VANDAAG", "Donderdag 6 november", [
+W1 = desk("Vandaag", "VANDAAG", "Donderdag 5 november", [
     ("Beslissing", """<div class="h-xl">AFBOUWEN</div><div class="why">HRV <b>15% onder</b> je 7-daagse gemiddelde. Drempel −5%.</div>
 <div class="tiles"><a class="tile" href="d2.html"><div class="k">HRV</div><div class="v warn">52</div></a><div class="tile"><div class="k">Slaap</div><div class="v">6u10</div></div><div class="tile"><div class="k">Belasting</div><div class="v">1.12</div></div></div>
 <div class="card hl"><div class="h-m">Zone 2 · 45 min</div><div class="p">Was drempel 4×8, 70 min.</div></div>"""),
@@ -531,7 +531,7 @@ PAL = """<div class="palette"><div class="box"><input value="thun" readonly/>
 <div class="grp">Races</div><a class="it on" href="w2.html"><span>IRONMAN Switzerland Thun</span><span class="mut">Plan · Races</span></a>
 <div class="grp">Acties</div><a class="it" href="c1.html"><span>Vraag de coach over Thun</span><span class="mut">↵</span></a><a class="it" href="p4.html"><span>Pre-mortem Thun</span><span class="mut">Plan · Seizoen</span></a>
 <div class="grp">Ga naar</div><a class="it" href="w1.html"><span>Vandaag</span><span class="mut">G V</span></a><a class="it" href="w4.html"><span>Ladder</span><span class="mut">G L</span></a></div></div>"""
-scherm("w3", "W", "Web: ⌘K", "Commandopalet: springen, zoeken en acties vanaf het toetsenbord.", desk("Vandaag", "VANDAAG", "Donderdag 6 november", [("Beslissing", '<div class="h-xl">AFBOUWEN</div>'), ("Waarom", ""), ("Progressie", "")], PAL), desk=True)
+scherm("w3", "W", "Web: ⌘K", "Commandopalet: springen, zoeken en acties vanaf het toetsenbord.", desk("Vandaag", "VANDAAG", "Donderdag 5 november", [("Beslissing", '<div class="h-xl">AFBOUWEN</div>'), ("Waarom", ""), ("Progressie", "")], PAL), desk=True)
 
 W4 = desk("Ladder", "LADDER", "Q4 2026", [
     ("Jouw score", '<div class="h-xl">642</div><p class="p">top 31%</p><div class="bar"><i style="width:64%"></i></div><div class="tiles t2" style="margin-top:10px"><div class="tile"><div class="k">C</div><div class="v">78</div></div><div class="tile"><div class="k">P</div><div class="v">61</div></div><div class="tile"><div class="k">Pr</div><div class="v">55</div></div><div class="tile"><div class="k">E</div><div class="v">90</div></div></div>'),
