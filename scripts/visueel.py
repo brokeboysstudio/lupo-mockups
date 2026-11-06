@@ -880,3 +880,178 @@ body { font-family:'DM Sans', sans-serif; }
 .tabbar a.on::before { content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:18px; height:3px; border-radius:2px; background:var(--accent); }
 .btn-primary { font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0; }
 """
+
+
+# ── WORKOUT UITVOEREN ───────────────────────────────────────────────────────
+# Voor, tijdens en na de sessie. Het doel staat groot, de band eromheen, de volgende stap eronder.
+# Bijsturen tijdens de sessie volgt vaste regels (hartslagdrift), net als de ochtendbeslissing.
+
+def workout_voortgang(blokken, pos, h=46, b=300):
+    """Workoutprofiel met een markering waar je nu zit (pos in minuten)."""
+    tot = sum(m for m, _ in blokken)
+    s = workout(blokken, h, b).replace("</svg>", "")
+    x = pos / tot * b
+    s += f'<rect x="0" y="0" width="{x:.1f}" height="{h}" fill="rgba(10,10,10,0.55)"/>'
+    s += f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{h}" stroke="#f0ede6" stroke-width="2"/>'
+    return s + "</svg>"
+
+
+STAPPEN = [("Opwarmen", "10 min", "zone 1", "6:00 /km"), ("Strides", "4 × 20 s", "vlot", "—"),
+           ("Drempel 1", "8 min", "zone 4", "4:20 /km"), ("Herstel", "3 min", "zone 1", "6:00 /km"),
+           ("Drempel 2", "8 min", "zone 4", "4:20 /km"), ("Herstel", "3 min", "zone 1", "6:00 /km"),
+           ("Drempel 3", "8 min", "zone 4", "4:20 /km"), ("Herstel", "3 min", "zone 1", "6:00 /km"),
+           ("Drempel 4", "8 min", "zone 4", "4:20 /km"), ("Uitlopen", "10 min", "zone 1", "6:00 /km")]
+
+stap_rijen = "".join(
+    f'<div class="row{" on" if "Drempel" in n else ""}" style="padding:10px 12px"><span>{n}<br/><span class="mut" style="font-size:11px">{d} · {z}</span></span><span class="r">{t}</span></div>'
+    for n, d, z, t in STAPPEN)
+
+scherm("x1", "X", "Voor de start", "De sessie als profiel en als stappen. Naar je horloge sturen of in de app volgen.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="d1b.html">← Vandaag</a>
+<div class="lbl" style="margin-top:0">Vrijdag · Lopen · 70 min</div>
+<div class="h-l">DREMPEL <span class="acc">4×8 MIN</span></div>
+<div class="card" style="margin-top:10px">{workout(DREMPEL, 56)}<div style="display:flex;justify-content:space-between;margin-top:8px" class="p"><span>70 min · 12,6 km</span><span>TSS 82</span></div></div>
+<div class="why">Vandaag voluit: HRV binnen je band. Doel van het blok: <b>4:20 houden met een hartslag die niet wegloopt.</b></div>
+<div class="lbl">Stappen</div>
+{stap_rijen}
+<div class="spacer"></div>
+<a class="btn-primary" href="x2.html">Start in de app</a>
+<a class="btn-text" href="x2.html">Stuur naar je horloge</a>
+""", tab="Vandaag", fab=False)
+
+scherm("x2", "X", "Bezig", "Eén getal groot: het doeltempo en of je erin zit. De tijd die rest, en wat hierna komt. Leesbaar in het voorbijgaan.", f"""
+<div class="lbl acc" style="margin-top:4px">Drempel 2 van 4</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin:6px 0 4px">
+  <div><div class="mut" style="font-size:12px">Tempo nu</div><div style="font-family:Bebas Neue;font-size:88px;line-height:0.85">4:22</div></div>
+  <div style="text-align:right"><div class="mut" style="font-size:12px">Nog</div><div style="font-family:Bebas Neue;font-size:52px;line-height:0.9">05:12</div></div>
+</div>
+<div class="band"><span style="left:30%;width:40%"></span><i style="left:55%"></i></div>
+<div style="display:flex;justify-content:space-between" class="mut"><span style="font-size:11px">4:28</span><span class="acc" style="font-size:12px">doel 4:16 – 4:24 · erin</span><span style="font-size:11px">4:12</span></div>
+<div class="tiles" style="margin-top:14px"><div class="tile"><div class="k">Hartslag</div><div class="v">164</div><div class="s">grens 170</div></div><div class="tile"><div class="k">Afstand</div><div class="v">5,8</div><div class="s">km</div></div><div class="tile"><div class="k">Totaal</div><div class="v">31:40</div><div class="s">van 70 min</div></div></div>
+<div class="card" style="padding:12px">{workout_voortgang(DREMPEL, 30)}</div>
+<div class="row"><span>Hierna<br/><span class="mut" style="font-size:11px">Herstel 3 min · rustig dribbelen</span></span><span class="r">6:00 /km</span></div>
+<div class="spacer"></div>
+<div class="tiles t2"><a class="tile" href="x3.html" style="text-align:center"><div class="v" style="font-size:18px">Pauze</div></a><a class="tile" href="x4.html" style="text-align:center"><div class="v" style="font-size:18px">Stop</div></a></div>
+""", fab=False)
+
+scherm("x3", "X", "Bijsturen tijdens", "Loopt de hartslag weg bij hetzelfde tempo, dan stelt het schema een kortere laatste herhaling voor. Een vaste regel, geen gevoel. Jij beslist.", f"""
+<div class="lbl acc" style="margin-top:4px">Drempel 4 van 4</div>
+<div class="card warnc" style="margin-top:8px">
+  <div class="h-m warn">HARTSLAG LOOPT WEG</div>
+  <p class="p" style="margin:6px 0 0">Herhaling 3 eindigde op 172 bij 4:21. Herhaling 1 was 164 bij hetzelfde tempo. Dat is 5% drift, boven de grens van 4%.</p>
+</div>
+<div class="card" style="padding:12px"><span class="lbl" style="margin:0">Hartslag per herhaling</span>{staven([164, 168, 172, 0], ["1", "2", "3", "4"], 70, markeer=2)}</div>
+<div class="why">Het schema stelt voor: <b>herhaling 4 op 5 minuten in plaats van 8.</b> Wat je vandaag laat liggen, haal je niet in.</div>
+<div class="spacer"></div>
+<a class="btn-primary" href="x4.html">Neem 5 minuten</a>
+<a class="btn-text" href="x4.html">Doe de volle 8</a>
+""", fab=False)
+
+scherm("x4", "X", "Klaar", "Meteen na de sessie: gepland tegen gedaan in één beeld, dan de analyse en de ene vraag.", f"""
+<div class="lbl acc" style="margin-top:4px">✓ Gedaan · 67 min</div>
+<div class="h-l">DREMPEL <span class="acc">4×8</span></div>
+<div class="card" style="margin-top:10px"><div class="lbl" style="margin:0 0 6px">Gepland</div><div style="opacity:0.4">{workout(DREMPEL, 26)}</div>
+<div class="lbl" style="margin:10px 0 6px">Gedaan</div>{workout([(10, 1), (8, 2), (6, 2), (8, 4), (3, 1), (8, 4), (3, 1), (8, 4), (3, 1), (5, 4), (10, 1)], 26)}</div>
+<div class="stats"><div><div class="k">Afstand</div><div class="v">12,1 km</div></div><div><div class="k">Drempel</div><div class="v">4:20</div></div><div><div class="k">Plan</div><div class="v acc">94%</div></div></div>
+<div class="why">Laatste herhaling ingekort zoals het schema voorstelde. <b>Telt als nagekomen.</b></div>
+<a class="btn-primary" href="d5.html">Naar de analyse</a>
+""", fab=False)
+
+
+# ── RACEDAY ─────────────────────────────────────────────────────────────────
+# De laatste tien dagen, het raceplan uit eigen data, de ochtend zelf, de uitslag claimen, en wat daarna komt.
+
+def taper(b=300, h=110):
+    dagen = 14
+    belasting = [70, 64, 72, 60, 0, 55, 48, 40, 0, 35, 28, 0, 20, 0]
+    vorm = [-14, -12, -15, -10, -2, -5, -1, 3, 8, 9, 12, 15, 16, 19]
+    sx = lambda i: 10 + i * (b - 20) / (dagen - 1)
+    s = f'<svg viewBox="0 0 {b} {h}" width="100%" height="{h}">'
+    for i, v in enumerate(belasting):
+        bh = v / 75 * (h - 50)
+        s += f'<rect x="{sx(i)-6:.1f}" y="{h-18-bh:.1f}" width="12" height="{bh:.1f}" rx="2" fill="#3a3a3a"/>'
+    pts = [(sx(i), 46 - v * 1.6) for i, v in enumerate(vorm)]
+    s += f'<polyline fill="none" stroke="{ACC}" stroke-width="2.2" points="{_pad(pts)}"/>'
+    s += f'<circle cx="{pts[-1][0]:.1f}" cy="{pts[-1][1]:.1f}" r="4" fill="{ACC}" stroke="#0a0a0a" stroke-width="2"/>'
+    s += f'<text x="{b-4}" y="{pts[-1][1]-8:.1f}" text-anchor="end" fill="{ACC}" font-family="DM Sans" font-size="9">vorm +19</text>'
+    for i, t in [(0, "−14 d"), (7, "−7 d"), (13, "race")]:
+        s += f'<text x="{sx(i):.1f}" y="{h-4}" text-anchor="{"end" if i == 13 else "start" if i == 0 else "middle"}" fill="rgba(240,237,230,0.4)" font-family="DM Sans" font-size="8">{t}</text>'
+    return s + "</svg>"
+
+
+scherm("y1", "Y", "Taper", "De laatste twee weken: belasting omlaag, vorm omhoog. Het schema laat zien waarom je je soms traag voelt, en dat dat hoort.", f"""
+<div class="media">{beeld("thun", 120, "THUN · NOG 9 DAGEN", "4 juli 2027 • doel sub 9u30", "TAPER")}</div>
+<div class="card" style="padding:12px"><div style="display:flex;justify-content:space-between"><span class="lbl" style="margin:0">Belasting en vorm</span><span class="legend" style="margin:0"><span><b style="background:#3a3a3a"></b>belasting</span><span><b style="background:{ACC}"></b>vorm</span></span></div>{taper()}</div>
+<div class="why">Volume <b>−45%</b>, intensiteit blijft. Zware benen deze week horen bij een taper: je lichaam bouwt op wat je trainde.</div>
+<div class="lbl">Nog te doen</div>
+<div class="row"><span>Raceplan nakijken</span><a class="r acc" href="y2.html">open →</a></div>
+<div class="row"><span>Voeding testen op de laatste lange rit</span><span class="r">✓</span></div>
+<div class="row"><span>Fiets nagekeken</span><span class="r">zaterdag</span></div>
+<div class="row dim"><span>Inchecken en briefing</span><span class="r">3 juli</span></div>
+""", tab="Plan", fab=False)
+
+scherm("y2", "Y", "Raceplan", "Per onderdeel een doel en een grens, uit je eigen trainingsdata. Voeding per uur. Splits om op te letten.", f"""
+<a class="btn-text" style="text-align:left;padding-left:0" href="y1.html">← Taper</a>
+<div class="h-l">RACEPLAN <span class="acc">SUB 9U30</span></div>
+<p class="p" style="margin:4px 0 10px">IRONMAN Switzerland Thun · 4 juli 2027 · start 06:50</p>
+<div class="card" style="padding:12px">
+<div class="segbar"><span style="flex:65;background:#4a6a7a">ZWEM</span><span style="flex:4;background:#2a2a2a"></span><span style="flex:305;background:#7d9400">FIETS</span><span style="flex:3;background:#2a2a2a"></span><span style="flex:190;background:{ACC};color:#0a0a0a">LOOP</span></div>
+<div style="display:flex;justify-content:space-between" class="mut"><span style="font-size:11px">06:50</span><span style="font-size:11px">~ 16:17</span></div></div>
+<table class="t"><tr><th>Onderdeel</th><th>Doel</th><th>Grens</th><th>Tijd</th></tr>
+<tr><td>Zwem 3,8 km</td><td>1:42 /100 m</td><td>—</td><td>1:05</td></tr>
+<tr><td>Fiets 180 km</td><td>205 W NP</td><td>&lt; 230 W op klim</td><td>5:05</td></tr>
+<tr><td>Loop 42,2 km</td><td>4:30 /km</td><td>hs &lt; 150 tot km 30</td><td>3:10</td></tr>
+<tr><td>Wissels</td><td>—</td><td>—</td><td>0:07</td></tr></table>
+<div class="lbl">Voeding</div>
+<div class="tiles"><div class="tile"><div class="k">Fiets</div><div class="v">85 g</div><div class="s">koolhydraten per uur</div></div><div class="tile"><div class="k">Loop</div><div class="v">60 g</div><div class="s">per uur</div></div><div class="tile"><div class="k">Vocht</div><div class="v">750 ml</div><div class="s">per uur, warm</div></div></div>
+<div class="why">Je lange ritten op 205 W gaven <b>ontkoppeling onder 4%</b> over vier uur. Hoger dan 215 W zag je drift na drie uur.</div>
+""", tab="Plan", fab=False)
+
+scherm("y3", "Y", "De ochtend van de race", "Op racedag geen beslissing. Alleen het plan, de tijd en wat nog moet.", f"""
+<div class="lbl acc" style="margin-top:4px">Zondag 4 juli · 04:45</div>
+<div class="h-xl">RACE<span class="acc">DAG.</span></div>
+<p class="p" style="margin:8px 0 12px">Vandaag beslist LUPO niets. Het plan staat. Jij voert uit.</p>
+<div class="tiles"><div class="tile"><div class="k">Start</div><div class="v">06:50</div><div class="s">golf 3</div></div><div class="tile"><div class="k">Water</div><div class="v">19°</div><div class="s">wetsuit ok</div></div><div class="tile"><div class="k">Wind</div><div class="v">12</div><div class="s">km/u, ZW</div></div></div>
+<div class="lbl">Tot de start</div>
+<div class="row"><span>Ontbijt, 3 uur voor de start</span><span class="r">✓ 03:50</span></div>
+<div class="row on"><span>Wisselzone open</span><span class="r acc">05:15</span></div>
+<div class="row"><span>Bidons en voeding op de fiets</span><span class="r">05:30</span></div>
+<div class="row"><span>Inzwemmen</span><span class="r">06:20</span></div>
+<div class="card hl" style="margin-top:8px"><div class="p" style="color:var(--text)">Fiets: 205 watt, ook als ze je voorbij rijden. Loop: hartslag onder 150 tot km 30.</div></div>
+""", tab="Vandaag", fab=False)
+
+scherm("y4", "Y", "Uitslag claimen", "De officiële uitslag koppelen aan je profiel. Dat telt voor je Ladder en, als je wil, voor het Race Board.", f"""
+<div class="lbl acc" style="margin-top:4px">IRONMAN Switzerland Thun · uitslag</div>
+<div class="h-l">IS DIT <span class="acc">JOUW TIJD?</span></div>
+<div class="card hl" style="margin-top:12px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span>Jan V. · M40–44 · #1182</span><span class="h-m acc">9:24:51</span></div>
+<div class="tiles t4" style="margin:10px 0 0"><div class="tile"><div class="k">Zwem</div><div class="v" style="font-size:18px">1:04</div></div><div class="tile"><div class="k">Fiets</div><div class="v" style="font-size:18px">5:03</div></div><div class="tile"><div class="k">Loop</div><div class="v" style="font-size:18px">3:11</div></div><div class="tile"><div class="k">Plaats</div><div class="v" style="font-size:18px">41</div><div class="s">van 412</div></div></div></div>
+<div class="row"><span>Tegenover je plan</span><span class="r acc">−2:09 · sub 9u30 ✓</span></div>
+<div class="row"><span>Leeftijdsgecorrigeerd</span><span class="r">8:58:12</span></div>
+<label class="row" style="cursor:pointer"><span>Toon op het Race Board van Thun</span><span class="pill acc">aan</span></label>
+<div class="spacer"></div>
+<a class="btn-primary" href="y5.html">Claim deze uitslag</a>
+<a class="btn-text" href="y4.html">Dit ben ik niet</a>
+""", fab=False)
+
+scherm("y5", "Y", "Na de race", "Eerst herstel, dan de volgende datum. Het schema bouwt geen nieuwe belasting op tot je lichaam daar klaar voor is.", f"""
+<div class="h-l">GEFINISHT. <span class="acc">9:24:51</span></div>
+<div class="why">Sub 9u30 gehaald, 2 minuten onder plan. Fiets en loop binnen de grens: <b>het plan klopte voor jouw lichaam.</b></div>
+<div class="lbl">Volgende twee weken</div>
+<div class="card" style="padding:12px">{staven([0, 0, 0.5, 0, 0.6, 0, 0.8, 0, 0.7, 0.9, 0, 1.0, 0.8, 1.2], ["", "", "", "", "", "", "W1", "", "", "", "", "", "", "W2"], 70)}<p class="p" style="font-size:11px;margin:4px 0 0">Alleen rustig, kort, zonder intensiteit. HRV moet eerst terug in je band.</p></div>
+<div class="lbl">Volgende race</div>
+<a class="row" href="p5.html"><span>IRONMAN 70.3 Zell am See<br/><span class="mut" style="font-size:11px">8 weken · B-race</span></span><span class="r">datum volgt</span></a>
+<a class="row" href="p5.html"><span>Of een andere race kiezen</span><span class="r">→</span></a>
+<div class="row"><span>Ladder</span><span class="r acc">02 → 03 · je valt op</span></div>
+""", tab="Plan", fab=False)
+
+for s in SCHERMEN:
+    if s["id"] in ("d1", "d1z"):
+        s["body"] += '<a class="btn-text" href="x1.html">Bekijk de training →</a>'
+
+CSS_EXTRA += """
+.band { position:relative; height:14px; background:#1f1f1f; border-radius:7px; margin:10px 0 6px; }
+.band span { position:absolute; top:0; bottom:0; background:rgba(200,241,53,0.28); border-radius:7px; }
+.band i { position:absolute; top:-4px; width:4px; height:22px; background:var(--accent); border-radius:2px; transform:translateX(-2px); }
+.segbar { display:flex; gap:2px; height:26px; border-radius:6px; overflow:hidden; margin-bottom:6px; }
+.segbar span { display:flex; align-items:center; justify-content:center; font-size:9px; letter-spacing:0.1em; font-weight:600; color:#f0ede6; }
+"""

@@ -24,6 +24,8 @@ SECTIES = {
     "V": ("Vergelijken", "Waar sta je? Tegen atleten zoals jij, naast je vrienden, en tegen het pad van wie jouw doel al haalde. Alleen wat je zelf deelt, nooit HRV of slaap."),
     "S": ("Samen", "Een crew zonder feed, een matcher, Race Boards en clubs. Voorbeelddata; later in de roadmap."),
     "C": ("Coach en Ik", "Coachgesprek over het schema, eigen data importeren en privé-instellingen."),
+    "X": ("Workout uitvoeren", "Voor de start, tijdens en meteen na de sessie. Het doel groot, de band eromheen, bijsturen volgens een vaste regel."),
+    "Y": ("Raceday", "Taper, raceplan uit eigen data, de ochtend van de race, de uitslag claimen en het herstel daarna."),
     "W": ("Webversie", "Mobiel beslist, web verklaart en plant. Zijbalk, panelen naast elkaar, ⌘K."),
 }
 
