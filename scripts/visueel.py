@@ -125,10 +125,8 @@ def beeld(scene="thun", h=150, titel="", sub="", tag=""):
         lucht = ("#0e1012", "#1e2a1e")
         lagen = ('<ellipse cx="150" cy="128" rx="170" ry="46" fill="#3a1e18"/><ellipse cx="150" cy="128" rx="130" ry="30" fill="#1d3320"/>'
                  '<ellipse cx="150" cy="128" rx="150" ry="38" fill="none" stroke="#e8e4dc" stroke-opacity="0.25" stroke-dasharray="3 5"/>')
-    # Echte foto (Unsplash) over de illustratie; laadt die niet, dan blijft de illustratie staan.
-    foto = {"thun": "photo-1627156399021-721b0f720f8d", "weg": "photo-1679769177248-727f4d1047a5", "baan": "photo-1474546652694-a33dd8161d66"}.get(scene)
-    if foto:
-        lagen += f'<image href="https://images.unsplash.com/{foto}?w=900&amp;q=75&amp;auto=format&amp;fit=crop" width="300" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
+    if scene in ("thun", "weg", "baan"):
+        lagen += f'<image href="foto-{scene}.jpg" width="300" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
     tekst = ""
     if tag:
         tekst += f'<text x="14" y="22" fill="{ACC}" font-family="DM Sans" font-size="9" letter-spacing="1.5">{tag}</text>'
