@@ -20,7 +20,7 @@ Bronnen:
 
 ## Antwoorden voor het formulier (concept)
 
-**Bedrijf.** Vul in uit `src/app/site/_ui/bedrijf.ts`:
+**Bedrijf.** Vul in uit `src/app/site/_ui/bedrijf.ts`. Let op: daar staan nu verzonnen voorbeeldgegevens (LUPO BV, BE 0123.456.700, Voorbeeldstraat 1). Nooit zo indienen; eerst de echte gegevens invullen.
 - Website: https://lupo.coach
 - Privacy: https://lupo.coach/privacy
 

@@ -63,8 +63,8 @@ function PrivacyEN() {
             <tr><td>Supabase</td><td>Database and accounts</td><td>EU (Frankfurt)</td></tr>
             <tr><td>Vercel</td><td>Hosting of app and website</td><td>EU (Frankfurt); managed from the US</td></tr>
             <tr><td>Anthropic</td><td>Plain-language explanation and coach conversation, without health data</td><td>US</td></tr>
-            <tr><td>[TO FILL IN] payment provider</td><td>Payments</td><td>[TO FILL IN]</td></tr>
-            <tr><td>[TO FILL IN] email service</td><td>Waitlist and account emails</td><td>[TO FILL IN]</td></tr>
+            <tr><td>Mollie</td><td>Payments</td><td>EU (Amsterdam)</td></tr>
+            <tr><td>Brevo</td><td>Waitlist and account emails</td><td>EU (Paris)</td></tr>
           </tbody>
         </table>
         <p style={{ marginTop: 14 }}>For transfers outside the European Economic Area we rely on an adequacy decision (EU-US Data Privacy Framework) or on the standard contractual clauses of the European Commission.</p>
@@ -154,8 +154,8 @@ function PrivacyNL() {
             <tr><td>Supabase</td><td>Database en accounts</td><td>EU (Frankfurt)</td></tr>
             <tr><td>Vercel</td><td>Hosting van app en website</td><td>EU (Frankfurt); beheer vanuit de VS</td></tr>
             <tr><td>Anthropic</td><td>Uitleg in gewone taal en coachgesprek, zonder gezondheidsdata</td><td>VS</td></tr>
-            <tr><td>[IN TE VULLEN] betaalprovider</td><td>Betalingen</td><td>[IN TE VULLEN]</td></tr>
-            <tr><td>[IN TE VULLEN] e-maildienst</td><td>Wachtlijst en accountmails</td><td>[IN TE VULLEN]</td></tr>
+            <tr><td>Mollie</td><td>Betalingen</td><td>EU (Amsterdam)</td></tr>
+            <tr><td>Brevo</td><td>Wachtlijst en accountmails</td><td>EU (Parijs)</td></tr>
           </tbody>
         </table>
         <p style={{ marginTop: 14 }}>Bij doorgifte buiten de Europese Economische Ruimte steunen we op een adequaatheidsbesluit (EU-US Data Privacy Framework) of op de standaardcontractbepalingen van de Europese Commissie.</p>
@@ -245,8 +245,8 @@ function PrivacyFR() {
             <tr><td>Supabase</td><td>Base de données et comptes</td><td>UE (Francfort)</td></tr>
             <tr><td>Vercel</td><td>Hébergement de l’application et du site</td><td>UE (Francfort) ; gestion depuis les États-Unis</td></tr>
             <tr><td>Anthropic</td><td>Explication en langage courant et échange avec le coach, sans données de santé</td><td>États-Unis</td></tr>
-            <tr><td>[À COMPLÉTER] prestataire de paiement</td><td>Paiements</td><td>[À COMPLÉTER]</td></tr>
-            <tr><td>[À COMPLÉTER] service d’e-mail</td><td>Liste d’attente et e-mails de compte</td><td>[À COMPLÉTER]</td></tr>
+            <tr><td>Mollie</td><td>Paiements</td><td>UE (Amsterdam)</td></tr>
+            <tr><td>Brevo</td><td>Liste d’attente et e-mails de compte</td><td>UE (Paris)</td></tr>
           </tbody>
         </table>
         <p style={{ marginTop: 14 }}>Pour les transferts hors de l’Espace économique européen, nous nous appuyons sur une décision d’adéquation (EU-US Data Privacy Framework) ou sur les clauses contractuelles types de la Commission européenne.</p>

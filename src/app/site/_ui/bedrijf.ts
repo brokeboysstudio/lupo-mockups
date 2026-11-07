@@ -1,12 +1,14 @@
 // Bedrijfsgegevens voor de website, de privacyverklaring en de voorwaarden.
-// [IN TE VULLEN] staat waar Jan de echte gegevens nog moet aanleveren.
+// LET OP: juridische naam, ondernemingsnummer en adres zijn VERZONNEN voorbeelddata (keuze Jan, 7 nov 2026).
+// Het nummer heeft bewust een ongeldig controlegetal, zodat het geen bestaand bedrijf is.
+// Vervang ze door de echte gegevens voor de site naar lupo.coach gaat of de Garmin-aanvraag vertrekt.
 // Gebruik de interne studionaam nooit extern.
 
 export const BEDRIJF = {
   merk: "LUPO",
-  juridischeNaam: "[IN TE VULLEN: juridische naam onderneming]",
-  ondernemingsnummer: "[IN TE VULLEN: BE 0xxx.xxx.xxx]",
-  adres: "[IN TE VULLEN: straat en nummer, postcode gemeente, België]",
+  juridischeNaam: "LUPO BV",
+  ondernemingsnummer: "BE 0123.456.700",
+  adres: "Voorbeeldstraat 1, 2000 Antwerpen, België",
   mail: "hallo@lupo.coach",
   privacyMail: "privacy@lupo.coach",
   supportMail: "support@lupo.coach",
