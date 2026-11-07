@@ -1,154 +1,56 @@
-const categories = [
-  {
-    num: 1,
-    title: "Onboarding",
-    desc: "Kennismaking, niveau, voorproefje, FAQ en beslismoment. Geen account nodig.",
-    status: "in opbouw",
-    screens: "5 schermen",
-    href: "/mockups/onboarding-fase-1/index.html",
-    active: true,
-  },
-  {
-    num: 2,
-    title: "De app",
-    desc: "Validatiedemo: korte onboarding, ochtend met en zonder waarom, Niet 100%, DFRNT tryout, raceblok €49. Verder Vandaag met de reden bij elke beslissing, Niet 100%, één vraag na de training, plan, maandkalender, logboek met afgewerkte trainingen en inzichten, Ladder, vergelijken (waar sta je, naast een vriend, het pad van wie je doel haalde, openbaar profiel), Samen, coach en privacy.",
-    status: "doorklikbaar",
-    screens: "46 schermen",
-    href: "/mockups/app/index.html",
-    active: true,
-  },
-  {
-    num: 3,
-    title: "Webversie",
-    desc: "Mobiel beslist, web verklaart en plant. Zijbalk, panelen naast elkaar, weekkalender met verslepen, commandopalet met ⌘K.",
-    status: "doorklikbaar",
-    screens: "6 schermen",
-    href: "/mockups/app/w1.html",
-    active: true,
-  },
-  {
-    num: 4,
-    title: "Website",
-    desc: "Volledige website voor lupo.coach en de Garmin-aanvraag: home, hoe het werkt, je data, DFRNT, prijzen met wachtlijst, over, contact, privacy, voorwaarden en cookies.",
-    status: "klaar voor review",
-    screens: "10 pagina's",
-    href: "/site",
-    active: true,
-  },
-  {
-    num: 5,
-    title: "Business",
-    desc: "Gameplan, funding, subsidies en positionering.",
-    status: "in opbouw",
-    screens: "4 pagina's",
-    href: "/business",
-    active: true,
-  },
-  {
-    num: 6,
-    title: "Workout uitvoering",
-    desc: "Voor de start, tijdens de sessie (doel groot, band eromheen, wat hierna komt), bijsturen bij hartslagdrift volgens een vaste regel, en klaar.",
-    status: "doorklikbaar",
-    screens: "4 schermen",
-    href: "/mockups/app/x1.html",
-    active: true,
-  },
-  {
-    num: 7,
-    title: "Race day",
-    desc: "Taper met belasting en vorm, raceplan uit eigen data met voeding, de ochtend van de race, uitslag claimen, herstel en volgende race.",
-    status: "doorklikbaar",
-    screens: "5 schermen",
-    href: "/mockups/app/y1.html",
-    active: true,
-  },
+import Link from "next/link";
+import { VerhaalPagina, BIJGEWERKT } from "./_verhaal/kop";
+import { Callout, PageHead } from "./business/ui";
+
+const stats = [
+  ["half dec.", "go/no-go op de killcriteria"],
+  ["4 jul 2027", "IRONMAN Thun, atleet nul"],
+  ["61", "doorklikbare schermen"],
+  ["3 talen", "website voor lupo.coach"],
 ];
 
-export default function Home() {
-  const today = new Date().toLocaleDateString("nl-BE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+const delen = [
+  { href: "/verloop", titel: "Verloop", tekst: "Van de eerste app in oktober tot het financieel plan van vandaag, stap voor stap." },
+  { href: "/business", titel: "Business en gameplan", tekst: "Positionering, model en prijzen, DFRNT-tryouts, gameplan met killcriteria, funding en oprichting." },
+  { href: "/financieel", titel: "Financieel", tekst: "Kost per klant, vier scenario's tot 2029 en het volledige plan in Excel." },
+  { href: "/mockups", titel: "Mockups", tekst: "De app, de webversie, een workout uitvoeren en de racedag: 61 doorklikbare schermen." },
+  { href: "/site", titel: "Website", tekst: "Tien pagina's in het Engels, Nederlands en Frans, nodig voor de Garmin-aanvraag." },
+  { href: "/documenten", titel: "Documenten", tekst: "Analyses en dossiers in Notion, het Garmin-formulier en het Excel-plan." },
+];
 
+export default function Start() {
   return (
-    <main className="mx-auto max-w-[1200px] px-8 py-16">
-      {/* Header */}
-      <div className="mb-12">
-        <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent mb-4">
-          V1 — {today}
-        </p>
-        <h1 className="font-display text-[72px] leading-[0.92] tracking-tight mb-4">
-          LUPO <span className="text-accent">Mockups</span>
-        </h1>
-        <p className="text-muted-2 text-base leading-relaxed max-w-[600px] font-light">
-          Geen excuses. Alleen vooruitgang. Elke ochtend één beslissing, met de reden erbij.
-          Klikbare flows van de app, de webversie en het businessplan.
-        </p>
+    <VerhaalPagina actief="/">
+      <PageHead
+        eyebrow="LUPO · het verhaal"
+        title="De laatste onafhankelijke coach"
+        lede="Alles wat voor LUPO is voorbereid, op één plek: hoe het liep, het gameplan, de cijfers, de klikbare renders en de website. De echte app staat apart op lupo.coach; dit is het verhaal dat vooruitloopt."
+      />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map(([b, s]) => (
+          <div key={s} className="bg-card border border-line rounded-xl p-5">
+            <p className="font-display text-[34px] leading-none text-accent">{b}</p>
+            <p className="text-[12px] text-muted-2 mt-2">{s}</p>
+          </div>
+        ))}
       </div>
-
-      {/* Category grid */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
-        {categories.map((cat) => {
-          const inner = (
-            <>
-              {/* Top row: number + status */}
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-accent">
-                  {String(cat.num).padStart(2, "0")}
-                </span>
-                <span
-                  className={`
-                    font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-0.5 rounded-full
-                    ${cat.active
-                      ? "bg-[rgba(216,255,0,0.1)] text-accent"
-                      : "bg-[rgba(255,255,255,0.05)] text-muted"
-                    }
-                  `}
-                >
-                  {cat.status}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h2 className="font-display text-[22px] leading-tight">
-                {cat.title}
-              </h2>
-
-              {/* Description */}
-              <p className="text-[12px] text-muted-2 leading-relaxed font-light">
-                {cat.desc}
-              </p>
-
-              {/* Screen count */}
-              <div className="mt-auto pt-3 border-t border-line">
-                <span className="font-mono text-[10px] tracking-[0.1em] text-muted uppercase">
-                  {cat.screens}
-                </span>
-              </div>
-            </>
-          );
-
-          const className = `
-            bg-card border border-line rounded-xl p-5
-            flex flex-col gap-2 transition-colors duration-150
-            ${cat.active
-              ? "hover:border-accent cursor-pointer no-underline text-text"
-              : "opacity-35 cursor-default"
-            }
-          `;
-
-          return cat.active ? (
-            <a key={cat.num} href={cat.href!} className={className}>
-              {inner}
-            </a>
-          ) : (
-            <div key={cat.num} className={className}>
-              {inner}
-            </div>
-          );
-        })}
-      </div>
-    </main>
+      <Callout title={`Waar we nu staan (${BIJGEWERKT})`}>
+        De app draait op lupo.coach met testdata. Sinds 5 november ligt de focus op voorbereiding: het verhaal staat hier volledig,
+        met 61 schermen, een drietalige website en een gameplan met financieel plan. Volgende stappen: de website live voor de
+        Garmin-aanvraag, de betaalde pilot met drie atleten, en de go/no-go half december. AI blijft een kleine kost:
+        ongeveer €0,50 tot €1 per klant per maand.
+      </Callout>
+      <section className="flex flex-col gap-4">
+        <h2 className="font-display text-[26px] md:text-[32px] leading-tight">Bekijk</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+          {delen.map((d) => (
+            <Link key={d.href} href={d.href} className="bg-card border border-line rounded-xl p-5 flex flex-col gap-2 hover:border-accent transition-colors">
+              <h3 className="font-display text-[24px] leading-none">{d.titel}</h3>
+              <p className="text-[13px] text-muted-2 leading-relaxed font-light">{d.tekst}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </VerhaalPagina>
   );
 }

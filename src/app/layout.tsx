@@ -21,8 +21,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LUPO Mockups",
-  description: "Mockups voor LUPO trainingsapp",
+  title: "LUPO · het verhaal",
+  description: "Gameplan, financieel plan, doorklikbare renders en website van LUPO",
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({

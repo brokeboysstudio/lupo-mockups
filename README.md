@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LUPO · het verhaal
 
-## Getting Started
+Gameplan, financieel plan, doorklikbare renders en de website van LUPO, op één plek. De echte app staat in de repo `Lupo` (live op lupo.coach). Het verhaal mag vooruitlopen op de app; wat gebouwd is, verwijst naar de echte app.
 
-First, run the development server:
+Alles hier gebruikt voorbeelddata. Nooit echte gezondheidsdata of klantgegevens in een mockup.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Inhoud
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Pad | Wat |
+| --- | --- |
+| `/` | Start: waar we staan, kerncijfers, links naar alles |
+| `/verloop` | Tijdlijn van mei 2026 tot vandaag, en wat volgt |
+| `/business` | Positionering, model en prijzen, DFRNT, gameplan, funding, oprichting |
+| `/financieel` | Vier scenario's, kost per klant, kostenbeslissingen, Excel om te downloaden |
+| `/mockups` | Overzicht van de doorklikbare renders |
+| `/mockups/app/` | 61 schermen: app, webversie, workout uitvoeren, racedag |
+| `/site` | Website voor lupo.coach in het Engels (`/site`), Nederlands (`/site/nl`) en Frans (`/site/fr`) |
+| `/documenten` | Links naar de analyses in Notion en de bestanden in deze repo |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Login
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`src/proxy.ts` zet de hele site achter een login (HTTP Basic Auth). Stel in Vercel > Settings > Environment Variables `MOCKUP_USER` en `MOCKUP_PASSWORD` in. Zonder die twee blijft de site dicht.
 
-## Learn More
+## Bijwerken
 
-To learn more about Next.js, take a look at the following resources:
+- **App-schermen:** `python3 scripts/genereer-app-mockups.py` schrijft `public/mockups/app/`.
+- **Financieel plan:** vervang `public/financieel/LUPO-financieel-plan.xlsx` en werk de tabellen in `src/app/financieel/page.tsx` bij.
+- **Nieuwe stap:** voeg ze toe in `src/app/verloop/page.tsx` en zet de datum in `src/app/_verhaal/kop.tsx` (`BIJGEWERKT`).
+- **Website naar lupo.coach:** zet `BASIS` op `""` in `src/app/site/_ui/bedrijf.ts` en kopieer de map naar de Lupo-repo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Commit en push naar `main`; Vercel zet het meteen online.
