@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SLOGAN, type Taal, pad } from "../_ui/bedrijf";
+import { SLOGAN, type Taal, beeld, pad } from "../_ui/bedrijf";
 
 const FOTO = (id: string, w = 2000) => `https://images.unsplash.com/${id}?w=${w}&q=80&auto=format&fit=crop`;
 
@@ -145,7 +145,7 @@ export function Home({ taal }: { taal: Taal }) {
             </div>
             <p className="dim klein-tekst" style={{ marginTop: 18 }}>{t.test}</p>
           </div>
-          <Telefoon src="/site/d1.png" alt={t.altD1} />
+          <Telefoon src={beeld(taal, "d1")} alt={t.altD1} />
         </div>
       </section>
 
@@ -175,7 +175,7 @@ export function Home({ taal }: { taal: Taal }) {
             <p className="lead">{t.naLead}</p>
             <div className="waarom">{t.naWaarom}</div>
           </div>
-          <Telefoon src="/site/r2.png" alt={t.altR2} />
+          <Telefoon src={beeld(taal, "r2")} alt={t.altR2} />
         </div>
       </section>
 
@@ -189,7 +189,7 @@ export function Home({ taal }: { taal: Taal }) {
               {t.seizLijst.map(l => <li key={l}>{l}</li>)}
             </ul>
           </div>
-          <Telefoon src="/site/p3.png" alt={t.altP3} />
+          <Telefoon src={beeld(taal, "p3")} alt={t.altP3} />
         </div>
       </section>
 
