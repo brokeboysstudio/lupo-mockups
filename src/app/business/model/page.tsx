@@ -72,7 +72,7 @@ export default function Model() {
         </p>
       </Section>
 
-      <Section title="Proefperiode: zes weken, verdiend in blokken van twee" intro="Wie het plan volgt, speelt telkens twee weken bij. Wie een poort mist, valt terug naar Gratis en houdt alles. Rust die LUPO oplegde telt als gehaald.">
+      <Section title="Proefperiode: zes weken, verdiend in blokken van twee" intro="Wie het plan volgt, speelt telkens twee weken bij. Wie een poort mist, stopt de proef en houdt zijn data; er is geen permanente gratis laag. Rust die LUPO oplegde telt als gehaald.">
         <Table
           head={["Blok", "Dagen", "Poort", "Per 1.000 starters"]}
           rows={[
@@ -89,7 +89,7 @@ export default function Model() {
 
       <Section
         title="Unit economics per betalende gebruiker"
-        intro={<>Herrekend op 7 november, exclusief btw. Het plan van augustus rekende €17,03 inclusief btw. <Tag label="aanname" /> Volumes en AI-gebruik tot de pilot ze bevestigt.</>}
+        intro={<>Herrekend op 7 november, exclusief btw. Het plan van augustus rekende €17,03 inclusief btw. <Tag label="aanname" /> Volumes en AI-gebruik tot de eerste testers ze bevestigen.</>}
       >
         <Table
           head={["Post", "Maandklant", "Toelichting"]}
@@ -130,7 +130,7 @@ export default function Model() {
 
       <Section title="Open in het model">
         <ul className="text-[14px] text-muted-2 leading-relaxed list-disc pl-5 max-w-[75ch]">
-          <li>In de code staan nog drie prijsmodellen naast elkaar (€19 enkel, Gratis/Premium/Pack, Community/Solo). Eén kiezen. <Tag label="aanbeveling" /></li>
+          <li>In de app-code staan nog drie prijsmodellen naast elkaar (€19 enkel, Gratis/Premium/Pack, Community/Solo). Bij het verder bouwen alleen Tryout/Premium/Pack overhouden. <Tag label="aanbeveling" /></li>
           <li>Het model voor coaches (€5–10 per atleet per maand) is een hypothese, nog geen laag. <Tag label="aanname" /></li>
           <li>Prijs voor jongeren in Premium: gratis via het talentsignaal, of een studentenprijs. <Tag label="open" /></li>
         </ul>

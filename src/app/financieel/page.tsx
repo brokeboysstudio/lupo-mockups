@@ -10,7 +10,7 @@ export default function Financieel() {
       <PageHead
         eyebrow="Het verhaal · financieel"
         title="Wat LUPO kost en opbrengt"
-        lede="Vier scenario's van januari 2027 tot december 2029. Alle cijfers volgen uit de aannames in het Excel-plan; wijzig daar een cel en alles rekent mee. Scenario's zijn geen prognoses tot de pilot ze bevestigt."
+        lede="Vier scenario's van januari 2027 tot december 2029. Alle cijfers volgen uit de aannames in het Excel-plan; wijzig daar een cel en alles rekent mee. Scenario's zijn geen prognoses tot echte klanten ze bevestigen."
       />
       <div>
         <a href="/financieel/LUPO-financieel-plan.xlsx" className="inline-block bg-accent text-black font-mono text-[11px] tracking-[0.12em] uppercase px-5 py-3 rounded-full hover:opacity-90">

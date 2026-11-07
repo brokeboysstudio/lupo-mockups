@@ -10,7 +10,7 @@ const parts = [
   {
     href: "/business/model",
     title: "Model en prijzen",
-    desc: "Gratis, Premium en Pack. Prijzen, proefperiode in blokken, unit economics en break-even.",
+    desc: "Tryout, Premium en Pack. Prijzen, proefperiode in blokken, unit economics, chatlimiet en betalen.",
   },
   {
     href: "/business/dfrnt",
@@ -20,7 +20,7 @@ const parts = [
   {
     href: "/business/gameplan",
     title: "Gameplan",
-    desc: "Van vandaag tot 500 betalend, in fases met gates. Killcriteria en de hypotheses voor de 12 gesprekken.",
+    desc: "Van voorbereiding tot break-even, in fases met gates. Killcriteria en de hypotheses voor de gesprekken.",
   },
   {
     href: "/business/funding",
@@ -59,17 +59,17 @@ export default function BusinessHome() {
           </li>
           <li>
             <b>Wie betaalt:</b> de leeftijdsgroeper van 28 tot 50 met een A-race. <b>Wie je zoekt:</b> jonge potentials
-            van 15 tot 25, via de gratis laag.
+            van 15 tot 25, via de DFRNT-tryouts. Geen permanente gratis laag.
           </li>
           <li>
             <b>Grootste risico:</b> toegang tot data. LUPO zet zich af tegen Garmin en Strava, maar hangt aan hun data.
           </li>
           <li>
-            <b>Volgende stap:</b> een betaalde pilot van zes weken vanaf half november, met drie atleten die €49 vooraf
-            betalen.
+            <b>Volgende stap:</b> de website live op lupo.coach, dan de aanvraag bij Garmin. Jan, Bob en Axel testen
+            zonder formulieren.
           </li>
           <li>
-            <b>Beslismoment:</b> go/no-go half december, op zes killcriteria.
+            <b>Beslismoment:</b> go/no-go op zes killcriteria, na de gesprekken. Die starten pas als het voorbereidende werk staat.
           </li>
         </ul>
       </Section>
@@ -87,14 +87,14 @@ export default function BusinessHome() {
         </div>
       </Section>
 
-      <Section title="Gates" intro="Geen van deze gates is op 5 november gestart. Ze hebben elk weken doorlooptijd, dus ze lopen parallel.">
+      <Section title="Gates" intro="Stand 7 november. Eerst de website en de Garmin-aanvraag; de andere gates volgen bewust later.">
         <Table
           head={["Gate", "Wat moet er liggen", "Doorlooptijd", "Status"]}
           rows={[
-            ["Validatie", "12 gesprekken, minstens 8 positief, en 3 betalende pilotatleten", "4–6 weken", <Tag key="v" label="open">niet gestart</Tag>],
-            ["Sportarts", "Akkoord op de kernregels van het schema", "5–6 weken, €500–800", <Tag key="s" label="open">niet gestart</Tag>],
+            ["Validatie", "12 gesprekken, minstens 8 positief, en 3 betalende atleten", "4–6 weken", <Tag key="v" label="open">later</Tag>],
+            ["Sportarts", "Akkoord op de kernregels van het schema. Jan onderbouwt eerst zelf, geen mails voorlopig", "5–6 weken, €500–800", <Tag key="s" label="open">dossier klaar</Tag>],
             ["Juridisch", "GDPR, medische claims (MDR), minderjarigen", "volgens offerte", <Tag key="j" label="open">niet gestart</Tag>],
-            ["Data", "Garmin Connect Developer Program, Apple Health-route", "weken tot maanden", <Tag key="d" label="open">niet gestart</Tag>],
+            ["Data", "Garmin Connect Developer Program (vraagt een volledige website), Apple Health-route", "weken tot maanden", <Tag key="d" label="aanbeveling">volgende stap</Tag>],
           ]}
         />
       </Section>

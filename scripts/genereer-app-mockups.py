@@ -566,8 +566,8 @@ def pagina(s):
 
 PAD = [("o1", "Onboarding: race kiezen"), ("o2", "Niveau"), ("o3", "Eerste week"), ("d1", "Ochtend met waarom"),
        ("d1z", "Ochtend zonder waarom (H3)"), ("d3", "Niet 100%"), ("t1", "DFRNT tryout"), ("r2", "Afgewerkte training met inzichten"), ("v1", "Waar sta je (vergelijken)"), ("a1", "Raceblok €49")]
-VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Validatiedemo — volgorde voor de 12 gesprekken</div>'
-             '<p class="lead" style="margin-bottom:16px">Toon D1 en D1Z apart en vraag welke de atleet zou volgen. Ladder, Samen en de webversie wachten.</p>'
+VALIDATIE = ('<div class="super" style="margin-top:8px">⌗ Rondleiding — de kern in tien schermen</div>'
+             '<p class="lead" style="margin-bottom:16px">Van race kiezen tot raceblok. D1 en D1Z tonen dezelfde ochtend met en zonder reden; later de vraag in de gesprekken: welke volg je?</p>'
              '<div class="screen-grid">' + "".join(
                  f'<a href="{i}.html" class="screen-card"><div class="screen-num">{n+1:02d} · {i.upper()}</div><div class="screen-title">{t}</div></a>'
                  for n, (i, t) in enumerate(PAD)) + '</div>')
