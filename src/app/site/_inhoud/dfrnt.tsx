@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type Taal, pad } from "../_ui/bedrijf";
+import { type Taal, beeld, pad } from "../_ui/bedrijf";
 
 export const TITEL_DFRNT: Record<Taal, string> = { en: "DFRNT tryouts", nl: "DFRNT tryouts", fr: "Tryouts DFRNT" };
 
@@ -59,7 +59,7 @@ export function Dfrnt({ taal }: { taal: Taal }) {
           </div>
           <div className="telefoon">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/site/t1.png" alt={t.alt} />
+            <img src={beeld(taal, "t1")} alt={t.alt} />
           </div>
         </div>
       </section>

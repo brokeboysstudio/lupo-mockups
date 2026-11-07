@@ -3,7 +3,7 @@ import { VerhaalPagina, BIJGEWERKT } from "./_verhaal/kop";
 import { Callout, PageHead } from "./business/ui";
 
 const stats = [
-  ["half dec.", "go/no-go op de killcriteria"],
+  ["Garmin", "volgende stap: website live, aanvraag in"],
   ["4 jul 2027", "IRONMAN Thun, atleet nul"],
   ["61", "doorklikbare schermen"],
   ["3 talen", "website voor lupo.coach"],
@@ -35,10 +35,10 @@ export default function Start() {
         ))}
       </div>
       <Callout title={`Waar we nu staan (${BIJGEWERKT})`}>
-        De app draait op lupo.coach met testdata. Sinds 5 november ligt de focus op voorbereiding: het verhaal staat hier volledig,
-        met 61 schermen, een drietalige website en een gameplan met financieel plan. Volgende stappen: de website live voor de
-        Garmin-aanvraag, de betaalde pilot met drie atleten, en de go/no-go half december. AI blijft een kleine kost:
-        ongeveer €0,50 tot €1 per klant per maand.
+        De app draait op lupo.coach met testdata. Sinds 5 november bouwen we niet verder aan de app, maar bereiden we alles voor: het verhaal staat hier volledig,
+        met 61 schermen, een drietalige website en een gameplan met financieel plan. Volgende stap: de website live op
+        lupo.coach en de aanvraag bij Garmin. Daarna testen Jan, Bob en Axel, en pas dan volgen gesprekken en een go/no-go.
+        AI blijft een kleine kost: ongeveer €0,50 tot €1 per klant per maand.
       </Callout>
       <section className="flex flex-col gap-4">
         <h2 className="font-display text-[26px] md:text-[32px] leading-tight">Bekijk</h2>

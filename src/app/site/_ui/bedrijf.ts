@@ -78,3 +78,6 @@ export const SLOGAN: Record<Taal, { kop: string }> = {
   nl: { kop: "Geen excuses. Alleen vooruitgang." },
   fr: { kop: "Pas d’excuses. Que du progrès." },
 };
+
+/** Telefoonbeeld in de taal van de pagina. Nederlands staat in /site, de rest in /site/<taal>. */
+export const beeld = (taal: Taal, naam: string) => (taal === "nl" ? `/site/${naam}.png` : `/site/${taal}/${naam}.png`);

@@ -2,18 +2,18 @@ import { Callout, Card, NextLink, PageHead, Section, Table, Tag } from "../ui";
 
 const phases = [
   {
-    when: "5–15 nov 2026",
-    name: "Alles starten",
-    goal: "Gates lopen, pilot klaar",
-    jan: ["Garmin-aanvraag indienen", "Offerte juridische check vragen", "Drie mails naar sportartsen", "15 namen voor gesprekken, eerste 3 inplannen", "Drie pilotatleten vragen €49 vooraf"],
-    claude: ["Mails en dossiers klaarzetten", "Mockups en flows voor de gesprekken", "Betaal- en toestemmingsflow voor de pilot uitzoeken"],
+    when: "nov 2026",
+    name: "Voorbereiden",
+    goal: "Website live · Garmin-aanvraag ingediend",
+    jan: ["Bedrijfsgegevens en drie mailadressen op @lupo.coach", "Akkoord op de verhuizing van de website naar lupo.coach", "Garmin Connect Developer Program aanvragen", "Schemaregels zelf onderbouwen voor de sportarts"],
+    claude: ["Het verhaal, de mockups en de website bijhouden", "Website in de Lupo-repo zetten na akkoord", "Garmin-formulier invullen met Jan", "Financieel plan bijwerken bij elke beslissing"],
   },
   {
-    when: "15 nov – 15 dec",
-    name: "Pilot en gesprekken",
+    when: "daarna, datum open",
+    name: "Testen en gesprekken",
     goal: "Go/no-go op K1–K6",
-    jan: ["3–4 gesprekken per week", "Elke ochtend de beslissing nakijken en sturen", "Eerste consult sportarts"],
-    claude: ["Notities na elk gesprek verwerken", "Pilotdata en volggedrag bijhouden", "Alleen bouwen wat de pilot nodig heeft"],
+    jan: ["Jan, Bob en Axel testen, zonder formulieren", "Gesprekken: 3–4 per week, met de rondleiding uit de mockups", "Offerte juridische check, consult sportarts"],
+    claude: ["Notities na elk gesprek verwerken", "Testdata en volggedrag bijhouden", "Alleen bouwen wat het testen nodig heeft"],
   },
   {
     when: "jan – mrt 2027",
@@ -51,7 +51,7 @@ export default function Gameplan() {
       <PageHead
         eyebrow="Business · gameplan"
         title="Van nu tot break-even"
-        lede="Zes fases. Elke fase heeft één doel dat je kunt meten. Doelen na december zijn scenario's, geen prognoses; ze hangen af van de go/no-go."
+        lede="Zes fases. Elke fase heeft één doel dat je kunt meten. Eerst voorbereiden, dan testen en gesprekken; doelen daarna zijn scenario's, geen prognoses, en hangen af van de go/no-go."
       />
 
       <Callout title="Wat break-even hier betekent">
@@ -101,28 +101,28 @@ export default function Gameplan() {
         <Table
           head={["#", "Criterium", "Wanneer"]}
           rows={[
-            ["K1", "Minder dan 8 van 12 gesprekken positief op H1–H3", "half december"],
-            ["K2", "Minder dan 3 van 12 betalen €49 vooraf", "half december"],
-            ["K3", "Na 3 maanden geen automatische databron voor Garmin-gebruikers", "eind februari 2027"],
-            ["K4", "Testatleten volgen de beslissing op minder dan de helft van de dagen na week 4", "eind pilot"],
+            ["K1", "Minder dan 8 van 12 gesprekken positief op H1–H3", "na de gesprekken"],
+            ["K2", "Minder dan 3 van 12 betalen €49 vooraf", "na de gesprekken"],
+            ["K3", "Drie maanden na de Garmin-aanvraag nog geen automatische databron", "aanvraag + 3 maanden"],
+            ["K4", "Testatleten volgen de beslissing op minder dan de helft van de dagen na week 4", "na zes weken testen"],
             ["K5", "Sportarts weigert de kernregels te tekenen", "bij consult"],
             ["K6", "Jurist: kernfunctie valt onder MDR zonder werkbare formulering", "bij advies"],
           ]}
         />
       </Section>
 
-      <Section title="Hypotheses voor de 12 gesprekken" intro="Vraag naar wat iemand de laatste keer deed, en vraag om geld. Mix: 6 leeftijdsgroepers, 2 hybride, 2 coaches, 2 jeugdtrainers.">
+      <Section title="Hypotheses voor de 12 gesprekken" intro="Voor later: de gesprekken starten pas na het voorbereidende werk. Vraag naar wat iemand de laatste keer deed, en vraag om geld. Mix: 6 leeftijdsgroepers, 2 hybride, 2 coaches, 2 jeugdtrainers.">
         <Table
           head={["#", "Hypothese", "Vraag", "Geslaagd als"]}
           rows={[
             ["H1", "De ochtendtwijfel is echt", "Laatste keer dat je niet wist of je moest trainen. Wat deed je?", "8/12 concreet voorbeeld"],
             ["H2", "Garmin en WHOOP lossen het niet op", "Wanneer negeer je je readiness-score?", "7/12 negeren of wantrouwen"],
             ["H3", "De reden maakt het verschil", "Mockup met en zonder waarom-regel. Welke volg je?", "9/12 kiezen met reden"],
-            ["H4", "Betalen bij een race", "Raceblok €49, stap je nu in de pilot?", "3/12 betalen effectief"],
+            ["H4", "Betalen bij een race", "Raceblok €49, stap je nu in?", "3/12 betalen effectief"],
             ["H5", "Onafhankelijkheid telt", "Ooit van horloge gewisseld? Wat verloor je?", "5/12 noemen lock-in"],
             ["H6", "Rust telt als nagekomen", "Hoe voel je je bij een gemiste training?", "6/12 schuld of compensatie"],
             ["H7", "Coaches willen een merkneutraal instrument", "Hoeveel tijd gaat naar dagelijkse bijsturing?", "2 van de 2 coaches ≥2 u/week"],
-            ["H8", "De Ladder trekt", "Elk kwartaal een test om te zien waar je staat?", "8/12 ja, anders gratis laag schrappen"],
+            ["H8", "De Ladder trekt", "Elk kwartaal een test om te zien waar je staat?", "8/12 ja, anders de Ladder uitstellen"],
             ["H9", "Jeugdtrainers missen progressiedata", "Hoe vind je talent dat niet van een topclub komt?", "2 van de 2 beschrijven het gat"],
           ]}
         />
@@ -131,8 +131,8 @@ export default function Gameplan() {
       <Section title="Waar het kan vastlopen">
         <ul className="text-[14px] text-muted-2 leading-relaxed list-disc pl-5 max-w-[75ch]">
           <li><b className="text-text">Data-toegang.</b> Strava verbiedt AI-gebruik en tonen aan anderen; Garmin pauzeerde aanvragen. <Tag label="feit" /></li>
-          <li><b className="text-text">Focus.</b> 27 schermen en een lange ideeënlijst voor één bouwer. Alles wat niet bijdraagt aan de beslissing met reden wacht tot 250 betalend. <Tag label="aanbeveling" /></li>
-          <li><b className="text-text">Stilstand.</b> Van 11 oktober tot 5 november bewoog er niets. De killcriteria zijn er ook om dat te voorkomen.</li>
+          <li><b className="text-text">Focus.</b> 61 schermen en een lange ideeënlijst voor één bouwer. Alles wat niet bijdraagt aan de beslissing met reden wacht tot 250 betalend. <Tag label="aanbeveling" /></li>
+          <li><b className="text-text">Stilstand.</b> Van 11 oktober tot 5 november bewoog er niets. Daarom staat elke stap hier, met wie hem doet.</li>
         </ul>
       </Section>
 

@@ -38,11 +38,11 @@ export default function Positionering() {
               <li>Eén A-race, 6–12 uur per week, job en gezin, meestal Garmin</li>
               <li>Zoekt zekerheid tot de startlijn</li>
               <li>€19 per maand, €169 per jaar of €49 per racedoel</li>
-              <li>Financiert het systeem, ook de gratis laag</li>
+              <li>Financiert het systeem, ook de tryouts</li>
             </ul>
           </Card>
           <Card>
-            <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-accent">Potential · Gratis</p>
+            <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-accent">Potential · Tryout</p>
             <p className="font-display text-[48px] leading-none">15–25</p>
             <ul className="text-[14px] text-muted-2 leading-relaxed list-disc pl-5">
               <li>Veel progressie bij weinig volume: het talentsignaal</li>

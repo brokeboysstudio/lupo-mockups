@@ -6,17 +6,18 @@ export default function Funding() {
       <PageHead
         eyebrow="Business · funding"
         title="Wat het kost en waar het geld vandaan komt"
-        lede="Beslist op 4 mei 2026: bootstrap, geen co-founder, eerst 12 maanden bewijzen. Subsidies vullen aan; ze vervangen de test op betaalbereidheid niet."
+        lede="Stand 7 november. In Voorzichtig, Basis en Groei is ongeveer €6.000 vooraf genoeg en volstaan eigen middelen. Het scenario Ambitie vraagt ±€9.000 marketing per maand: dat kan alleen met subsidie of kapitaal. Subsidies vullen aan; ze vervangen de test op betaalbereidheid niet."
       />
 
-      <Section title="Wat het kost tot de go/no-go (half december)">
+      <Section title="Wat het kost tot de go/no-go">
         <Table
           head={["Post", "Bedrag", "Status"]}
           rows={[
             ["Sportarts: toetsing schemaregels", "€500–800", <Tag key="a" label="feit">uit protocol</Tag>],
             ["Juridische check: GDPR, MDR, minderjarigen", "volgens offerte", <Tag key="b" label="open">offerte vragen</Tag>],
-            ["Hosting en AI tijdens de pilot", "< €50/maand", <Tag key="c" label="aanname" />],
-            ["Tijd Jan", "±4 u in week 1, daarna ±2 u/week plus de ochtendcontrole", <Tag key="d" label="aanname" />],
+            ["Hosting en AI tijdens het testen", "< €50/maand", <Tag key="c" label="aanname" />],
+            ["Vercel Pro voor website en app", "$20/maand", <Tag key="v" label="feit">bouwkrediet bijna op</Tag>],
+            ["Tijd Jan", "website afwerken, Garmin-aanvraag, testen met Bob en Axel", <Tag key="d" label="aanname" />],
           ]}
         />
       </Section>
@@ -39,21 +40,21 @@ export default function Funding() {
         <Table
           head={["#", "Bron", "Wat", "Voorwaarde", "Oordeel"]}
           rows={[
-            ["1", "Pilotinkomsten", "€49 per racedoel, vooraf", "Factuur via een vennootschap; voorwaarden en privacy klaar", <Tag key="1" label="aanbeveling">nu</Tag>],
-            ["2", "Eigen middelen", "Bootstrap", "Beslist 4 mei 2026", <Tag key="2" label="feit">loopt</Tag>],
+            ["1", "Eerste klanten", "€49 per racedoel, vooraf", "Factuur via een vennootschap; voorwaarden en privacy klaar", <Tag key="1" label="aanbeveling">na de testers</Tag>],
+            ["2", "Eigen middelen", "±€6.000 tot de omzet de kosten draagt (Voorzichtig tot Groei)", "Vertrekpunt sinds mei 2026: bootstrap, geen co-founder", <Tag key="2" label="feit">loopt</Tag>],
             ["3", "VLAIO Innovatieve starterssteun", "€50.000 plus begeleiding, per oproep", "Onderneming < 2 jaar of in oprichting; uitbetaling pas met rechtspersoon", <Tag key="3" label="aanbeveling">Q1 2027</Tag>],
             ["4", "Erasmus+ Sport, kleine partnerschappen", "Europees breedtesportproject, ideaal voor de jeugdtryout", "Club of vzw dient in, LUPO is partner; vorige deadlines 5 maart", <Tag key="4" label="aanbeveling">maart 2027</Tag>],
             ["5", "Sport Vlaanderen", "Talentdetectie via federaties en Topsport", "Geen rechtstreeks kanaal voor een bedrijf gevonden", <Tag key="5" label="open">via federatie</Tag>],
             ["6", "Winwinlening", "Lening van vrienden en familie met belastingvoordeel", "Voorwaarden 2026 na te gaan", <Tag key="6" label="aanname">te checken</Tag>],
             ["7", "VLAIO Ontwikkelingsproject", "25–50% van de kosten, min. €25.000 subsidie", "Sterke businesscase, cofinanciering", <Tag key="7" label="open">later</Tag>],
-            ["8", "Seed", "€500K–1M", "Na 12 maanden bewijs (beslist mei 2026)", <Tag key="8" label="open">2028</Tag>],
+            ["8", "Seed", "€500K–1M", "Alleen voor Ambitie, en pas met bewijs: betalende klanten, retentie, automatische data", <Tag key="8" label="open">na bewijs</Tag>],
           ]}
         />
       </Section>
 
       <Callout title="Kanttekening">
-        Een subsidie vraagt een vennootschap, een businesscase en administratie. Dat is werk voor één persoon. Daarom: eerst de pilot
-        met betalende atleten, dan de starterssteun met die cijfers in de aanvraag. Een aanvraag met drie betalende klanten is
+        Een subsidie vraagt een vennootschap, een businesscase en administratie. Dat is werk voor één persoon. Daarom: eerst de website en
+        de eerste betalende atleten, dan de starterssteun met die cijfers in de aanvraag. Een aanvraag met drie betalende klanten is
         sterker dan een aanvraag met een plan.
       </Callout>
 

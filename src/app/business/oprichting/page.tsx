@@ -4,12 +4,12 @@ type Row = [string, string, string];
 
 const groups: { title: string; when: string; rows: Row[] }[] = [
   {
-    title: "Vóór de eerste betaling in de pilot",
-    when: "november 2026",
+    title: "Vóór de eerste betaling",
+    when: "na de testers",
     rows: [
       ["Juridische thuis", "Factureren via een bestaande vennootschap of een nieuwe BV. Met de boekhouder beslissen; de naam Brokeboys blijft intern.", "Jan + boekhouder"],
-      ["Toestemming gezondheidsdata", "Uitdrukkelijke schriftelijke toestemming per pilotatleet (art. 9 GDPR).", "Jan"],
-      ["Pilotvoorwaarden", "Eén pagina: wat de pilot is, geen medisch advies, stoppen kan altijd, terugbetaling.", "Claude schrijft, jurist leest"],
+      ["Toestemming gezondheidsdata", "Uitdrukkelijke toestemming per betalende atleet (art. 9 GDPR). De testers Jan, Bob en Axel testen zonder formulieren.", "Jan"],
+      ["Voorwaarden eerste klanten", "Eén pagina: wat de dienst is, geen medisch advies, stoppen kan altijd, terugbetaling.", "Claude schrijft, jurist leest"],
       ["Betaling", "Overschrijving of betaallink; nog geen abonnementssysteem.", "Jan"],
     ],
   },
@@ -29,7 +29,7 @@ const groups: { title: string; when: string; rows: Row[] }[] = [
     ],
   },
   {
-    title: "Vóór de tryout en de gratis laag",
+    title: "Vóór de tryouts",
     when: "2027 H2",
     rows: [
       ["Minderjarigen", "Ouderlijke toestemming tot 18, aparte privacytekst, geen HRV of slaap in de score.", "jurist"],
