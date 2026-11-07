@@ -73,8 +73,8 @@ export const JURIDISCH: Record<Taal, { href: string; label: string }[]> = {
 /** Datum van de laatste wijziging, per taal geschreven. */
 export const BIJGEWERKT: Record<Taal, string> = { en: "6 November 2026", nl: "6 november 2026", fr: "6 novembre 2026" };
 
-export const SLOGAN: Record<Taal, { kop: string; onder: string }> = {
-  en: { kop: "No excuses. Only progress.", onder: "No glory without sacrifices." },
-  nl: { kop: "Geen excuses. Alleen vooruitgang.", onder: "Zonder offer geen glorie." },
-  fr: { kop: "Pas d’excuses. Que du progrès.", onder: "Pas de gloire sans sacrifice." },
+export const SLOGAN: Record<Taal, { kop: string }> = {
+  en: { kop: "No excuses. Only progress." },
+  nl: { kop: "Geen excuses. Alleen vooruitgang." },
+  fr: { kop: "Pas d’excuses. Que du progrès." },
 };

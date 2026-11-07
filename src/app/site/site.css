@@ -115,7 +115,6 @@
 .site .band-in h2 { font-size: clamp(48px, 7vw, 96px); }
 .site .band-in .lead { max-width: 520px; margin-top: 14px; }
 @media (max-width: 900px) { .site .band { min-height: 420px; } .site .foto-held { padding-top: 72px; background-position: 30% 35%; } }
-.site .onderkop { font-family: var(--f-kop), sans-serif; font-size: clamp(24px, 2.6vw, 34px); letter-spacing: 0.04em; color: var(--acc, #c8f135); margin-bottom: 22px; }
 .site .talen { display: flex; gap: 2px; font-size: 12px; letter-spacing: 0.06em; border: 1px solid var(--line-2); border-radius: 999px; padding: 3px; }
 .site .talen a { padding: 4px 9px; border-radius: 999px; color: var(--dim); }
 .site .talen a.actief { background: var(--card-2); color: var(--tekst); }
