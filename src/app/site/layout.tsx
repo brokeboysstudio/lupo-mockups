@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./site.css";
 
-const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--f-kop" });
-const dm = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--f-tekst" });
+const bebas = localFont({ src: "../../fonts/bebas-neue.woff2", weight: "400", variable: "--f-kop" });
+const dm = localFont({ src: "../../fonts/dm-sans.woff2", weight: "300 700", variable: "--f-tekst" });
 
 export const metadata: Metadata = {
   title: { default: "LUPO — No excuses. Only progress.", template: "%s | LUPO" },
