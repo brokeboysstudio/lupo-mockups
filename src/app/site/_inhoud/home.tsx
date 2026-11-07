@@ -138,7 +138,6 @@ export function Home({ taal }: { taal: Taal }) {
           <div>
             <div className="lbl acc">{t.lbl}</div>
             <h1 style={{ margin: "18px 0 14px" }}>{s.kop}</h1>
-            <div className="onderkop">{s.onder}</div>
             <p className="lead">{t.lead}</p>
             <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
               <Link href={pad(taal, "/pricing#wachtlijst")} className="knop">{t.wacht}</Link>
