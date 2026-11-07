@@ -1,4 +1,4 @@
-import { Card, NextLink, PageHead, Section, Table, Tag } from "../ui";
+import { Callout, Card, NextLink, PageHead, Section, Table, Tag } from "../ui";
 
 const phases = [
   {
@@ -19,8 +19,8 @@ const phases = [
     when: "jan – mrt 2027",
     name: "Kern bouwen",
     goal: "50 betalend · automatische data",
-    jan: ["Vennootschap en juridische thuis regelen", "VLAIO-starterssteun aanvragen", "Erasmus+-aanvraag met een club, deadline begin maart"],
-    claude: ["Supabase eu-central-1, login", "Eerste wearable-koppeling", "Betalingen"],
+    jan: ["Vennootschap en juridische thuis regelen", "OSS-btw regelen met de boekhouder", "VLAIO-starterssteun aanvragen", "Erasmus+-aanvraag met een club, deadline begin maart"],
+    claude: ["Supabase eu-central-1, login", "Eerste wearable-koppeling", "Betalingen via Mollie (Bancontact, dan SEPA)", "Chatlimiet en bijkoop", "AI-verbruik per klant loggen"],
   },
   {
     when: "apr – jul 2027",
@@ -39,7 +39,7 @@ const phases = [
   {
     when: "2028",
     name: "Break-even",
-    goal: "±700 betalend",
+    goal: "break-even mét loon voor Jan",
     jan: ["Eerste hire bij 500 betalend en €8.000 MRR", "Nederland openen"],
     claude: ["Schaal en kost per gebruiker bewaken"],
   },
@@ -53,6 +53,12 @@ export default function Gameplan() {
         title="Van nu tot break-even"
         lede="Zes fases. Elke fase heeft één doel dat je kunt meten. Doelen na december zijn scenario's, geen prognoses; ze hangen af van de go/no-go."
       />
+
+      <Callout title="Wat break-even hier betekent">
+        Het financieel plan (basisscenario) toont positieve maanden vanaf maart 2027, maar alleen omdat Jan zichzelf niets uitbetaalt.
+        Betalende klanten eind 2027, 2028 en 2029: 392, 605 en 751. Het echte doel is break-even mét een loon voor Jan.
+        Details: <a className="text-accent hover:underline" href="https://app.notion.com/p/41150f6b380981b9bd27f6a72515de39" target="_blank" rel="noreferrer">Kost per klant</a> en LUPO-financieel-plan.xlsx.
+      </Callout>
 
       <Section title="Fases">
         <div className="flex flex-col gap-4">

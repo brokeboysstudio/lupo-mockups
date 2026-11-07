@@ -87,19 +87,36 @@ export default function Model() {
         </p>
       </Section>
 
-      <Section title="Unit economics per betalende gebruiker" intro={<>Uit het businessplan van augustus. <Tag label="aanname" /></>}>
+      <Section
+        title="Unit economics per betalende gebruiker"
+        intro={<>Herrekend op 7 november, exclusief btw. Het plan van augustus rekende €17,03 inclusief btw. <Tag label="aanname" /> Volumes en AI-gebruik tot de pilot ze bevestigt.</>}
+      >
         <Table
-          head={["Post", "Bedrag", "Toelichting"]}
+          head={["Post", "Maandklant", "Toelichting"]}
           rows={[
-            ["Gemengde opbrengst", "€17,03/mnd", "60% maandelijks, 40% jaarlijks"],
-            ["Betaalverwerking", "−€0,51", "±3%"],
-            ["AI-kost", "−€0,40", "coachtaal; gratis gebruikers kosten niets"],
-            ["Infrastructuur", "−€0,30", "Supabase, Vercel"],
-            ["Brutomarge", "€15,82 · 93%", ""],
+            ["Prijs", "€19,00", "inclusief 21% btw"],
+            ["Netto opbrengst", "€15,70", "na btw; een jaarklant (€169) brengt €11,64 per maand"],
+            ["Betaalverwerking", "−€0,25", "Mollie SEPA-incasso per transactie"],
+            ["AI-kost", "−€0,10 tot −€0,40", "Haiku als standaard, Sonnet alleen voor schemavragen"],
+            ["Infrastructuur", "−€0,11", "Supabase, Vercel, gedeeld over alle klanten"],
+            ["Brutomarge", "±€15,19 · 97%", "bij gemiddeld AI-gebruik"],
             ["Levensduur", "14–18 maanden", "lagere churn na het eerste jaar"],
-            ["LTV", "±€237", "bij 15 maanden"],
-            ["Doel-CAC", "< €25", "instroom via clubs, Race Boards, Combine; geen gekochte installs"],
-            ["Break-even", "±700 betalend", "eerste hire bij 500 betalend én €8.000 MRR"],
+            ["Doel-CAC", "< €25", "instroom via clubs, Race Boards, tryouts; geen gekochte installs"],
+          ]}
+        />
+        <p className="text-[12px] text-muted">
+          Uitgewerkt in Notion (<a className="text-accent hover:underline" href="https://app.notion.com/p/41150f6b380981b9bd27f6a72515de39" target="_blank" rel="noreferrer">Kost per klant</a>) en in het financieel plan (LUPO-financieel-plan.xlsx, basisscenario).
+        </p>
+      </Section>
+
+      <Section title="Spelregels die de marge beschermen">
+        <Table
+          head={["Regel", "Wat", "Status"]}
+          rows={[
+            ["Chatlimiet met bijkoop", "200 berichten per maand in Premium. Bijkopen: 200 extra voor €3, op de volgende factuur. De ochtendbeslissing en het schema tellen nooit mee.", <Tag key="c" label="feit">beslist 7 nov</Tag>],
+            ["Betalen via Mollie", "Eerste betaling met Bancontact, daarna SEPA-incasso. Goedkoop en vertrouwd in België.", <Tag key="m" label="aanbeveling">voorstel</Tag>],
+            ["Geen app-stores", "Apple en Google nemen 15–30% van elke betaling. Daarom blijft LUPO een webapp.", <Tag key="w" label="aanbeveling">voorstel</Tag>],
+            ["OSS-btw", "Klanten buiten België betalen de btw van hun land. Aangifte via het OSS-loket, met de boekhouder.", <Tag key="o" label="open">met boekhouder</Tag>],
           ]}
         />
       </Section>

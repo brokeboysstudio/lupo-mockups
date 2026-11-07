@@ -21,13 +21,13 @@ export default function Funding() {
         />
       </Section>
 
-      <Section title="Wat het kost tot break-even" intro={<>Break-even ±700 betalend, volgens het businessplan. <Tag label="aanname" /></>}>
+      <Section title="Wat het kost tot break-even" intro={<>Basisscenario: 392 betalend eind 2027, 605 eind 2028, 751 eind 2029. Positief vanaf maart 2027 zonder loon voor Jan; met loon ligt break-even later. <Tag label="aanname" /></>}>
         <Table
           head={["Post", "Wanneer", "Richtbedrag"]}
           rows={[
             ["Merkregistratie LUPO (Benelux of EU)", "vóór lancering", "volgens BOIP/EUIPO-tarief, na te gaan"],
             ["Vennootschap, boekhouder", "vóór de eerste factuur", "na te gaan met boekhouder"],
-            ["Supabase, Vercel, Claude", "vanaf Sprint 3a", "±€0,70 per betalende gebruiker per maand"],
+            ["Supabase, Vercel, Claude, Mollie", "vanaf de eerste betalende klant", "±€0,50–1 per betalende klant per maand"],
             ["Fysieke Combine", "vanaf 2027 H2", "deels gedekt door €99 inschrijving"],
             ["Pack Talent", "vanaf 2027 H2", "±€500 per atleet per jaar"],
             ["Eerste hire", "bij 500 betalend én €8.000 MRR", "uit omzet"],
@@ -59,6 +59,7 @@ export default function Funding() {
 
       <Section title="Bronnen">
         <ul className="text-[13px] flex flex-col gap-1">
+          <li><a className="text-accent hover:underline" href="https://app.notion.com/p/41150f6b380981b9bd27f6a72515de39" target="_blank" rel="noreferrer">Notion · Kost per klant</a> (detail in LUPO-financieel-plan.xlsx)</li>
           <li><a className="text-accent hover:underline" href="https://www.vlaio.be/nl/subsidies-financiering/subsidiedatabank/innovatieve-starterssteun" target="_blank" rel="noreferrer">VLAIO · Innovatieve starterssteun</a></li>
           <li><a className="text-accent hover:underline" href="https://www.vlaio.be/nl/subsidies-financiering/subsidiedatabank/ontwikkelingsproject-subsidie-voor-innovatie" target="_blank" rel="noreferrer">VLAIO · Ontwikkelingsproject</a></li>
           <li><a className="text-accent hover:underline" href="https://erasmus-plus.ec.europa.eu/programme-guide/part-b/key-action-2/small-scale-partnerships" target="_blank" rel="noreferrer">Erasmus+ · Small-scale partnerships</a></li>
